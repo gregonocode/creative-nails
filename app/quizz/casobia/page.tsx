@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import { useRouter } from "next/navigation";
 import type { QuizOption } from "../../types/quiz";
 import { CasoBiaQuizLayout } from "./CasoBiaQuizLayout";
@@ -62,40 +63,66 @@ export default function CasoBiaQuizPage() {
   }
 
   function handleCheckoutClick() {
-    // 👉 Ajuste aqui para a URL real do seu checkout
-    // Ex: router.push("https://sua-plataforma.com/checkout/caso-bia");
+    // Mantido caso ainda queira usar router em outra situação
     router.push("/casobia/checkout");
   }
 
   return (
-    <CasoBiaQuizLayout>
-      {step === "intro" && (
-        <CasoBiaStepIntro onSelectOption={handleIntroOption} />
-      )}
+    <>
+      {/* UTMify Pixel */}
+      <Script
+        id="utmify-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.pixelId = "693c9040d8d1c51c530746b2";
+            var a = document.createElement("script");
+            a.setAttribute("async", "");
+            a.setAttribute("defer", "");
+            a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+            document.head.appendChild(a);
+          `,
+        }}
+      />
 
-      {step === "briefing" && (
-        <CasoBiaStepBriefing onContinue={handleBriefingContinue} />
-      )}
+      {/* UTMify UTMs */}
+      <Script
+        id="utmify-utms"
+        src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+        strategy="afterInteractive"
+        data-utmify-prevent-xcod-sck
+        data-utmify-prevent-subids
+      />
 
-      {step === "perfil" && (
-        <CasoBiaStepPerfil onComplete={handlePerfilComplete} />
-      )}
+      <CasoBiaQuizLayout>
+        {step === "intro" && (
+          <CasoBiaStepIntro onSelectOption={handleIntroOption} />
+        )}
 
-      {step === "pistas" && (
-        <CasoBiaStepPistas onContinue={handlePistasContinue} />
-      )}
+        {step === "briefing" && (
+          <CasoBiaStepBriefing onContinue={handleBriefingContinue} />
+        )}
 
-      {step === "raspadinha" && (
-        <CasoBiaStepRaspadinha onUnlockedBonus={handleRaspadinhaUnlocked} />
-      )}
+        {step === "perfil" && (
+          <CasoBiaStepPerfil onComplete={handlePerfilComplete} />
+        )}
 
-      {step === "oferta" && (
-        <CasoBiaStepOferta
-          perfilInvestigador={perfilInvestigador}
-          bonusDesbloqueado={bonusDesbloqueado}
-          onClickCheckout={handleCheckoutClick}
-        />
-      )}
-    </CasoBiaQuizLayout>
+        {step === "pistas" && (
+          <CasoBiaStepPistas onContinue={handlePistasContinue} />
+        )}
+
+        {step === "raspadinha" && (
+          <CasoBiaStepRaspadinha onUnlockedBonus={handleRaspadinhaUnlocked} />
+        )}
+
+        {step === "oferta" && (
+          <CasoBiaStepOferta
+            perfilInvestigador={perfilInvestigador}
+            bonusDesbloqueado={bonusDesbloqueado}
+            onClickCheckout={handleCheckoutClick}
+          />
+        )}
+      </CasoBiaQuizLayout>
+    </>
   );
 }

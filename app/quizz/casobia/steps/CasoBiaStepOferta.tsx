@@ -38,7 +38,7 @@ export function CasoBiaStepOferta({
           </div>
 
           {bonusDesbloqueado && (
-            <span className="rounded-full bg-red-600/20 border border-red-500/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-red-300">
+            <span className="text-xs rounded-full bg-red-600/20 border border-red-500/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-red-300">
               +9 arquivos extras
             </span>
           )}
@@ -265,7 +265,7 @@ export function CasoBiaStepOferta({
         rel="noopener noreferrer"
         className="shine-button w-full rounded-full border border-red-800/70 bg-red-600/90 px-4 py-3 text-sm md:text-base font-medium text-white transition hover:bg-red-500 hover:border-red-500 active:scale-[0.98] block text-center"
       >
-        Quero Essa Oferta + Bônus extras
+        Quero Essa Oferta + Bonus extras
       </a>
 
         <p className="text-[11px] text-center text-gray-500">

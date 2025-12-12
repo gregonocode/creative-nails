@@ -96,20 +96,21 @@ export function CasoBiaStepRaspadinha({
             <span className="font-semibold">24 arquivos em PDF</span> para
             investigar: relatórios, prints, depoimentos, bilhetes e muito mais.
           </p>
-          <p>
-            Na próxima etapa, vou te mostrar como ter acesso a{" "}
-            <span className="font-semibold">
-              todo esse material para imprimir e jogar
-            </span>{" "}
-            em casa, em casal ou com um grupo de amigos.
-          </p>
-
+          
           <button
             type="button"
             onClick={onUnlockedBonus}
             className="shine-button w-full rounded-full border border-red-800/70 bg-red-600/90 px-4 py-3 text-sm md:text-base font-medium text-white transition hover:bg-red-500 hover:border-red-500 active:scale-[0.98]"
           >
-            Quero ver como ter acesso a esses 24 arquivos
+            Eu quero os Arquivos!
+          </button>
+
+          <button
+            type="button"
+            onClick={onUnlockedBonus}
+            className="w-full rounded-full border border-red-900/70 bg-black/60 px-4 py-3 text-sm md:text-base font-medium text-gray-100 transition hover:border-red-500 hover:bg-red-900/30 active:scale-[0.98]"
+          >
+            Isso vai me ajudar nas investigações..
           </button>
 
           {!fullyRevealed && (
