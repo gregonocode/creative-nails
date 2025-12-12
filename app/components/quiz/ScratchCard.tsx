@@ -33,19 +33,23 @@ export function ScratchCard({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Tamanho direto, sem devicePixelRatio pra simplificar e ficar mais leve
+    // Tamanho direto, sem devicePixelRatio (mais suave no mobile)
     canvas.width = width;
     canvas.height = height;
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
     ctx.globalCompositeOperation = "source-over";
+
+    // Fundo bem claro (amarelo quase branco)
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, "rgba(30, 41, 59, 0.95)");
-    gradient.addColorStop(1, "rgba(15, 23, 42, 0.9)");
+    gradient.addColorStop(0, "rgba(255, 251, 235, 0.98)"); // #FFFBEB
+    gradient.addColorStop(1, "rgba(254, 249, 195, 0.95)"); // #FEF9C3
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = "rgba(148, 27, 37, 0.55)";
+
+    // Leve véu branco por cima
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
     ctx.fillRect(0, 0, width, height);
   }, [width, height]);
 
@@ -136,7 +140,7 @@ export function ScratchCard({
       style={{ width, maxWidth: "100%" }}
     >
       <div
-        className="flex items-center justify-center text-center text-lg font-semibold text-gray-100 rounded-xl bg-black/50"
+        className="flex items-center justify-center text-center text-lg font-semibold text-gray-100 rounded-xl bg-black/60"
         style={{ minHeight: `${height}px` }}
       >
         {children}

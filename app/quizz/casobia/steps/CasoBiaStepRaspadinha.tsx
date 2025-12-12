@@ -75,10 +75,10 @@ export function CasoBiaStepRaspadinha({
         >
           <div className="px-4 py-2 flex flex-col items-center justify-center gap-2">
             <p className="text-sm md:text-base font-semibold text-gray-100">
-              Documento confidencial
+              Pista secreta do Caso Bia
             </p>
             <p className="text-xs md:text-sm text-gray-300">
-              Caso Bia Andrade — acesso restrito.
+              Raspe para liberar novos documentos de investigação.
             </p>
           </div>
         </ScratchCard>
@@ -89,12 +89,12 @@ export function CasoBiaStepRaspadinha({
         <div className="space-y-4 text-sm md:text-base text-gray-200">
           <p>
             <span className="font-semibold text-red-400">
-              Parabéns! Você destravou um mega dossiê.
+              Parabéns! Você acabou de ganhar 9 novos documentos
             </span>{" "}
-            Agora você pode levar{" "}
-            <span className="font-semibold">24 arquivos de investigação</span>:
-            15 documentos oficiais do caso +{" "}
-            <span className="font-semibold">9 novos arquivos extras</span>.
+            sobre o Caso Bia Andrade. Somando com os 15 arquivos oficiais
+            do dossiê, agora você tem acesso a{" "}
+            <span className="font-semibold">24 arquivos em PDF</span> para
+            investigar: relatórios, prints, depoimentos, bilhetes e muito mais.
           </p>
           <p>
             Na próxima etapa, vou te mostrar como ter acesso a{" "}
@@ -114,9 +114,8 @@ export function CasoBiaStepRaspadinha({
 
           {!fullyRevealed && (
             <p className="text-[11px] text-center text-gray-500">
-              Continue raspando o cartão por diversão — a mensagem já foi
-              liberada, mas a experiência fica ainda mais imersiva quando você
-              revela tudo.
+              Você já garantiu seus 9 arquivos extras, mas pode continuar
+              raspando o cartão só pela experiência.
             </p>
           )}
         </div>
