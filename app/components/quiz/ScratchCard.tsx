@@ -1,22 +1,30 @@
+// app/components/quiz/ScratchCard.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 type ScratchCardProps = {
   width: number;
   height: number;
   onReveal: () => void;
+  onScratchStart?: () => void;
   children: React.ReactNode;
 };
 
-const SCRATCH_THRESHOLD = 0.5; // 30% revelado
+const SCRATCH_THRESHOLD = 0.35; // 35% revelado
 const BRUSH_SIZE = 28;
 
-export function ScratchCard({ width, height, onReveal, children }: ScratchCardProps) {
+export function ScratchCard({
+  width,
+  height,
+  onReveal,
+  onScratchStart,
+  children,
+}: ScratchCardProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const isDrawing = useRef(false);
   const revealed = useRef(false);
-  const deviceRatio = typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+  const hasStarted = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -25,28 +33,26 @@ export function ScratchCard({ width, height, onReveal, children }: ScratchCardPr
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const scaledWidth = width * deviceRatio;
-    const scaledHeight = height * deviceRatio;
-
-    canvas.width = scaledWidth;
-    canvas.height = scaledHeight;
+    // Tamanho direto, sem devicePixelRatio pra simplificar e ficar mais leve
+    canvas.width = width;
+    canvas.height = height;
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
 
-    ctx.scale(deviceRatio, deviceRatio);
     ctx.globalCompositeOperation = "source-over";
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, "rgba(255, 240, 245, 0.95)");
-    gradient.addColorStop(1, "rgba(253, 216, 255, 0.9)");
+    gradient.addColorStop(0, "rgba(30, 41, 59, 0.95)");
+    gradient.addColorStop(1, "rgba(15, 23, 42, 0.9)");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
+    ctx.fillStyle = "rgba(148, 27, 37, 0.55)";
     ctx.fillRect(0, 0, width, height);
-  }, [width, height, deviceRatio]);
+  }, [width, height]);
 
   function scratch(x: number, y: number) {
     const canvas = canvasRef.current;
     if (!canvas || revealed.current) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -61,20 +67,29 @@ export function ScratchCard({ width, height, onReveal, children }: ScratchCardPr
   function getPointerPos(e: React.PointerEvent<HTMLCanvasElement>) {
     const canvas = canvasRef.current;
     if (!canvas) return null;
+
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
+
     const x = (e.clientX - rect.left) * scaleX;
     const y = (e.clientY - rect.top) * scaleY;
+
     return { x, y };
   }
 
   function handlePointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
     if (revealed.current) return;
+
     isDrawing.current = true;
     const pos = getPointerPos(e);
     if (pos) scratch(pos.x, pos.y);
     e.currentTarget.setPointerCapture(e.pointerId);
+
+    if (!hasStarted.current) {
+      hasStarted.current = true;
+      onScratchStart?.();
+    }
   }
 
   function handlePointerMove(e: React.PointerEvent<HTMLCanvasElement>) {
@@ -93,6 +108,7 @@ export function ScratchCard({ width, height, onReveal, children }: ScratchCardPr
   function checkReveal() {
     const canvas = canvasRef.current;
     if (!canvas || revealed.current) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -116,11 +132,11 @@ export function ScratchCard({ width, height, onReveal, children }: ScratchCardPr
 
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-dashed border-pink-300 bg-gradient-to-br from-pink-50 to-pink-100 p-4 shadow-sm"
+      className="relative overflow-hidden rounded-2xl border border-red-900/70 bg-gradient-to-br from-[#020617] to-[#0b1120] p-4 shadow-sm"
       style={{ width, maxWidth: "100%" }}
     >
       <div
-        className="flex items-center justify-center text-center text-lg font-semibold text-pink-600 rounded-xl bg-white/70"
+        className="flex items-center justify-center text-center text-lg font-semibold text-gray-100 rounded-xl bg-black/50"
         style={{ minHeight: `${height}px` }}
       >
         {children}

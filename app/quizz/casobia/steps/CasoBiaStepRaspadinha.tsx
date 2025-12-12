@@ -12,14 +12,20 @@ type CasoBiaStepRaspadinhaProps = {
 export function CasoBiaStepRaspadinha({
   onUnlockedBonus,
 }: CasoBiaStepRaspadinhaProps) {
-  const [revealed, setRevealed] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [fullyRevealed, setFullyRevealed] = useState(false);
+
+  function handleScratchStart() {
+    if (!hasStarted) {
+      setHasStarted(true);
+    }
+  }
 
   function handleReveal() {
-    if (revealed) return;
+    if (fullyRevealed) return;
 
-    setRevealed(true);
+    setFullyRevealed(true);
 
-    // Dispara um confetti simples quando a raspadinha é revelada
     try {
       confetti({
         particleCount: 90,
@@ -28,7 +34,6 @@ export function CasoBiaStepRaspadinha({
         scalar: 0.9,
       });
     } catch (err) {
-      // se der algum erro no confetti, só ignora pra não quebrar o fluxo
       console.error("Erro ao disparar confetti:", err);
     }
   }
@@ -53,51 +58,43 @@ export function CasoBiaStepRaspadinha({
         </p>
       </div>
 
+      {/* Texto "raspe aqui" acima da raspadinha */}
+      {!hasStarted && (
+        <p className="text-center text-sm md:text-base font-medium text-red-200">
+          Passe o dedo sobre o cartão para raspar e liberar sua recompensa.
+        </p>
+      )}
+
       {/* Raspadinha */}
       <div className="flex justify-center">
         <ScratchCard
           width={320}
           height={160}
           onReveal={handleReveal}
+          onScratchStart={handleScratchStart}
         >
           <div className="px-4 py-2 flex flex-col items-center justify-center gap-2">
-            {!revealed ? (
-              <>
-                <p className="text-sm md:text-base font-semibold text-gray-900">
-                  Raspe aqui para descobrir
-                </p>
-                <p className="text-xs md:text-sm text-gray-700">
-                  Quantos arquivos você pode levar deste caso?
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="text-sm md:text-base font-semibold text-gray-900">
-                  Parabéns! Você destravou um mega dossiê.
-                </p>
-                <p className="text-xs md:text-sm text-gray-700">
-                  Agora você pode levar{" "}
-                  <span className="font-bold">24 arquivos de investigação</span>
-                  : 15 documentos oficiais do caso +{" "}
-                  <span className="font-semibold">9 novos arquivos extras</span>.
-                </p>
-              </>
-            )}
+            <p className="text-sm md:text-base font-semibold text-gray-100">
+              Documento confidencial
+            </p>
+            <p className="text-xs md:text-sm text-gray-300">
+              Caso Bia Andrade — acesso restrito.
+            </p>
           </div>
         </ScratchCard>
       </div>
 
-      {/* Texto e botão depois de revelar */}
-      {revealed ? (
+      {/* Texto e botão depois de começar a raspar */}
+      {hasStarted ? (
         <div className="space-y-4 text-sm md:text-base text-gray-200">
           <p>
-            Você acabou de Ganhar 🥳{" "}
             <span className="font-semibold text-red-400">
-              9 novos documentos
+              Parabéns! Você destravou um mega dossiê.
             </span>{" "}
-            sobre o Caso Bia Andrade. Somando tudo, o seu dossiê agora conta com{" "}
-            <span className="font-semibold">24 arquivos em PDF</span> para
-            investigar: relatórios, prints, depoimentos, bilhetes e muito mais.
+            Agora você pode levar{" "}
+            <span className="font-semibold">24 arquivos de investigação</span>:
+            15 documentos oficiais do caso +{" "}
+            <span className="font-semibold">9 novos arquivos extras</span>.
           </p>
           <p>
             Na próxima etapa, vou te mostrar como ter acesso a{" "}
@@ -114,11 +111,18 @@ export function CasoBiaStepRaspadinha({
           >
             Quero ver como ter acesso a esses 24 arquivos
           </button>
+
+          {!fullyRevealed && (
+            <p className="text-[11px] text-center text-gray-500">
+              Continue raspando o cartão por diversão — a mensagem já foi
+              liberada, mas a experiência fica ainda mais imersiva quando você
+              revela tudo.
+            </p>
+          )}
         </div>
       ) : (
         <p className="text-[11px] text-center text-gray-500">
-          Raspe o cartão acima até revelar a mensagem completa para desbloquear
-          os documentos extras.
+          Raspe o cartão para começar a revelar sua recompensa especial.
         </p>
       )}
     </div>
