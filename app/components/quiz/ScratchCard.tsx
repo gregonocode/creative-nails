@@ -9,7 +9,7 @@ type ScratchCardProps = {
   children: React.ReactNode;
 };
 
-const SCRATCH_THRESHOLD = 0.3; // 30% revelado
+const SCRATCH_THRESHOLD = 0.5; // 30% revelado
 const BRUSH_SIZE = 28;
 
 export function ScratchCard({ width, height, onReveal, children }: ScratchCardProps) {
