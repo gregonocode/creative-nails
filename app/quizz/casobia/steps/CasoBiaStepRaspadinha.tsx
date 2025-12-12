@@ -75,10 +75,10 @@ export function CasoBiaStepRaspadinha({
         >
           <div className="px-4 py-2 flex flex-col items-center justify-center gap-2">
             <p className="text-sm md:text-base font-semibold text-gray-100">
-              Pista secreta do Caso Bia
+              Você ganhou + 9 arquivos! 🥳
             </p>
             <p className="text-xs md:text-sm text-gray-300">
-              Raspe para liberar novos documentos de investigação.
+              agora vc tem 24 documentos para investigação.
             </p>
           </div>
         </ScratchCard>
