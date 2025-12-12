@@ -50,7 +50,7 @@ export function CasoBiaStepRaspadinha({
         </h2>
         <p className="text-sm md:text-base text-gray-300">
           Uma nova remessa de arquivos acabou de chegar à promotoria. 
-          Raspe o cartão abaixo e descubra{" "}
+          <strong>Raspe o cartão abaixo</strong> e descubra{" "}
           <span className="font-semibold text-red-400">
             quantos documentos você pode levar
           </span>{" "}
@@ -85,7 +85,7 @@ export function CasoBiaStepRaspadinha({
       </div>
 
       {/* Texto e botão depois de começar a raspar */}
-      {hasStarted ? (
+      {fullyRevealed ? (
         <div className="space-y-4 text-sm md:text-base text-gray-200">
           <p>
             <span className="font-semibold text-red-400">
