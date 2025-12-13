@@ -75,7 +75,7 @@ export default function CasoBiaQuizPage() {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            window.pixelId = "693c9040d8d1c51c530746b2";
+            window.pixelId = "693cb0c062e38f668b3c9d84";
             var a = document.createElement("script");
             a.setAttribute("async", "");
             a.setAttribute("defer", "");
