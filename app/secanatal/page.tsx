@@ -368,7 +368,7 @@ export default function SecaNatalPage() {
 
                 <div className="mt-4 rounded-[32px] border border-red-500/20 bg-red-500/10 p-6">
                   <p className="text-sm font-extrabold uppercase tracking-wider text-red-700">
-                    APENAS DE HOJE {isOfferLive ? "COM A OFERTA RELÂMPAGO" : ""}
+                    APENAS HOJE {isOfferLive ? "COM A OFERTA RELÂMPAGO" : ""}
                   </p>
 
                   <div className="mt-2 flex items-end gap-3">
