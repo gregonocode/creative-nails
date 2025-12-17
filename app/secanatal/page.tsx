@@ -285,7 +285,7 @@ export default function SecaNatalPage() {
                 🎁 “Sobremesas da Nutri”
               </h3>
               <p className="mt-3 text-black/70">
-                Mini-guia com <span className="font-extrabold">4 receitas natalinas</span> com{" "}
+                Mini-guia com <span className="font-extrabold"> Sobremesas natalinas</span> com{" "}
                 <span className="font-extrabold">menos de 100 calorias</span>. Repetir o doce sem medo.
               </p>
 
