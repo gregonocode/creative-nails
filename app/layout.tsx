@@ -27,25 +27,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* Google Tag (gtag.js) - base */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* UTMify - Captura de UTMs */}
         <Script
-          id="gtag-base"
+          id="utmify-latest"
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-10810473655"
+          src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+          async
+          defer
+          data-utmify-prevent-xcod-sck
+          data-utmify-prevent-subids
         />
 
-        {/* Configuração da tag */}
-        <Script id="gtag-config" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-10810473655');
-          `}
+        {/* UTMify Pixel (Meta/Facebook) */}
+        <Script id="utmify-pixel-id" strategy="afterInteractive">
+          {`window.pixelId = "693cb0c062e38f668b3c9d84";`}
         </Script>
+
+        <Script
+          id="utmify-pixel"
+          strategy="afterInteractive"
+          src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"
+          async
+          defer
+        />
 
         {children}
       </body>

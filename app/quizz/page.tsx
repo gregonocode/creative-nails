@@ -13,25 +13,7 @@ import confetti from "canvas-confetti";
 
 
 export default function QuizzPage() {
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    // Define o ID do pixel na window (igual ao snippet da Utmify)
-    (window as any).googlePixelId = "6934df829f45845fcb041a76";
-
-    // Cria o script do pixel
-    const script = document.createElement("script");
-    script.async = true;
-    script.defer = true;
-    script.src = "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js";
-
-    document.head.appendChild(script);
-
-    // (opcional) limpar no unmount
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+ 
 
   const [currentStep, setCurrentStep] = useState<QuizStepId>("intro");
   const [answers, setAnswers] = useState<Record<string, string>>({});
