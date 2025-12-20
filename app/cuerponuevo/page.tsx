@@ -84,7 +84,7 @@ export default function SecaNatalPage() {
     },
     {
       q: "¿Y si no me gusta?",
-      a: "Tienes 7 días de garantía. Si no sientes que valió mucho más que US$5, te devolvemos el 100%.",
+      a: "Tienes 14 días de garantía. Si no sientes que valió mucho más que US$5, te devolvemos el 100%.",
     },
   ];
 
@@ -233,7 +233,7 @@ export default function SecaNatalPage() {
             </div>
 
             <p className="mt-4 text-xs text-black/55">
-              Acceso instantáneo después del pago • Garantía de 7 días • Oferta
+              Acceso instantáneo después del pago • Garantía de 14 días • Oferta
               por tiempo limitado
             </p>
           </div>
@@ -244,7 +244,7 @@ export default function SecaNatalPage() {
               <div className="relative mx-auto aspect-[3/4] w-full overflow-hidden rounded-[26px] bg-[linear-gradient(135deg,rgba(239,68,68,0.10),rgba(1,169,32,0.08))]">
                 {/* IMAGEN: portada del ebook */}
                 <Image
-                  src="/secanatal/capa-ebook.webp"
+                  src="/secanatal/capa-ebook_es.webp"
                   alt="Portada del e-book Cierre Ligero"
                   fill
                   className="object-contain p-6"
@@ -476,7 +476,7 @@ export default function SecaNatalPage() {
               <div className="mt-4 overflow-hidden rounded-[32px] border border-black/10 bg-white/70 shadow-sm">
                 <div className="relative aspect-[16/11] w-full">
                   <Image
-                    src="/secanatal/relogio-10min.webp"
+                    src="/secanatal/relogio-10min_es.webp"
                     alt="Reloj con cuenta regresiva de 10 minutos"
                     fill
                     className="object-cover"
