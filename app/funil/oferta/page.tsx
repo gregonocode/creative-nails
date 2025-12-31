@@ -145,9 +145,9 @@ export default function OfertaPage() {
   }, [payload?.amount]);
 
   // ✅ Troque pelos seus links reais:
-  const checkoutIndividual = '/checkout?plano=individual_10';
-  const checkoutFamilia = '/checkout?plano=familia_27';
-  const checkoutOferta1990 = '/checkout?plano=familia_1990';
+  const checkoutIndividual = 'https://pay.sereja.com.br/checkout/xFZ4qhce';
+  const checkoutFamilia = 'https://pay.sereja.com.br/checkout/_CUBPHPI';
+  const checkoutOferta1990 = 'https://pay.sereja.com.br/checkout/99lZVGTF';
 
   return (
     <div className="min-h-screen bg-[#efeae2] text-[#111b21]">
