@@ -122,9 +122,7 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
           )}
         </div>
 
-        <div className="mt-2 text-[11px] text-black/40">
-          Dica: você pode acelerar o áudio no próprio player do seu celular (quando disponível).
-        </div>
+        
       </div>
 
       {canContinue ? (
