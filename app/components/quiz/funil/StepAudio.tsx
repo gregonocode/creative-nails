@@ -9,8 +9,6 @@ function formatTime(seconds: number): string {
   return `${m}:${String(r).padStart(2, '0')}`;
 }
 
-type RateOption = { label: string; value: number };
-
 type StepAudioProps = {
   src: string;
   onNext: () => void;
@@ -18,44 +16,15 @@ type StepAudioProps = {
 
 const MIN_SECONDS = 75; // 1 min e 15s
 
-function PlayIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path d="M8 5v14l12-7-12-7z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function PauseIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function StepAudio({ src, onNext }: StepAudioProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [ready, setReady] = useState(false);
-  const [playing, setPlaying] = useState(false);
-
   const [duration, setDuration] = useState(0);
   const [current, setCurrent] = useState(0);
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [canContinue, setCanContinue] = useState(false);
-
-  const rates: RateOption[] = useMemo(
-    () => [
-      { label: '1x', value: 1 },
-      { label: '1.15x', value: 1.15 },
-      { label: '1.25x', value: 1.25 },
-    ],
-    []
-  );
-
-  const [rate, setRate] = useState<RateOption>(rates[1]);
 
   const timeLeft = useMemo(() => {
     const remaining = Math.ceil(MIN_SECONDS - current);
@@ -74,8 +43,6 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
       setCanContinue(false);
     };
 
-    const onCanPlay = () => setReady(true);
-
     const onTime = () => {
       const t = el.currentTime || 0;
       setCurrent(t);
@@ -83,74 +50,30 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
       setCanContinue((prev) => {
         if (prev) return true;
         if (t >= MIN_SECONDS) return true;
-        if (duration > 0 && t >= duration) return true;
+        if (duration > 0 && t >= duration) return true; // se o áudio acabar antes
         return false;
       });
     };
 
-    const onEnded = () => {
-      setPlaying(false);
-      setCanContinue(true);
-    };
+    const onEnded = () => setCanContinue(true);
 
     const onError = () => {
       setReady(false);
-      setPlaying(false);
       setErrorMsg('Não consegui carregar o áudio. Verifique se /intro.mp3 abre no navegador.');
     };
 
     el.addEventListener('loadedmetadata', onLoaded);
-    el.addEventListener('canplay', onCanPlay);
     el.addEventListener('timeupdate', onTime);
     el.addEventListener('ended', onEnded);
     el.addEventListener('error', onError);
 
     return () => {
       el.removeEventListener('loadedmetadata', onLoaded);
-      el.removeEventListener('canplay', onCanPlay);
       el.removeEventListener('timeupdate', onTime);
       el.removeEventListener('ended', onEnded);
       el.removeEventListener('error', onError);
     };
   }, [duration]);
-
-  useEffect(() => {
-    const el = audioRef.current;
-    if (!el) return;
-    el.playbackRate = rate.value;
-  }, [rate]);
-
-  async function togglePlay(): Promise<void> {
-    const el = audioRef.current;
-    if (!el) return;
-
-    if (playing) {
-      el.pause();
-      setPlaying(false);
-      return;
-    }
-
-    try {
-      await el.play();
-      setPlaying(true);
-      setErrorMsg(null);
-    } catch {
-      setErrorMsg('Seu navegador bloqueou a reprodução. Tente clicar novamente no play.');
-    }
-  }
-
-  function seek(value: number): void {
-    const el = audioRef.current;
-    if (!el) return;
-    el.currentTime = value;
-    setCurrent(value);
-  }
-
-  function cycleRate(): void {
-    const idx = rates.findIndex((r) => r.value === rate.value);
-    const next = rates[(idx + 1) % rates.length];
-    setRate(next);
-  }
 
   return (
     <div className="space-y-4">
@@ -162,65 +85,41 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
       </div>
 
       <div className="rounded-2xl border border-black/10 bg-white p-4">
-        <audio ref={audioRef} src={src} preload="metadata" />
-
         {errorMsg && (
           <div className="mb-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">
             {errorMsg}
           </div>
         )}
 
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => void togglePlay()}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0FDB6B] text-[#062b16]"
-            aria-label={playing ? 'Pausar' : 'Reproduzir'}
-          >
-            {playing ? (
-              <PauseIcon className="h-6 w-6" />
-            ) : (
-              <PlayIcon className="ml-0.5 h-6 w-6" />
-            )}
-          </button>
-
-          <div className="flex-1">
-            <div className="flex items-center justify-between text-xs text-black/60">
-              <span>{formatTime(current)}</span>
-              <span>{formatTime(duration)}</span>
-            </div>
-
-            <input
-              type="range"
-              min={0}
-              max={Math.max(1, duration)}
-              step={0.1}
-              value={Math.min(current, duration || 0)}
-              onChange={(e) => seek(Number(e.target.value))}
-              className="mt-2 w-full accent-[#0FDB6B]"
-              aria-label="Progresso do áudio"
-              disabled={!ready}
-            />
-          </div>
-
-          <button
-            type="button"
-            onClick={cycleRate}
-            className="rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold text-black/70 hover:bg-black/5"
-            aria-label="Alterar velocidade"
-          >
-            {rate.label}
-          </button>
-        </div>
+        {/* Player nativo */}
+        <audio
+          ref={audioRef}
+          src={src}
+          controls
+          preload="metadata"
+          className="w-full"
+        />
 
         <div className="mt-3 text-xs text-black/45">
-          Ouve esse áudio rapidinho.
+          {!ready ? (
+            'Carregando áudio…'
+          ) : (
+            <>
+              Progresso: <span className="font-semibold">{formatTime(current)}</span> de{' '}
+              <span className="font-semibold">{formatTime(duration)}</span>.
+            </>
+          )}
+
           {!canContinue && (
             <>
               {' '}
               <span className="font-semibold">Liberando em {formatTime(timeLeft)}…</span>
             </>
           )}
+        </div>
+
+        <div className="mt-2 text-[11px] text-black/40">
+          Dica: você pode acelerar o áudio no próprio player do seu celular (quando disponível).
         </div>
       </div>
 
