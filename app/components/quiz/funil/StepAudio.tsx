@@ -18,6 +18,22 @@ type StepAudioProps = {
 
 const MIN_SECONDS = 75; // 1 min e 15s
 
+function PlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path d="M8 5v14l12-7-12-7z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PauseIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor" />
+    </svg>
+  );
+}
+
 export default function StepAudio({ src, onNext }: StepAudioProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -55,11 +71,7 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
       setDuration(d);
       setReady(true);
       setErrorMsg(null);
-
-      // se o áudio for menor que 75s, libera ao carregar (quando terminar)
-      if (d > 0 && d <= MIN_SECONDS) {
-        setCanContinue(false);
-      }
+      setCanContinue(false);
     };
 
     const onCanPlay = () => setReady(true);
@@ -71,14 +83,14 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
       setCanContinue((prev) => {
         if (prev) return true;
         if (t >= MIN_SECONDS) return true;
-        if (duration > 0 && t >= duration) return true; // caso o áudio termine antes
+        if (duration > 0 && t >= duration) return true;
         return false;
       });
     };
 
     const onEnded = () => {
       setPlaying(false);
-      setCanContinue(true); // se terminou, libera
+      setCanContinue(true);
     };
 
     const onError = () => {
@@ -162,10 +174,14 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
           <button
             type="button"
             onClick={() => void togglePlay()}
-            className="h-12 w-12 rounded-full bg-[#0FDB6B] text-[#062b16] text-lg font-bold"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0FDB6B] text-[#062b16]"
             aria-label={playing ? 'Pausar' : 'Reproduzir'}
           >
-            {playing ? '❚❚' : '▶'}
+            {playing ? (
+              <PauseIcon className="h-6 w-6" />
+            ) : (
+              <PlayIcon className="ml-0.5 h-6 w-6" />
+            )}
           </button>
 
           <div className="flex-1">
@@ -202,9 +218,7 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
           {!canContinue && (
             <>
               {' '}
-              <span className="font-semibold">
-                Liberando em {formatTime(timeLeft)}…
-              </span>
+              <span className="font-semibold">Liberando em {formatTime(timeLeft)}…</span>
             </>
           )}
         </div>
