@@ -92,13 +92,17 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
         )}
 
         {/* Player nativo */}
-        <audio
-          ref={audioRef}
-          src={src}
-          controls
-          preload="metadata"
-          className="w-full"
-        />
+<div className="rounded-2xl border border-black/10 bg-black/5 p-3">
+  <div className="audio-native">
+    <audio
+      ref={audioRef}
+      src={src}
+      controls
+      preload="metadata"
+      className="w-full"
+    />
+  </div>
+</div>
 
         <div className="mt-3 text-xs text-black/45">
           {!ready ? (
