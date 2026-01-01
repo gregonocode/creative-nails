@@ -260,6 +260,7 @@ export default function OfertaPage() {
               <li>✅ 4 tabelas: 10k, 20k, 40k e 100k</li>
               <li>✅ Você pode imprimir quantas quiser</li>
               <li>✅ Perfeito para objetivos diferentes</li>
+              <li>✅ Mesma meta dividido para casal ou familia</li>
             </ul>
 
             <Link
