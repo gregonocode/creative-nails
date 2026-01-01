@@ -36,7 +36,7 @@ export default function FunilPage() {
     <FunnelShell progress={progress}>
       {step === "audio" && (
         <StepAudio
-          src="/intro.mp3"
+          src="/introm.mp3"
           onNext={() => setStep("goal")}
         />
       )}
