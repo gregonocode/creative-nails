@@ -136,7 +136,7 @@ export default function StepAudio({ src, onNext }: StepAudioProps) {
       ) : (
         <div className="text-center text-xs text-black/50">
           O botão <span className="font-semibold">Continuar</span> aparece após{' '}
-          <span className="font-semibold">1:15</span> do áudio.
+          <span className="font-semibold">ouvir</span> áudio.
         </div>
       )}
     </div>
