@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 
 type Goal = 'casa' | 'viagem' | 'carro' | 'tranquilidade' | 'outro';
 type Amount = 10000 | 20000 | 40000 | 100000;
@@ -83,7 +83,7 @@ function Modal({
 }: {
   open: boolean;
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
   onClose: () => void;
 }) {
   useEffect(() => {
@@ -144,6 +144,11 @@ export default function OfertaPage() {
     return formatBRL(payload.amount);
   }, [payload?.amount]);
 
+const congratsName = useMemo(
+  () => safeFirstName(payload?.name ?? ''),
+  [payload?.name]
+);
+
   // ✅ Troque pelos seus links reais:
   const checkoutIndividual = 'https://pay.sereja.com.br/checkout/xFZ4qhce';
   const checkoutFamilia = 'https://pay.sereja.com.br/checkout/_CUBPHPI';
@@ -169,8 +174,6 @@ export default function OfertaPage() {
               <div className="text-sm font-semibold">Tabela da Prosperidade</div>
               <div className="text-xs text-black/50">2026 • versão personalizada</div>
             </div>
-
-          
           </div>
         </div>
 
@@ -236,6 +239,51 @@ export default function OfertaPage() {
 
         {/* Ofertas */}
         <div className="mt-4 grid gap-3">
+     {/* NOVO CARD 1 — Opcional */}
+<div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm">
+  <div className="mb-3 flex items-center justify-end">
+    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-semibold text-black/70">
+      Opcional
+    </div>
+  </div>
+
+  <div className="flex items-start gap-4">
+    <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl ring-1 ring-black/10">
+      <Image src="/frango.png" alt="Receita" fill className="object-cover" />
+    </div>
+
+    <p className="text-sm text-black/65">
+      Quer <span className="font-semibold text-[#111b21]">acelerar</span> e marcar sua tabela mais rápido?
+      Leve o pacote com essa <span className="font-semibold text-[#111b21]">receita bônus</span> novidade,
+      com <span className="font-semibold text-[#111b21]">ótima saída</span> Facil de fazer e vende sozinha!
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+          {/* NOVO CARD 2 — Parabéns + bônus 15 min */}
+          <div className="relative overflow-hidden rounded-3xl border border-[#0FDB6B]/35 bg-white p-5 shadow-sm">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#0FDB6B]/15 blur-2xl" />
+
+            <div className="text-sm font-extrabold text-[#111b21]">
+           {congratsName} parabéns por ter chegado até aqui 🎉
+           </div>
+
+
+            <div className="mt-2 text-sm text-black/65">
+              Se você levar nos próximos <span className="font-semibold text-[#111b21]">15 minutos</span>,
+              você vai receber totalmente <span className="font-semibold text-[#111b21]">GRÁTIS</span>{' '}
+              a dica de como concluir em até 10x mais rapido <strong>( NÃO E BRINCADEIRA").</strong>
+            </div>
+          </div>
+
           {/* Destaque 27 */}
           <div className="relative overflow-hidden rounded-3xl border border-[#0FDB6B]/45 bg-white p-5 shadow-sm">
             <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#0FDB6B]/20 blur-2xl" />
@@ -246,7 +294,7 @@ export default function OfertaPage() {
                 Melhor escolha
               </div>
 
-              <div className="mt-3 text-lg font-extrabold">Pacote Família (2026)</div>
+              <div className="mt-3 text-lg font-extrabold">Pacote Completo (2026)</div>
 
               <div className="mt-2 text-sm text-black/60">
                 Ideal pra casal e família — várias metas prontas.
@@ -257,17 +305,18 @@ export default function OfertaPage() {
             </div>
 
             <ul className="mt-5 space-y-2 text-sm text-black/70">
-              <li>✅ 4 tabelas: 10k, 20k, 40k e 100k</li>
+              <li>✅ 4 tabelas: 10k, 20k, 40k e 100k e +</li>
               <li>✅ Você pode imprimir quantas quiser</li>
               <li>✅ Perfeito para objetivos diferentes</li>
               <li>✅ Mesma meta dividido para casal ou familia</li>
+              <li>✅ Bônus: Receita acelera metas</li>
             </ul>
 
             <Link
               href={checkoutFamilia}
               className="shine-button mt-5 block w-full rounded-2xl bg-[#0FDB6B] py-3 text-center font-semibold text-[#062b16]"
             >
-              Quero o Pacote Família
+              Quero o Pacote Completo
             </Link>
 
             <div className="mt-2 text-center text-xs text-black/50">
@@ -316,14 +365,16 @@ export default function OfertaPage() {
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
               <div className="text-sm font-semibold text-[#111b21]">E se eu não gostar?</div>
               <div className="mt-1 text-sm text-black/60">
-                Você pode pedir reembolso. Você tem prazo de <span className="font-semibold">7 dias</span>.
+                Você pode pedir reembolso. Você tem prazo de{' '}
+                <span className="font-semibold">7 dias</span>.
               </div>
             </div>
 
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
               <div className="text-sm font-semibold text-[#111b21]">Quando recebo?</div>
               <div className="mt-1 text-sm text-black/60">
-                Você recebe de forma <span className="font-semibold">instantânea no e-mail</span> logo após o pagamento.
+                Você recebe de forma <span className="font-semibold">instantânea no e-mail</span>{' '}
+                logo após o pagamento.
               </div>
             </div>
           </div>
@@ -335,18 +386,13 @@ export default function OfertaPage() {
       </div>
 
       {/* POPUP UPSELL */}
-      <Modal
-        open={upsellOpen}
-        title="OFERTA IMPERDÍVEL!!!"
-        onClose={() => setUpsellOpen(false)}
-      >
+      <Modal open={upsellOpen} title="OFERTA IMPERDÍVEL!!!" onClose={() => setUpsellOpen(false)}>
         <div className="text-center text-sm text-black/70">
-          Leve <span className="font-semibold text-[#111b21]">tudo que tem no de R$27</span> por apenas:
+          Leve <span className="font-semibold text-[#111b21]">tudo que tem no de R$27</span> por
+          apenas:
         </div>
 
-        <div className="mt-3 text-center text-5xl font-extrabold text-[#111b21]">
-          R$ 19,90
-        </div>
+        <div className="mt-3 text-center text-5xl font-extrabold text-[#111b21]">R$ 19,90</div>
 
         <div className="mt-2 text-center text-xs text-black/50">
           pagamento único • acesso instantâneo no e-mail
@@ -361,6 +407,9 @@ export default function OfertaPage() {
           </div>
           <div className="rounded-2xl border border-black/10 bg-black/5 p-3">
             ✅ Ideal para casal e família
+          </div>
+          <div className="rounded-2xl border border-black/10 bg-black/5 p-3">
+            ✅ Receita Acelera metas
           </div>
         </div>
 
