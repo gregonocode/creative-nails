@@ -255,7 +255,7 @@ const congratsName = useMemo(
     <p className="text-sm text-black/65">
       Quer <span className="font-semibold text-[#111b21]">acelerar</span> e marcar sua tabela mais rápido?
       Leve o pacote com essa <span className="font-semibold text-[#111b21]">receita bônus</span> novidade,
-      com <span className="font-semibold text-[#111b21]">ótima saída</span> Facil de fazer e vende sozinha!
+      com <span className="font-semibold text-[#111b21]">ótima saída</span> Facil de fazer p/ vender todos os dias!
     </p>
   </div>
 </div>
