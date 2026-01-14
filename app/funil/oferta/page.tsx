@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 type Goal = 'casa' | 'viagem' | 'carro' | 'tranquilidade' | 'outro';
 type Amount = 10000 | 20000 | 40000 | 100000;
@@ -15,6 +15,23 @@ type StoredPayload = {
 };
 
 const STORAGE_KEY = 'prosperidade_funnel_v1';
+
+// ✅ Exit intent / back intercept (mostra só 1x por sessão)
+const EXIT_UPSELL_SHOWN_KEY = 'prosperidade_exit_upsell_shown_v1';
+
+function hasShownExitUpsell(): boolean {
+  try {
+    return sessionStorage.getItem(EXIT_UPSELL_SHOWN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markExitUpsellShown() {
+  try {
+    sessionStorage.setItem(EXIT_UPSELL_SHOWN_KEY, '1');
+  } catch {}
+}
 
 function formatBRL(n: number): string {
   return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -144,15 +161,53 @@ export default function OfertaPage() {
     return formatBRL(payload.amount);
   }, [payload?.amount]);
 
-const congratsName = useMemo(
-  () => safeFirstName(payload?.name ?? ''),
-  [payload?.name]
-);
+  const congratsName = useMemo(() => safeFirstName(payload?.name ?? ''), [payload?.name]);
 
   // ✅ Troque pelos seus links reais:
   const checkoutIndividual = 'https://pay.sereja.com.br/checkout/xFZ4qhce';
   const checkoutFamilia = 'https://pay.sereja.com.br/checkout/_CUBPHPI';
   const checkoutOferta1990 = 'https://pay.sereja.com.br/checkout/99lZVGTF';
+
+  // ✅ Abre o upsell só 1x por sessão
+  const openUpsellOnce = useCallback(() => {
+    if (hasShownExitUpsell()) return;
+
+    setUpsellOpen((prev) => {
+      if (prev) return prev;
+      markExitUpsellShown();
+      return true;
+    });
+  }, []);
+
+  // ✅ Exit intent (desktop) + intercept back (mobile/desktop)
+  useEffect(() => {
+    // 1) Exit intent: mouse indo pro topo (muito comum quando vai fechar/ir embora)
+    const onMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) openUpsellOnce();
+    };
+
+    // 2) Intercepta "voltar" (popstate). Empurra estado fake pra capturar o primeiro back.
+    try {
+      window.history.pushState({ __exit_upsell: true }, '', window.location.href);
+    } catch {}
+
+    const onPopState = () => {
+      openUpsellOnce();
+
+      // Mantém o usuário na página depois do back (pra não sair)
+      try {
+        window.history.pushState({ __exit_upsell: true }, '', window.location.href);
+      } catch {}
+    };
+
+    window.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('popstate', onPopState);
+
+    return () => {
+      window.removeEventListener('mouseleave', onMouseLeave);
+      window.removeEventListener('popstate', onPopState);
+    };
+  }, [openUpsellOnce]);
 
   return (
     <div className="min-h-screen bg-[#efeae2] text-[#111b21]">
@@ -161,13 +216,7 @@ const congratsName = useMemo(
         <div className="mb-4 rounded-2xl border border-black/10 bg-white/70 p-4 backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-black/10">
-              <Image
-                src="/perfil horta.webp"
-                alt="Perfil"
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src="/perfil horta.webp" alt="Perfil" fill className="object-cover" priority />
             </div>
 
             <div className="flex-1">
@@ -184,9 +233,7 @@ const congratsName = useMemo(
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-semibold text-black/70">
               ✅ Acesso instantâneo
             </div>
-            <div className="text-xs text-black/55">
-              Você recebe no e-mail logo após o pagamento.
-            </div>
+            <div className="text-xs text-black/55">Você recebe no e-mail logo após o pagamento.</div>
           </div>
 
           <div className="max-w-[92%] rounded-2xl bg-black/5 px-4 py-3">
@@ -200,8 +247,7 @@ const congratsName = useMemo(
               {amountText ? (
                 <>
                   {' '}
-                  com meta de{' '}
-                  <span className="font-semibold text-[#111b21]">{amountText}</span>.
+                  com meta de <span className="font-semibold text-[#111b21]">{amountText}</span>.
                 </>
               ) : (
                 '.'
@@ -239,48 +285,42 @@ const congratsName = useMemo(
 
         {/* Ofertas */}
         <div className="mt-4 grid gap-3">
-     {/* NOVO CARD 1 — Opcional */}
-<div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm">
-  <div className="mb-3 flex items-center justify-end">
-    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-semibold text-black/70">
-      Opcional
-    </div>
-  </div>
+          {/* NOVO CARD 1 — Opcional */}
+          <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm">
+            <div className="mb-3 flex items-center justify-end">
+              <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/5 px-3 py-1 text-xs font-semibold text-black/70">
+                Opcional
+              </div>
+            </div>
 
-  <div className="flex items-start gap-4">
-    <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl ring-1 ring-black/10">
-      <Image src="/frango.png" alt="Receita" fill className="object-cover" />
-    </div>
+            <div className="flex items-start gap-4">
+              <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl ring-1 ring-black/10">
+                <Image src="/frango.png" alt="Receita" fill className="object-cover" />
+              </div>
 
-    <p className="text-sm text-black/65">
-      Quer <span className="font-semibold text-[#111b21]">acelerar</span> e marcar sua tabela mais rápido?
-      Leve o pacote com essa <span className="font-semibold text-[#111b21]">receita bônus</span> novidade,
-      com <span className="font-semibold text-[#111b21]">ótima saída</span> Facil de fazer p/ vender todos os dias!
-    </p>
-  </div>
-</div>
-
-
-
-
-
-
-
-
+              <p className="text-sm text-black/65">
+                Quer <span className="font-semibold text-[#111b21]">acelerar</span> e marcar sua
+                tabela mais rápido? Leve o pacote com essa{' '}
+                <span className="font-semibold text-[#111b21]">receita bônus</span> novidade, com{' '}
+                <span className="font-semibold text-[#111b21]">ótima saída</span> Facil de fazer p/
+                vender todos os dias!
+              </p>
+            </div>
+          </div>
 
           {/* NOVO CARD 2 — Parabéns + bônus 15 min */}
           <div className="relative overflow-hidden rounded-3xl border border-[#0FDB6B]/35 bg-white p-5 shadow-sm">
             <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#0FDB6B]/15 blur-2xl" />
 
             <div className="text-sm font-extrabold text-[#111b21]">
-           {congratsName} parabéns por ter chegado até aqui 🎉
-           </div>
-
+              {congratsName} parabéns por ter chegado até aqui 🎉
+            </div>
 
             <div className="mt-2 text-sm text-black/65">
-              Se você levar nos próximos <span className="font-semibold text-[#111b21]">15 minutos</span>,
-              você vai receber totalmente <span className="font-semibold text-[#111b21]">GRÁTIS</span>{' '}
-              a dica de como concluir em até 10x mais rapido <strong>( NÃO E BRINCADEIRA").</strong>
+              Se você levar nos próximos{' '}
+              <span className="font-semibold text-[#111b21]">15 minutos</span>, você vai receber
+              totalmente <span className="font-semibold text-[#111b21]">GRÁTIS</span> a dica de como
+              concluir em até 10x mais rapido <strong>( NÃO E BRINCADEIRA").</strong>
             </div>
           </div>
 
@@ -332,7 +372,7 @@ const congratsName = useMemo(
                 Uma tabela para 1 pessoa (meta escolhida).
               </div>
 
-              <div className="mt-4 text-5xl font-extrabold text-[#111b21]">R$ 10</div>
+              <div className="mt-4 text-5xl font-extrabold text-[#111b21]">R$ 12</div>
               <div className="mt-1 text-xs text-black/50">pagamento único</div>
             </div>
 
@@ -348,7 +388,7 @@ const congratsName = useMemo(
               onClick={() => setUpsellOpen(true)}
               className="mt-5 block w-full rounded-2xl bg-[#D3FCAE] py-3 text-center font-semibold text-[#062b16] hover:bg-[#c7f59b]"
             >
-              Quero a Individual (R$ 10)
+              Quero a Individual (R$ 12)
             </button>
 
             <div className="mt-2 text-center text-xs text-black/50">
@@ -425,7 +465,7 @@ const congratsName = useMemo(
             href={checkoutIndividual}
             className="block w-full rounded-2xl border border-black/10 bg-white py-3 text-center font-semibold text-black/70 hover:bg-black/5"
           >
-            Quero o de 10 mesmo
+            Quero o de 12 mesmo
           </Link>
 
           <button
