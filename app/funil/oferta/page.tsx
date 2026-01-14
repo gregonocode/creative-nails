@@ -345,7 +345,8 @@ export default function OfertaPage() {
             </div>
 
             <ul className="mt-5 space-y-2 text-sm text-black/70">
-              <li>✅ 4 tabelas: 10k, 20k, 40k e 100k e +</li>
+              <li>✅ 7 tabelas: 10k, 20k, 40k e 100k e +</li>
+              <li>✅ Tabelas para você dar de presente </li>
               <li>✅ Você pode imprimir quantas quiser</li>
               <li>✅ Perfeito para objetivos diferentes</li>
               <li>✅ Mesma meta dividido para casal ou familia</li>
