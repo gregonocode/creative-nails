@@ -51,7 +51,7 @@ export default function Page() {
       subtitle="Primeiro, qual é a sua igreja?"
     >
       <div className="space-y-3">
-        <div className="text-sm font-semibold">Escolha uma opção:</div>
+        <div className="text-sm font-semibold">Escolha uma opção: Qual e a sua Igreja ?</div>
 
         <div className="grid grid-cols-1 gap-2">
           {IGREJAS.map((opt) => {

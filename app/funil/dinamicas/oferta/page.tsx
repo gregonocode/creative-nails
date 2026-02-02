@@ -274,7 +274,7 @@ export default function OfertaDinamicasPage() {
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
               <div className="text-sm font-semibold text-[#111b21]">E se eu não gostar?</div>
               <div className="mt-1 text-sm text-black/60">
-                Você pode solicitar reembolso dentro do prazo legal/da sua política.
+                Você tem 7 dias para pedir reembolso, sem burocracia.
               </div>
             </div>
           </div>
