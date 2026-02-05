@@ -2,14 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import { readFunil } from "@/app/lib/funil/state";
 
 function safeFirstName(fullName: string): string {
@@ -63,9 +57,7 @@ function Modal({
             <div className="inline-flex items-center gap-2 rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-3 py-1 text-xs font-semibold text-[#5b21b6]">
               Oferta
             </div>
-            <h3 className="mt-3 text-xl font-extrabold text-[#111b21]">
-              {title}
-            </h3>
+            <h3 className="mt-3 text-xl font-extrabold text-[#111b21]">{title}</h3>
           </div>
 
           <div className="mt-4">{children}</div>
@@ -75,35 +67,36 @@ function Modal({
   );
 }
 
-
-
 export default function OfertaDinamicasPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const [upsellOpen, setUpsellOpen] = useState(false);
 
-  const data = useMemo(() => readFunil(), []);
-  const firstName = useMemo(() => safeFirstName(data.nome ?? ""), [data.nome]);
-  const objetivo = useMemo(
-    () => data.objetivo ?? "fortalecer a igreja",
-    [data.objetivo]
-  );
-  const igreja = useMemo(() => data.igreja ?? "sua igreja", [data.igreja]);
+  // ✅ dados do funil (client-only) — evita hydration mismatch
+  const [data, setData] = useState(() => ({
+    nome: null as string | null,
+    objetivo: null as string | null,
+    igreja: null as string | null,
+  }));
+
+  // ✅ query string (client-only) — evita suspense do useSearchParams
+  const [qs, setQs] = useState("");
 
   // ✅ seus links reais
   const checkoutBasico = "https://pay.sereja.com.br/checkout/33RkjhI2";
   const checkoutCompleto = "https://pay.sereja.com.br/checkout/DH_8om67";
   const checkoutOferta = "https://pay.sereja.com.br/checkout/vbC_sR3L"; // oferta do popup (desconto)
-
-  // popup vai para a oferta com desconto
   const checkoutCompletoDoPopup = checkoutOferta;
 
-  // ✅ repassa UTMs da oferta para o checkout (marcar criativo)
-  const qs = useMemo(() => {
-    const s = searchParams?.toString();
-    return s ? `?${s}` : "";
-  }, [searchParams]);
+  useEffect(() => {
+    // client-only: captura UTMs da URL atual (pra marcar criativo na UTMify)
+    try {
+      const s = window.location.search; // inclui o "?"
+      setQs(s && s.length > 1 ? s : "");
+    } catch {
+      setQs("");
+    }
+  }, []);
 
   const withQS = useCallback(
     (url: string) => {
@@ -113,19 +106,45 @@ export default function OfertaDinamicasPage() {
     [qs]
   );
 
- 
-
   useEffect(() => {
-    // proteção de etapas
+    // proteção de etapas + snapshot (client-only)
     const d = readFunil();
     if (!d.igreja) return router.replace("/funil/dinamicas/igreja");
     if (!d.objetivo) return router.replace("/funil/dinamicas/objetivo");
     if (!d.nome) return router.replace("/funil/dinamicas/nome");
+
+    setData({
+      nome: d.nome ?? null,
+      objetivo: d.objetivo ?? null,
+      igreja: d.igreja ?? null,
+    });
   }, [router]);
+
+  const firstName = useMemo(() => safeFirstName(data.nome ?? ""), [data.nome]);
+  const objetivo = useMemo(
+    () => data.objetivo ?? "fortalecer a igreja",
+    [data.objetivo]
+  );
+  const igreja = useMemo(() => data.igreja ?? "sua igreja", [data.igreja]);
 
   const openUpsell = useCallback(() => {
     setUpsellOpen(true);
   }, []);
+
+  // ✅ evita “flash” de placeholder antes de carregar o funil
+  if (!data.nome) {
+    return (
+      <div className="min-h-screen bg-[#efeae2] text-[#111b21]">
+        <div className="mx-auto max-w-xl px-4 py-10">
+          <div className="rounded-3xl border border-black/10 bg-white p-6 text-center">
+            <div className="mx-auto h-10 w-10 rounded-full border-4 border-black/10 border-t-[#7C3AED] animate-spin" />
+            <div className="mt-3 text-sm font-semibold">Carregando sua oferta…</div>
+            <div className="mt-1 text-xs text-black/50">Só um instante.</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#efeae2] text-[#111b21]">
@@ -156,20 +175,15 @@ export default function OfertaDinamicasPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-semibold text-black/70">
               ✅ Acesso instantâneo
             </div>
-            <div className="text-xs text-black/55">
-              Você recebe tudo logo após o pagamento.
-            </div>
+            <div className="text-xs text-black/55">Você recebe tudo logo após o pagamento.</div>
           </div>
 
           <div className="max-w-[92%] rounded-2xl bg-[#D2FADD] px-4 py-3">
-            <div className="text-sm font-semibold">
-              {firstName}, suas Dinâmicas estão prontas 🎉
-            </div>
+            <div className="text-sm font-semibold">{firstName}, suas Dinâmicas estão prontas 🎉</div>
 
             <div className="mt-1 text-sm text-black/60">
               Personalizadas para{" "}
-              <span className="font-semibold text-[#111b21]">{objetivo}</span>{" "}
-              na{" "}
+              <span className="font-semibold text-[#111b21]">{objetivo}</span> na{" "}
               <span className="font-semibold text-[#111b21]">{igreja}</span>.
             </div>
           </div>
@@ -177,8 +191,8 @@ export default function OfertaDinamicasPage() {
           <div className="mt-3 ml-auto max-w-[92%] rounded-2xl bg-[#EDE9FE] px-4 py-3 text-[#2e1065] shadow-sm">
             <div className="text-sm">
               Você vai ter dinâmicas no estilo{" "}
-              <span className="font-semibold">quiz (perguntas + respostas)</span>
-              , prontas para imprimir e aplicar.
+              <span className="font-semibold">quiz (perguntas + respostas)</span>, prontas para
+              imprimir e aplicar.
             </div>
           </div>
 
@@ -218,13 +232,12 @@ export default function OfertaDinamicasPage() {
 
             <p className="mt-2 text-sm text-black/65">
               No <span className="font-semibold">Plano Completo</span>, você recebe também
-              dinâmicas em vídeo fáceis de aplicar — com brincadeiras, desafios e
-              exemplos que trazem <span className="font-semibold">parábolas e aprendizados</span>{" "}
-              para o dia a dia. Receba gratuitamente nos proximos 10 minutos!
+              dinâmicas em vídeo fáceis de aplicar — com brincadeiras, desafios e exemplos que
+              trazem <span className="font-semibold">parábolas e aprendizados</span> para o dia a
+              dia.
             </p>
           </div>
 
-          {/* banner full width */}
           <Image
             src="/video_dinamicas.png"
             alt="Dinâmicas em vídeo"
@@ -235,7 +248,7 @@ export default function OfertaDinamicasPage() {
           />
         </div>
 
-        {/* ✅ Sessão: Escassez (antes das ofertas) */}
+        {/* ✅ Sessão: Escassez (sem timer) */}
         <div className="mt-4 relative overflow-hidden rounded-3xl border border-[#7C3AED]/35 bg-white p-5 shadow-sm">
           <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#7C3AED]/15 blur-2xl" />
           <div className="pointer-events-none absolute -left-24 -bottom-24 h-64 w-64 rounded-full bg-[#7C3AED]/10 blur-2xl" />
@@ -252,8 +265,6 @@ export default function OfertaDinamicasPage() {
             <span className="font-semibold">ensinamentos</span>.
           </p>
 
-          
-
           {/* imagem novidades */}
           <div className="mt-4 -mx-5">
             <Image
@@ -265,22 +276,15 @@ export default function OfertaDinamicasPage() {
               priority
             />
           </div>
+
           <div className="mt-3 rounded-2xl border border-black/10 bg-black/5 p-4">
-            <div className="text-sm font-semibold text-[#111b21]">
-              🎁 Bônus por tempo limitado:
-            </div>
+            <div className="text-sm font-semibold text-[#111b21]">🎁 Bônus por tempo limitado:</div>
 
             <div className="mt-1 text-sm text-black/70">
-              Se você comprar nos próximos{" "}
-              <span className="font-extrabold text-[#7C3AED]">10 minutos</span>, você ganha
-              elas{" "}
-              <span className="font-extrabold text-[#7C3AED]">
-                totalmente GRATUITAS
-              </span>
-              .
+              Se você comprar <span className="font-extrabold text-[#7C3AED]">agora</span>, você
+              ganha essas dinâmicas{" "}
+              <span className="font-extrabold text-[#7C3AED]">totalmente GRATUITAS</span> 🎁
             </div>
-
-            
           </div>
         </div>
 
@@ -312,6 +316,7 @@ export default function OfertaDinamicasPage() {
               <li>✅ Brincadeiras evangélicas (variações prontas)</li>
               <li>✅ Dinâmicas em vídeo (balões, desafios, etc.)</li>
               <li>✅ Você pode imprimir quantas quiser</li>
+              <li>🎁 Dinâmicas novas (bônus)</li>
             </ul>
 
             <Link
@@ -345,6 +350,7 @@ export default function OfertaDinamicasPage() {
               <li>✅ Dinâmicas personalizadas para seu objetivo</li>
               <li>✅ PDFs prontos para imprimir</li>
               <li>✅ Fácil de aplicar</li>
+              <li>🎁 Dinâmicas novas (bônus)</li>
             </ul>
 
             <button
@@ -368,9 +374,7 @@ export default function OfertaDinamicasPage() {
           <div className="mt-3 space-y-3">
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
               <div className="text-sm font-semibold text-[#111b21]">Quando recebo?</div>
-              <div className="mt-1 text-sm text-black/60">
-                Acesso instantâneo logo após o pagamento.
-              </div>
+              <div className="mt-1 text-sm text-black/60">Acesso instantâneo logo após o pagamento.</div>
             </div>
 
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
@@ -383,7 +387,7 @@ export default function OfertaDinamicasPage() {
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
               <div className="text-sm font-semibold text-[#111b21]">E se eu não gostar?</div>
               <div className="mt-1 text-sm text-black/60">
-                Você tem garantia de 7 Dias para testar a vontade! Se não gostar, é só pedir o reembolso.
+                Você tem garantia de 7 dias para testar à vontade. Se não gostar, é só pedir o reembolso.
               </div>
             </div>
           </div>
@@ -401,16 +405,13 @@ export default function OfertaDinamicasPage() {
         onClose={() => setUpsellOpen(false)}
       >
         <div className="text-center text-sm text-black/70">
-          
+          {firstName}, receba tudo que tem no de 19,90 por apenas:
           <div className="mt-2 font-semibold text-[#111b21]">
             ✅ vídeos + brincadeiras + variações de dinâmicas
           </div>
-          {firstName}, Receba tudo que tem no de 19,90 por apenas:
         </div>
 
-        <div className="mt-3 text-center text-5xl font-extrabold text-[#111b21]">
-          R$ 14,90
-        </div>
+        <div className="mt-3 text-center text-5xl font-extrabold text-[#111b21]">R$ 14,90</div>
 
         <div className="mt-2 text-center text-xs text-black/50">
           pagamento único • acesso imediato
