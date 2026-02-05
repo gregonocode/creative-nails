@@ -2,8 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useMemo, useState, type ReactNode, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { readFunil } from "@/app/lib/funil/state";
 
 function safeFirstName(fullName: string): string {
@@ -57,7 +63,9 @@ function Modal({
             <div className="inline-flex items-center gap-2 rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-3 py-1 text-xs font-semibold text-[#5b21b6]">
               Oferta
             </div>
-            <h3 className="mt-3 text-xl font-extrabold text-[#111b21]">{title}</h3>
+            <h3 className="mt-3 text-xl font-extrabold text-[#111b21]">
+              {title}
+            </h3>
           </div>
 
           <div className="mt-4">{children}</div>
@@ -67,23 +75,45 @@ function Modal({
   );
 }
 
+
+
 export default function OfertaDinamicasPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [upsellOpen, setUpsellOpen] = useState(false);
 
   const data = useMemo(() => readFunil(), []);
   const firstName = useMemo(() => safeFirstName(data.nome ?? ""), [data.nome]);
-  const objetivo = useMemo(() => data.objetivo ?? "fortalecer a igreja", [data.objetivo]);
+  const objetivo = useMemo(
+    () => data.objetivo ?? "fortalecer a igreja",
+    [data.objetivo]
+  );
   const igreja = useMemo(() => data.igreja ?? "sua igreja", [data.igreja]);
 
-  // 🔗 Troque pelos seus links reais
+  // ✅ seus links reais
   const checkoutBasico = "https://pay.sereja.com.br/checkout/33RkjhI2";
   const checkoutCompleto = "https://pay.sereja.com.br/checkout/DH_8om67";
-  const checkoutOferta = "https://pay.sereja.com.br/checkout/vbC_sR3L";
+  const checkoutOferta = "https://pay.sereja.com.br/checkout/vbC_sR3L"; // oferta do popup (desconto)
 
-  // opcional: um link específico pro completo dentro do popup (pode ser o mesmo do completo)
+  // popup vai para a oferta com desconto
   const checkoutCompletoDoPopup = checkoutOferta;
 
+  // ✅ repassa UTMs da oferta para o checkout (marcar criativo)
+  const qs = useMemo(() => {
+    const s = searchParams?.toString();
+    return s ? `?${s}` : "";
+  }, [searchParams]);
+
+  const withQS = useCallback(
+    (url: string) => {
+      if (!qs) return url;
+      return url.includes("?") ? `${url}&${qs.slice(1)}` : `${url}${qs}`;
+    },
+    [qs]
+  );
+
+ 
 
   useEffect(() => {
     // proteção de etapas
@@ -100,23 +130,18 @@ export default function OfertaDinamicasPage() {
   return (
     <div className="min-h-screen bg-[#efeae2] text-[#111b21]">
       <div className="mx-auto max-w-xl px-4 py-6">
-        {/* Header estilo “chat/funil” */}
+        {/* Header sem logo */}
         <div className="mb-4 rounded-2xl border border-black/10 bg-white/70 p-4 backdrop-blur">
           <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-black/10 bg-white">
-              {/* Troque por sua imagem depois */}
-              <Image
-                src="/logosereja.webp"
-                alt="Logo"
-                fill
-                className="object-contain p-1"
-                priority
-              />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#7C3AED]/10 text-sm font-extrabold text-[#5b21b6]">
+              D
             </div>
 
             <div className="flex-1">
               <div className="text-sm font-semibold">Dinâmicas para Igrejas</div>
-              <div className="text-xs text-black/50">versão personalizada • acesso imediato</div>
+              <div className="text-xs text-black/50">
+                versão personalizada • acesso imediato
+              </div>
             </div>
 
             <div className="rounded-full bg-[#7C3AED]/10 px-3 py-1 text-xs font-bold text-[#5b21b6]">
@@ -131,7 +156,9 @@ export default function OfertaDinamicasPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-semibold text-black/70">
               ✅ Acesso instantâneo
             </div>
-            <div className="text-xs text-black/55">Você recebe tudo logo após o pagamento.</div>
+            <div className="text-xs text-black/55">
+              Você recebe tudo logo após o pagamento.
+            </div>
           </div>
 
           <div className="max-w-[92%] rounded-2xl bg-[#D2FADD] px-4 py-3">
@@ -141,7 +168,8 @@ export default function OfertaDinamicasPage() {
 
             <div className="mt-1 text-sm text-black/60">
               Personalizadas para{" "}
-              <span className="font-semibold text-[#111b21]">{objetivo}</span> na{" "}
+              <span className="font-semibold text-[#111b21]">{objetivo}</span>{" "}
+              na{" "}
               <span className="font-semibold text-[#111b21]">{igreja}</span>.
             </div>
           </div>
@@ -149,8 +177,8 @@ export default function OfertaDinamicasPage() {
           <div className="mt-3 ml-auto max-w-[92%] rounded-2xl bg-[#EDE9FE] px-4 py-3 text-[#2e1065] shadow-sm">
             <div className="text-sm">
               Você vai ter dinâmicas no estilo{" "}
-              <span className="font-semibold">quiz (perguntas + respostas)</span>, prontas para
-              imprimir e aplicar.
+              <span className="font-semibold">quiz (perguntas + respostas)</span>
+              , prontas para imprimir e aplicar.
             </div>
           </div>
 
@@ -164,12 +192,95 @@ export default function OfertaDinamicasPage() {
             </ul>
           </div>
 
-          {/* Imagem (placeholder) */}
+          {/* Mockup padrão da oferta */}
           <div className="mt-4 -mx-4">
-            {/* Troque por mockup depois (ex: /dinamicas-mockup.webp) */}
-            <div className="w-full bg-black/5 py-10 text-center text-sm text-black/50">
-              (Aqui entra um mockup com imagens dos PDFs / dinâmicas)
+            <Image
+              src="/dinamicas.png"
+              alt="Mockup das dinâmicas (PDFs)"
+              width={1350}
+              height={1080}
+              className="w-full"
+              priority
+            />
+          </div>
+        </div>
+
+        {/* ✅ Sessão: Dinâmicas em vídeo */}
+        <div className="mt-4 overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
+          <div className="p-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 px-3 py-1 text-xs font-semibold text-[#5b21b6]">
+              🎬 Dinâmicas em vídeo
             </div>
+
+            <h2 className="mt-3 text-xl font-extrabold text-[#111b21]">
+              Dinâmicas divertidas, mas com ensinamentos bíblicos (e pra vida)
+            </h2>
+
+            <p className="mt-2 text-sm text-black/65">
+              No <span className="font-semibold">Plano Completo</span>, você recebe também
+              dinâmicas em vídeo fáceis de aplicar — com brincadeiras, desafios e
+              exemplos que trazem <span className="font-semibold">parábolas e aprendizados</span>{" "}
+              para o dia a dia. Receba gratuitamente nos proximos 10 minutos!
+            </p>
+          </div>
+
+          {/* banner full width */}
+          <Image
+            src="/video_dinamicas.png"
+            alt="Dinâmicas em vídeo"
+            width={1500}
+            height={500}
+            className="w-full"
+            priority
+          />
+        </div>
+
+        {/* ✅ Sessão: Escassez (antes das ofertas) */}
+        <div className="mt-4 relative overflow-hidden rounded-3xl border border-[#7C3AED]/35 bg-white p-5 shadow-sm">
+          <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#7C3AED]/15 blur-2xl" />
+          <div className="pointer-events-none absolute -left-24 -bottom-24 h-64 w-64 rounded-full bg-[#7C3AED]/10 blur-2xl" />
+
+          <h2 className="text-2xl font-extrabold text-[#111b21]">
+            Tá cansado(a) das mesmas dinâmicas repetidas?
+          </h2>
+
+          <p className="mt-2 text-sm text-black/65">
+            Conheça as <span className="font-semibold">dinâmicas novas</span> que você
+            provavelmente ainda não conhece: dinâmicas{" "}
+            <span className="font-semibold">divertidas</span> com{" "}
+            <span className="font-semibold">parábolas</span> e{" "}
+            <span className="font-semibold">ensinamentos</span>.
+          </p>
+
+          
+
+          {/* imagem novidades */}
+          <div className="mt-4 -mx-5">
+            <Image
+              src="/novidades.png"
+              alt="Novidades de dinâmicas"
+              width={1350}
+              height={1080}
+              className="w-full"
+              priority
+            />
+          </div>
+          <div className="mt-3 rounded-2xl border border-black/10 bg-black/5 p-4">
+            <div className="text-sm font-semibold text-[#111b21]">
+              🎁 Bônus por tempo limitado:
+            </div>
+
+            <div className="mt-1 text-sm text-black/70">
+              Se você comprar nos próximos{" "}
+              <span className="font-extrabold text-[#7C3AED]">10 minutos</span>, você ganha
+              elas{" "}
+              <span className="font-extrabold text-[#7C3AED]">
+                totalmente GRATUITAS
+              </span>
+              .
+            </div>
+
+            
           </div>
         </div>
 
@@ -203,9 +314,8 @@ export default function OfertaDinamicasPage() {
               <li>✅ Você pode imprimir quantas quiser</li>
             </ul>
 
-            {/* Botão principal com animação */}
             <Link
-              href={checkoutCompleto}
+              href={withQS(checkoutCompleto)}
               className={[
                 "shine-button mt-5 block w-full rounded-2xl bg-[#7C3AED] py-3 text-center font-semibold text-white",
                 "transition hover:brightness-95",
@@ -237,11 +347,10 @@ export default function OfertaDinamicasPage() {
               <li>✅ Fácil de aplicar</li>
             </ul>
 
-            {/* Em vez de Link direto: abre popup */}
             <button
               type="button"
               onClick={openUpsell}
-              className="mt-5 block w-full rounded-2xl bg-[#D2FADD] py-3 text-center font-semibold text-[#2e1065] hover:bg-[#e6defe]"
+              className="mt-5 block w-full rounded-2xl bg-[#D2FADD] py-3 text-center font-semibold text-[#111b21] hover:brightness-95"
             >
               Quero o Básico (R$ 10)
             </button>
@@ -274,7 +383,7 @@ export default function OfertaDinamicasPage() {
             <div className="rounded-2xl border border-black/10 bg-black/5 p-4">
               <div className="text-sm font-semibold text-[#111b21]">E se eu não gostar?</div>
               <div className="mt-1 text-sm text-black/60">
-                Você tem 7 dias para pedir reembolso, sem burocracia.
+                Você tem garantia de 7 Dias para testar a vontade! Se não gostar, é só pedir o reembolso.
               </div>
             </div>
           </div>
@@ -285,16 +394,23 @@ export default function OfertaDinamicasPage() {
         </div>
       </div>
 
-      {/* POPUP (aparece quando escolhe o plano menor) */}
-      <Modal open={upsellOpen} title="Espera! Libera o Completo com desconto 👀" onClose={() => setUpsellOpen(false)}>
+      {/* POPUP */}
+      <Modal
+        open={upsellOpen}
+        title="Espera! Libera o Completo com desconto 👀"
+        onClose={() => setUpsellOpen(false)}
+      >
         <div className="text-center text-sm text-black/70">
-          {firstName}, por uma diferença pequena você libera:
+          
           <div className="mt-2 font-semibold text-[#111b21]">
             ✅ vídeos + brincadeiras + variações de dinâmicas
           </div>
+          {firstName}, Receba tudo que tem no de 19,90 por apenas:
         </div>
 
-        <div className="mt-3 text-center text-5xl font-extrabold text-[#111b21]">R$ 14,90</div>
+        <div className="mt-3 text-center text-5xl font-extrabold text-[#111b21]">
+          R$ 14,90
+        </div>
 
         <div className="mt-2 text-center text-xs text-black/50">
           pagamento único • acesso imediato
@@ -314,14 +430,14 @@ export default function OfertaDinamicasPage() {
 
         <div className="mt-5 grid gap-2">
           <Link
-            href={checkoutCompletoDoPopup}
+            href={withQS(checkoutCompletoDoPopup)}
             className="shine-button block w-full rounded-2xl bg-[#7C3AED] py-3 text-center font-semibold text-white"
           >
-            Quero o Completo
+            Quero o Completo com desconto
           </Link>
 
           <Link
-            href={checkoutBasico}
+            href={withQS(checkoutBasico)}
             className="block w-full rounded-2xl border border-black/10 bg-white py-3 text-center font-semibold text-black/70 hover:bg-black/5"
           >
             Quero o Básico mesmo (R$ 10)
