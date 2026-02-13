@@ -295,7 +295,7 @@ export default function OfertaPage() {
 
             <div className="flex items-start gap-4">
   <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl ring-1 ring-black/10 bg-white">
-   BRIQUE!
+   
   </div>
 
   <div className="flex-1">
