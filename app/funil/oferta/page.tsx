@@ -378,7 +378,7 @@ export default function OfertaPage() {
               <li>✅ Você pode imprimir quantas quiser</li>
               <li>✅ Perfeito para objetivos diferentes</li>
               <li>✅ Mesma meta dividido para casal ou familia</li>
-              <li>✅ Bônus: Receita acelera metas</li>
+              <li>✅ Bônus: Brique acelera metas</li>
             </ul>
 
             <Link
