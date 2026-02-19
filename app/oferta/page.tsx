@@ -409,6 +409,7 @@ function goCheckout1990() {
                   <li>✅ +40 modelos 3D baixo orçamento</li>
                   <li>✅ Mais variações (mais espaço / mais valorização)</li>
                   <li>✅ Ideias simples pra deixar moderno gastando pouco</li>
+                  <li>✅ AI trasforma rascunho em planta 3D</li>
                 </ul>
               </div>
 
