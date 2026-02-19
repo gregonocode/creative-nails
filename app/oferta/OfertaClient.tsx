@@ -62,31 +62,20 @@ export default function OfertaPage() {
   const obj = sp.get("obj"); // moneyIntent
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  // aqui você plugaria checkout real depois
-  function withParams(baseUrl: string) {
-  const url = new URL(baseUrl);
-
-  // mantém personalização no checkout (opcional, mas útil)
-  if (nomeRaw?.trim()) url.searchParams.set("nome", nomeRaw.trim());
-  if (pra) url.searchParams.set("pra", pra);
-  if (prio) url.searchParams.set("prio", prio);
-  if (obj) url.searchParams.set("obj", obj);
-
-  return url.toString();
-}
-
+ 
+  // deixamos as url limpoas pra rodar em produção !
 function goCheckout27() {
-  window.location.assign(withParams("https://pay.sereja.com.br/checkout/DjV1ETPC"));
+  window.location.assign("https://pay.sereja.com.br/checkout/DjV1ETPC");
 }
 
 function goCheckout10() {
-  window.location.assign(withParams("https://pay.sereja.com.br/checkout/Y6rCfPS5"));
+  window.location.assign("https://pay.sereja.com.br/checkout/Y6rCfPS5");
 }
 
 function goCheckout1990() {
-  window.location.assign(withParams("https://pay.sereja.com.br/checkout/m5VgSbil"));
+  window.location.assign("https://pay.sereja.com.br/checkout/m5VgSbil");
 }
+
 
 
   const headlinePersonal = useMemo(() => {
