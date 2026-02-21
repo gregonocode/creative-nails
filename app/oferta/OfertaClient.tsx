@@ -405,7 +405,7 @@ function goCheckout1990() {
             </h2>
             <p className="mt-2 text-slate-700">
               Se por qualquer motivo você não gostar, você tem <b>7 dias</b> pra pedir reembolso.
-              A gente prefere devolver seu dinheiro do que deixar você no prejuízo.
+              A gente prefere devolver seu dinheiro do que deixar você insatisfeito!
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -434,7 +434,25 @@ function goCheckout1990() {
           </div>
         </div>
       </section>
+      {/* ===========================
+    <section> POR QUE TÃO BARATO?
+   =========================== */}
+<section className="bg-white">
+  <div className="mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
+    <h2 className="text-center text-2xl font-semibold tracking-tight text-sky-700 sm:text-3xl">
+      Por que tão barato?
+    </h2>
 
+    <p className="mx-auto mt-4 max-w-[820px] text-center text-sm text-slate-700 sm:text-base">
+      A ideia é <b>democratizar o conhecimento</b> e permitir que qualquer pessoa consiga desenvolver
+      suas plantas  seja para <b>alugar</b>, <b>morar</b> ou <b>revender</b>  sem custos elevados.
+      <br />
+      <span className="font-semibold text-rose-500">
+        Aproveite: talvez você não veja essa oferta novamente.
+      </span>
+    </p>
+  </div>
+</section>
       {/* ===========================
           <section> FAQ
          =========================== */}
