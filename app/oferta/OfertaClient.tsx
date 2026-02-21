@@ -184,44 +184,7 @@ function goCheckout1990() {
           </div>
         </div>
       </section>
-      
-      {/* BONUS IMEDIATO */}
-<div className="mt-6 rounded-3xl border border-sky-200 bg-[#ffffff] p-5 shadow-sm sm:p-6">
-  <div className="grid gap-5 sm:grid-cols-[220px_1fr] sm:items-center">
-    {/* imagem (placeholder) */}
-    <div className="overflow-hidden rounded-2xl border border-sky-100 bg-white">
-      <img
-        src="/oferta/dicas.webp"
-        alt="Bônus: Pack de decoração visual"
-        className="h-[160px] w-full object-cover sm:h-[180px]"
-      />
-    </div>
-
-    {/* texto */}
-    <div>
-      <div className="flex items-center gap-2">
-        <span className="grid h-9 w-9 place-items-center rounded-2xl bg-white text-lg shadow-sm">
-          🎁
-        </span>
-        <p className="text-sm font-semibold text-sky-700">Bônus imediato</p>
-      </div>
-
-      <h3 className="mt-2 text-xl font-semibold tracking-tight text-slate-900">
-        Se você adquirir qualquer plano nos próximos 10 minutos…
-      </h3>
-
-      <p className="mt-2 text-sm text-slate-700">
-        Vamos te dar <b>totalmente de graça</b> um <b>Pack de Decoração Visual</b> com ideias simples
-        pra deixar a quitinete mais bonita gastando pouco (sem “inventar moda” no orçamento).
-      </p>
-
-      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1 text-xs text-slate-600">
-        <span className="h-2 w-2 rounded-full bg-sky-400" />
-        Liberado automaticamente após a compra
-      </div>
-    </div>
-  </div>
-</div>
+  
 {/* ===========================
     <section> IA QUE CRIA PLANTAS 3D
    =========================== */}
@@ -315,6 +278,44 @@ function goCheckout1990() {
     </div>
   </div>
 </section>
+    
+      {/* BONUS IMEDIATO */}
+<div className="mt-6 rounded-3xl border border-sky-200 bg-[#ffffff] p-5 shadow-sm sm:p-6">
+  <div className="grid gap-5 sm:grid-cols-[220px_1fr] sm:items-center">
+    {/* imagem (placeholder) */}
+    <div className="overflow-hidden rounded-2xl border border-sky-100 bg-white">
+      <img
+        src="/oferta/dicas.webp"
+        alt="Bônus: Pack de decoração visual"
+        className="h-[160px] w-full object-cover sm:h-[180px]"
+      />
+    </div>
+
+    {/* texto */}
+    <div>
+      <div className="flex items-center gap-2">
+        <span className="grid h-9 w-9 place-items-center rounded-2xl bg-white text-lg shadow-sm">
+          🎁
+        </span>
+        <p className="text-sm font-semibold text-sky-700">Bônus imediato</p>
+      </div>
+
+      <h3 className="mt-2 text-xl font-semibold tracking-tight text-slate-900">
+        Se você adquirir qualquer plano nos próximos 10 minutos…
+      </h3>
+
+      <p className="mt-2 text-sm text-slate-700">
+        Vamos te dar <b>totalmente de graça</b> um <b>Pack de Decoração Visual</b> com ideias simples
+        pra deixar a quitinete mais bonita gastando pouco (sem “inventar moda” no orçamento).
+      </p>
+
+      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1 text-xs text-slate-600">
+        <span className="h-2 w-2 rounded-full bg-sky-400" />
+        Liberado automaticamente após a compra
+      </div>
+    </div>
+  </div>
+</div>
 
 
       {/* ===========================
@@ -342,6 +343,7 @@ function goCheckout1990() {
                 <li>✅ Ideias visuais pra melhorar o ambiente gastando pouco</li>
                 <li>✅ tabelas de objetivos para juntar de mil a 50 mil</li>
                 <li>✅ Melhor custo-benefício (pra quem vai usar de verdade)</li>
+                <li>✅ IA de rascunho para trasformar em 3D ( sem custo ) </li>
               </ul>
 
               <button
