@@ -343,8 +343,10 @@ function goCheckout1990() {
                 <li>✅ Ideias visuais pra melhorar o ambiente gastando pouco</li>
                 <li>✅ tabelas de objetivos para juntar de mil a 50 mil</li>
                 <li>✅ Melhor custo-benefício (pra quem vai usar de verdade)</li>
-                <li>✅ IA de rascunho para trasformar em 3D ( sem custo ) </li>
+                <li>✅ faça as suas proprias com IA de rascunho para trasformar em 3D ( sem custo ) </li>
+                
               </ul>
+
 
               <button
                 type="button"
