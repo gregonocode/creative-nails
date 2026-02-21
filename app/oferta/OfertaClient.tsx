@@ -222,6 +222,99 @@ function goCheckout1990() {
     </div>
   </div>
 </div>
+{/* ===========================
+    <section> IA QUE CRIA PLANTAS 3D
+   =========================== */}
+<section className="bg-white">
+  <div className="mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
+    <div className="rounded-3xl border border-sky-100 bg-sky-50 p-6 shadow-sm sm:p-8">
+      <div className="flex items-start gap-3">
+        <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-xl shadow-sm">
+          
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Crie suas próprias plantas 3D (realistas) com IA treinada por mim!
+          </h2>
+          <p className="mt-2 max-w-[820px] text-sm text-slate-700 sm:text-base">
+            Hoje, mandar fazer uma planta 3D com alguém costuma custar em média{" "}
+            <b>de R$500 a R$3.000</b> por projeto (dependendo do nível de detalhe).
+            Aqui você pode gerar as suas quando quiser.
+          </p>
+
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1 text-xs text-slate-600">
+            <span className="h-2 w-2 rounded-full bg-sky-400" />
+            Faça quantas vezes quiser • Sem mensalidade
+          </div>
+        </div>
+      </div>
+
+      {/* passo a passo */}
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl border border-sky-100 bg-white p-4">
+          <p className="text-xs font-semibold text-sky-700">PASSO 1</p>
+          <p className="mt-1 font-semibold text-slate-900">Rascunhe no papel</p>
+          <p className="mt-2 text-sm text-slate-600">
+            Faça seu desenho simples com papel e caneta (do seu jeito).
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-sky-100 bg-white p-4">
+          <p className="text-xs font-semibold text-sky-700">PASSO 2</p>
+          <p className="mt-1 font-semibold text-slate-900">Envie para a IA</p>
+          <p className="mt-2 text-sm text-slate-600">
+            Você manda o rascunho e a IA entende a ideia do layout.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-sky-100 bg-white p-4">
+          <p className="text-xs font-semibold text-sky-700">PASSO 3</p>
+          <p className="mt-1 font-semibold text-slate-900">Receba em 3D</p>
+          <p className="mt-2 text-sm text-slate-600">
+            A IA transforma pra você em um modelo 3D e você pode repetir quantas vezes quiser.
+          </p>
+        </div>
+      </div>
+
+      {/* banner rascunho */}
+      <div className="mt-6 overflow-hidden rounded-3xl border border-sky-100 bg-white shadow-sm">
+        <img
+          src="/oferta/rascunho.webp"
+          alt="Rascunho no papel transformado em planta 3D com IA"
+          className="h-auto w-full object-cover"
+        />
+      </div>
+      {/* Banner detalhes */}
+<div className="mt-6 overflow-hidden rounded-3xl border border-sky-100 bg-white shadow-sm">
+  <img
+    src="/oferta/detalhes.png"
+    alt="Detalhes do modelo 3D"
+    className="h-auto w-full object-cover"
+  />
+</div>
+
+      {/* reforço final */}
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-slate-700">
+          ✅ Use pra testar layouts, ganhar tempo e evitar erro caro antes de construir.
+        </p>
+
+        {/* Se quiser, você pode apontar esse botão pro checkout 19,90 ou 27 */}
+        {/* <button
+          type="button"
+          onClick={goCheckout1990}
+          className={cn(
+            "shine-button w-full rounded-2xl px-5 py-4 text-base font-semibold text-white shadow-sm transition sm:w-auto",
+            "bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-200"
+          )}
+        >
+          Quero acessar a IA
+        </button> */}
+      </div>
+    </div>
+  </div>
+</section>
 
 
       {/* ===========================
@@ -247,6 +340,7 @@ function goCheckout1990() {
                 <li>✅ +40 modelos 3D baixo orçamento</li>
                 <li>✅ Mais variações de layout (mais espaço/mais valorização)</li>
                 <li>✅ Ideias visuais pra melhorar o ambiente gastando pouco</li>
+                <li>✅ tabelas de objetivos para juntar de mil a 50 mil</li>
                 <li>✅ Melhor custo-benefício (pra quem vai usar de verdade)</li>
               </ul>
 
