@@ -1,4 +1,4 @@
-// app/oferta/page.tsx
+// app/ofertaClient/page.tsx
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -7,6 +7,57 @@ import "@/app/components/quiz/css/shine.css";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
+}
+
+const UTM_STORAGE_KEY = "sereja_utm_qs";
+
+function pickTrackingParamsFromSearch(search: string) {
+  const sp = new URLSearchParams(search);
+  const out = new URLSearchParams();
+
+  for (const [k, v] of sp.entries()) {
+    const key = k.toLowerCase();
+    if (key.startsWith("utm_")) out.set(k, v);
+    if (key === "fbclid") out.set(k, v);
+  }
+
+  return out;
+}
+
+function getStoredTrackingParams(): URLSearchParams {
+  try {
+    const raw = window.localStorage.getItem(UTM_STORAGE_KEY);
+    if (!raw) return new URLSearchParams();
+    return new URLSearchParams(raw);
+  } catch {
+    return new URLSearchParams();
+  }
+}
+
+function storeTrackingParams(params: URLSearchParams) {
+  try {
+    const s = params.toString();
+    if (s) window.localStorage.setItem(UTM_STORAGE_KEY, s);
+  } catch {}
+}
+
+function buildCheckoutUrl(base: string) {
+  const fromUrl = pickTrackingParamsFromSearch(window.location.search);
+  const stored = getStoredTrackingParams();
+
+  // mescla: prioriza o que está na URL atual, completa com o salvo
+  for (const [k, v] of stored.entries()) {
+    if (!fromUrl.has(k)) fromUrl.set(k, v);
+  }
+
+  // salva de volta (pra manter atualizado)
+  storeTrackingParams(fromUrl);
+
+  const qs = fromUrl.toString();
+  if (!qs) return base;
+
+  // preserva se já tiver query no base
+  return base.includes("?") ? `${base}&${qs}` : `${base}?${qs}`;
 }
 
 type BuildFor = "morar" | "alugar" | "vender" | "planejando";
@@ -49,6 +100,17 @@ function labelMoneyIntent(v: string | null): string {
 export default function OfertaPage() {
   const sp = useSearchParams();
 
+  useEffect(() => {
+  const tracking = pickTrackingParamsFromSearch(window.location.search);
+  const prev = getStoredTrackingParams();
+
+  for (const [k, v] of prev.entries()) {
+    if (!tracking.has(k)) tracking.set(k, v);
+  }
+
+  storeTrackingParams(tracking);
+}, []);
+
   const nomeRaw = sp.get("nome") ?? "";
   const nome = useMemo(() => {
     const cleaned = nomeRaw.trim();
@@ -65,15 +127,19 @@ export default function OfertaPage() {
  
   // deixamos as url limpoas pra rodar em produção !
 function goCheckout27() {
-  window.location.assign("https://pay.sereja.com.br/checkout/DjV1ETPC");
+  const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC");
+  console.log("CHECKOUT URL (27):", url);
+  window.location.assign(url);
 }
 
 function goCheckout10() {
-  window.location.assign("https://pay.sereja.com.br/checkout/Y6rCfPS5");
+  const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/Y6rCfPS5");
+  window.location.assign(url);
 }
 
 function goCheckout1990() {
-  window.location.assign("https://pay.sereja.com.br/checkout/m5VgSbil");
+  const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/m5VgSbil");
+  window.location.assign(url);
 }
 
 
