@@ -1,7 +1,7 @@
 // app/oferta/page.tsx
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "@/app/components/quiz/css/shine.css";
 
