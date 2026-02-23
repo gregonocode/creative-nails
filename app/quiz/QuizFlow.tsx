@@ -76,6 +76,26 @@ function buildOfferUrl(params: { name: string; answers: Partial<QuizAnswer> }) {
 
   return `/oferta?${sp.toString()}`;
 }
+async function trackQuizAnswer(params: { questionId: string; value: string }) {
+  const k = `${params.questionId}:${params.value}`;
+
+  // ✅ dedupe forte (evita 2 requests idênticas)
+  if (__sent.has(k)) return;
+  __sent.add(k);
+
+  // libera depois de 1s (pra não travar testes/fluxos)
+  window.setTimeout(() => __sent.delete(k), 1000);
+
+  try {
+    await fetch("/api/quiz/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+      keepalive: true,
+    });
+  } catch {}
+}
+const __sent = new Set<string>();
 
 export default function QuizFlow() {
   const router = useRouter();
@@ -95,29 +115,41 @@ export default function QuizFlow() {
   const [answers, setAnswers] = useState<Partial<QuizAnswer>>({});
   const [name, setName] = useState("");
   const [step, setStep] = useState<Step>({ type: "q", index: 0 });
+  // ✅ evita contar 2x (double click, bugs, etc.)
+  const [tracked, setTracked] = useState<Record<string, true>>({});
 
   const currentQuestion = useMemo(() => {
     if (step.type !== "q") return null;
     return QUIZ_QUESTIONS[step.index] ?? null;
   }, [step]);
 
-  function pickOption(value: string) {
-    if (!currentQuestion) return;
+ function pickOption(value: string) {
+  if (!currentQuestion) return;
 
-    setAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: value,
-    }));
+  const qid = String(currentQuestion.id);
+  const trackKey = `${qid}:${value}`;
 
-    const nextIndex = (step.type === "q" ? step.index : 0) + 1;
+  // ✅ 1x por resposta (state + dedupe)
+  setTracked((prev) => {
+    if (prev[trackKey]) return prev;
+    if (qid === "buildFor") void trackQuizAnswer({ questionId: qid, value });
+    return { ...prev, [trackKey]: true };
+  });
 
-    if (nextIndex < QUIZ_QUESTIONS.length) {
-      setStep({ type: "q", index: nextIndex });
-      return;
-    }
+  setAnswers((prev) => ({
+    ...prev,
+    [currentQuestion.id]: value,
+  }));
 
-    setStep({ type: "name" });
+  const nextIndex = (step.type === "q" ? step.index : 0) + 1;
+
+  if (nextIndex < QUIZ_QUESTIONS.length) {
+    setStep({ type: "q", index: nextIndex });
+    return;
   }
+
+  setStep({ type: "name" });
+}
 
   function goGenerate() {
     const trimmed = name.trim();
