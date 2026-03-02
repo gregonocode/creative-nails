@@ -233,13 +233,13 @@ export default function QuizFlow() {
               <h1 className="text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
                 Pra personalizar rapidinho…
               </h1>
-              <p className="mt-2 text-sm text-slate-600">Qual seu nome? (Vou usar na próxima tela)</p>
+              <p className="mt-2 text-sm text-slate-600">Qual seu nome?</p>
 
               <div className="mt-5">
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ex: Tiago"
+                  placeholder="Coloque seu nome aqui..."
                   className={cn(
                     "w-full rounded-2xl border px-4 py-3 text-slate-900",
                     "border-slate-200 focus:border-sky-300 focus:outline-none focus:ring-4 focus:ring-sky-100"
@@ -257,7 +257,7 @@ export default function QuizFlow() {
                       : "bg-sky-500 text-white hover:bg-sky-600"
                   )}
                 >
-                  Gerar plantas
+                  Gerar Plano Agora!
                 </button>
 
                 <p className="mt-3 text-xs text-slate-500">Leva poucos segundos. Sem enrolação.</p>

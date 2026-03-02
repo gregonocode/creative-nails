@@ -60,151 +60,315 @@ function buildCheckoutUrl(base: string) {
   return base.includes("?") ? `${base}&${qs}` : `${base}?${qs}`;
 }
 
-type BuildFor = "morar" | "alugar" | "vender" | "planejando";
-type Priority = "mais_espaco" | "mais_bonito" | "mais_barato" | "todas";
-type MoneyIntent = "ja_pensei" | "nunca_pensei" | "to_pensando_agora" | "quero_morar";
-
-function labelBuildFor(v: string | null): string {
-  const map: Record<BuildFor, string> = {
-    morar: "morar",
-    alugar: "alugar",
-    vender: "vender",
-    planejando: "planejar",
-  };
-  if (!v) return "começar";
-  return map[v as BuildFor] ?? "começar";
-}
-
-function labelPriority(v: string | null): string {
-  const map: Record<Priority, string> = {
-    mais_espaco: "mais espaço",
-    mais_bonito: "mais bonito",
-    mais_barato: "mais barato",
-    todas: "equilíbrio (tudo)",
-  };
-  if (!v) return "equilíbrio";
-  return map[v as Priority] ?? "equilíbrio";
-}
-
-function labelMoneyIntent(v: string | null): string {
-  const map: Record<MoneyIntent, string> = {
-    ja_pensei: "já pensou nisso",
-    nunca_pensei: "nunca pensou nisso",
-    to_pensando_agora: "tá pensando agora",
-    quero_morar: "quer pra morar",
-  };
-  if (!v) return "tá no começo";
-  return map[v as MoneyIntent] ?? "tá no começo";
-}
-
 export default function OfertaPage() {
   const sp = useSearchParams();
 
   useEffect(() => {
-  const tracking = pickTrackingParamsFromSearch(window.location.search);
-  const prev = getStoredTrackingParams();
+    const tracking = pickTrackingParamsFromSearch(window.location.search);
+    const prev = getStoredTrackingParams();
 
-  for (const [k, v] of prev.entries()) {
-    if (!tracking.has(k)) tracking.set(k, v);
-  }
+    for (const [k, v] of prev.entries()) {
+      if (!tracking.has(k)) tracking.set(k, v);
+    }
 
-  storeTrackingParams(tracking);
-}, []);
+    storeTrackingParams(tracking);
+  }, []);
 
   const nomeRaw = sp.get("nome") ?? "";
   const nome = useMemo(() => {
     const cleaned = nomeRaw.trim();
     if (!cleaned) return "aí";
-    // pega só o primeiro nome (opcional, fica mais “copy”)
     return cleaned.split(" ").filter(Boolean)[0] ?? cleaned;
   }, [nomeRaw]);
 
-  const pra = sp.get("pra"); // morar/alugar/vender/planejando
-  const prio = sp.get("prio"); // mais_espaco/mais_bonito/mais_barato/todas
-  const obj = sp.get("obj"); // moneyIntent
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
- 
-  // deixamos as url limpoas pra rodar em produção !
-function goCheckout27() {
-  const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC");
-  console.log("CHECKOUT URL (27):", url);
-  window.location.assign(url);
-}
 
-function goCheckout10() {
-  const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/Y6rCfPS5");
-  window.location.assign(url);
-}
+  // URLs em produção
+  function goCheckout27() {
+    const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC");
+    window.location.assign(url);
+  }
 
-function goCheckout1990() {
-  const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/m5VgSbil");
-  window.location.assign(url);
-}
+  function goCheckout10() {
+    const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/Y6rCfPS5");
+    window.location.assign(url);
+  }
 
+  function goCheckout1990() {
+    const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC?p=oferta");
+    window.location.assign(url);
+  }
 
-
-  const headlinePersonal = useMemo(() => {
-    const build = labelBuildFor(pra);
-    const priority = labelPriority(prio);
-
-    // personalização simples e forte
-    if ((pra as BuildFor) === "alugar") {
-      return `Como você quer ${build}, eu montei um pack pra você construir gastando pouco e aumentar seu retorno com um ambiente mais valorizado.`;
-    }
-    if ((pra as BuildFor) === "vender") {
-      return `Como você quer ${build}, eu montei um pack pra você deixar a planta mais clara e o ambiente mais atrativo, sem inventar moda no custo.`;
-    }
-    if ((pra as BuildFor) === "morar") {
-      return `Como você quer ${build}, eu montei um pack pra você ganhar ${priority} e ter uma quitinete bem organizada (sem erro bobo de espaço).`;
-    }
-    return `Pelo que você respondeu, eu montei um caminho simples pra você ganhar ${priority} usando plantas 3D fáceis de entender.`;
-  }, [pra, prio]);
+  function scrollToPlanos() {
+    const el = document.getElementById("planos");
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   return (
     <div className="min-h-[100dvh] bg-white text-slate-900">
       {/* ===========================
-          <section> HERO PERSONALIZADO
+          HERO (novo) — foco aluguel
          =========================== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50 to-white">
-        <div className="mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white px-3 py-1 text-xs text-slate-600 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-sky-400" />
-            Resultado do seu quiz • personalizado
+      <section className="relative overflow-hidden">
+        {/* fundo leve azul -> verde limão */}
+        <div className="absolute inset-0 bg-gradient-to-b from-sky-50 via-white to-lime-50" />
+        <div className="absolute -top-28 right-[-140px] h-[420px] w-[420px] rounded-full bg-lime-200/40 blur-3xl" />
+        <div className="absolute -bottom-28 left-[-140px] h-[420px] w-[420px] rounded-full bg-sky-200/40 blur-3xl" />
+
+        <div className="relative mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
+          {/* chip */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-lime-400" />
+            Plano de kitnets para aluguel • baixo custo
           </div>
 
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-            {nome}, aqui está sua melhor opção pra quitinetes de baixo custo 👇
+          {/* headline */}
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+            {nome}, aqui está seu plano pra kitnets de baixo custo{" "}
+            <span className="bg-gradient-to-r from-sky-700 to-lime-600 bg-clip-text text-transparent">
+              para aluguel
+            </span>
+            .
           </h1>
 
-          <p className="mt-3 max-w-[740px] text-base text-slate-700 sm:text-lg">
-            {headlinePersonal}
+          {/* subheadline */}
+          <p className="mt-4 max-w-[860px] text-base font-medium leading-relaxed text-slate-700 sm:text-lg">
+            A ideia é simples: <b>reduzir o custo por unidade</b> usando um método de construção mais econômico
+             e com o mesmo orçamento, sair do “vou fazer 1” pra{" "}
+            <b>ter chance real de fazer 2</b>.
           </p>
 
+          {/* cards (nova proposta) */}
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-3xl border border-sky-100 bg-white p-4 shadow-sm">
-              <p className="text-xs text-slate-500">Seu objetivo</p>
-              <p className="mt-1 font-semibold text-slate-800">
-                {pra ? `Construir pra ${labelBuildFor(pra)}` : "Definir objetivo"}
+            <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
+              <p className="text-xs font-semibold text-slate-500">ECONOMIA DAS GRANDES</p>
+              <p className="mt-2 text-base font-extrabold text-slate-900">
+                Até <span className="text-lime-700">~50%</span> mais barato*
+              </p>
+              <p className="mt-2 text-sm text-slate-600">
+                com o valor de uma kitinete você faz duas, apenas substituindo o método tradicional por um mais econômico.
               </p>
             </div>
-            <div className="rounded-3xl border border-sky-100 bg-white p-4 shadow-sm">
-              <p className="text-xs text-slate-500">Prioridade</p>
-              <p className="mt-1 font-semibold text-slate-800">
-                {prio ? labelPriority(prio) : "Equilíbrio"}
+
+            <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
+              <p className="text-xs font-semibold text-slate-500">RENDA MENSAL</p>
+              <p className="mt-2 text-base font-extrabold text-slate-900">
+                tenha uma renda todo mês com aluguel de kitinetes
+              </p>
+              <p className="mt-2 text-sm text-slate-600">
+                Deixe suas kitinetes trabalhar pra você e tenha uma renda todo mês, sem precisar vender ou depender de valorização.
               </p>
             </div>
-            <div className="rounded-3xl border border-sky-100 bg-white p-4 shadow-sm">
-              <p className="text-xs text-slate-500">Sobre ganhar dinheiro</p>
-              <p className="mt-1 font-semibold text-slate-800">
-                {obj ? labelMoneyIntent(obj) : "—"}
+
+            <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
+              <p className="text-xs font-semibold text-slate-500">APENAS COMEÇE</p>
+              <p className="mt-2 text-base font-extrabold text-slate-900">
+                Lhe mostramos 3 modelos de emprestimo para começar a construir.
+              </p>
+              <p className="mt-2 text-sm text-slate-600">
+                Lhe mostramos 3 modelos para você começar mesmo que nao tenha 1 real no bolso!
               </p>
             </div>
           </div>
 
-          
+          {/* CTA */}
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <button
+              type="button"
+              onClick={scrollToPlanos}
+              className={cn(
+                "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
+                "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
+                "focus:outline-none focus:ring-4 focus:ring-lime-200"
+              )}
+            >
+              Quero construir economizando!
+            </button>
+
+            <p className="text-xs text-slate-500">
+              *Varia por região, padrão e acabamento. Aqui é um caminho de economia (sem “mágica”).
+            </p>
+          </div>
         </div>
       </section>
+
+      <section className="bg-white">
+  <div className="mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
+    {/* Cabeçalho */}
+    <div className="max-w-[860px]">
+      <div className="inline-flex items-center gap-2 rounded-full border border-lime-200 bg-lime-50 px-3 py-1 text-xs font-semibold text-lime-800">
+        <span className="h-2 w-2 rounded-full bg-lime-500" />
+        Por que funciona (e por que fica mais barato)
+      </div>
+
+      <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        O maior custo de uma obra não é “subir parede”.
+        <span className="block bg-gradient-to-r from-rose-500 to-orange-500 bg-clip-text text-transparent">
+  O maior custo é o acabamento.
+</span>
+      </h2>
+
+      <p className="mt-4 text-base font-medium leading-relaxed text-slate-700 sm:text-lg">
+        Levantar as paredes é a parte “tranquila”. O problema começa quando você escolhe o método
+        convencional: a parede crua fica feia, e aí entra um efeito dominó de etapas (e gastos)
+        até ficar apresentável.
+      </p>
+    </div>
+
+    {/* Conteúdo */}
+    <div className="mt-7 grid gap-4 lg:grid-cols-2">
+      {/* Caixa: convencional */}
+      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p className="text-sm font-extrabold text-slate-900">
+          O que acontece na alvenaria convencional
+        </p>
+
+        <p className="mt-2 text-sm text-slate-700">
+          Além de gastar bastante cimento pra assentar bloco por bloco, você quase sempre precisa
+          “corrigir” a parede depois pra ela ficar bonita.
+        </p>
+
+        <ul className="mt-4 space-y-2 text-sm text-slate-700">
+          <li>• Chapisco</li>
+          <li>• Reboco</li>
+          <li>• Selador</li>
+          <li>• Massa corrida</li>
+          <li>• Lixamento</li>
+          <li>• Pintura</li>
+        </ul>
+
+        <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 p-4">
+          <p className="text-sm font-bold text-rose-700">
+            É aqui que o custo explode.
+          </p>
+          <p className="mt-1 text-sm text-slate-700">
+            Dependendo da região e do padrão, <b>uma parede dos dois lados</b> (com todos esses passos)
+            pode chegar perto de <b>R$300/m²</b> só de acabamento.
+          </p>
+          <p className="mt-2 text-xs text-slate-500">
+            *Valor estimado e variável por cidade, mão de obra e padrão de material.
+          </p>
+        </div>
+      </div>
+
+      {/* Caixa: econômica */}
+      <div className="rounded-3xl border border-lime-200 bg-lime-50 p-6 shadow-sm">
+        <p className="text-sm font-extrabold text-slate-900">
+          Como a alvenaria econômica reduz isso
+        </p>
+
+        <p className="mt-2 text-sm text-slate-700">
+          A proposta é usar <b>alvenaria econômica com tijolo ecológico</b> pra diminuir etapas caras.
+          Em muitos casos, a parede já fica com um visual bonito logo após levantar — e você não precisa
+          passar por todo aquele “ciclo de acabamento”.
+        </p>
+
+        <div className="mt-4 grid gap-3">
+          <div className="rounded-2xl border border-lime-200 bg-white p-4">
+            <p className="text-xs font-semibold text-lime-800">O que você economiza</p>
+            <p className="mt-1 text-sm text-slate-700">
+              Menos chapisco/reboco/massa corrida/lixamento → menos material, menos mão de obra, menos tempo.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-lime-200 bg-white p-4">
+            <p className="text-xs font-semibold text-lime-800">Por que isso ajuda no aluguel</p>
+            <p className="mt-1 text-sm text-slate-700">
+              Quando você baixa o custo por unidade, o orçamento rende. E aí vem a lógica:
+              <b> por que fazer 1, se dá pra fazer 2?</b>
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-lime-200 bg-white p-4">
+            <p className="text-xs font-semibold text-lime-800">O que eu vou te ensinar</p>
+            <p className="mt-1 text-sm text-slate-700">
+              Um modelo simples de kitnets para aluguel com foco em baixo custo, repetição de layout e execução direta
+              (sem frescura que estoura obra).
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-4 text-xs text-slate-600">
+          Obs: não é “milagre”. É método + escolhas certas + corte de etapas que drenam dinheiro.
+        </p>
+      </div>
+    </div>
+
+    {/* Imagem (1647 x 1559) */}
+    <div className="mt-6 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+      <img
+        src="/oferta/alvenaria.webp"
+        alt="Comparação visual: alvenaria convencional vs alvenaria econômica (tijolo ecológico)"
+        className="h-auto w-full object-cover"
+      />
+    </div>
+  </div>
+</section>
+<section className="bg-white">
+  <div className="mx-auto w-full max-w-[980px] px-4 py-8 sm:py-10">
+    <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-6 shadow-sm sm:p-8">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="max-w-[720px]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
+            <span className="h-2 w-2 rounded-full bg-amber-500" />
+            Dá pra começar mesmo sem dinheiro
+          </div>
+
+          <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+            Você não precisa ter tudo à vista pra sair do papel.
+          </h2>
+
+          <p className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-base">
+            Muita gente trava porque acha que só dá pra construir quando tiver “uma bolada”.
+            Na prática, o jogo é <b>estratégia</b>: você começa com um plano, escolhe o modelo certo
+            e organiza o caminho pra viabilizar a obra sem se enrolar.
+          </p>
+
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+            <p className="text-sm font-bold text-slate-900">
+              ✅ Dentro do pack, tem um módulo ensinando <span className="text-amber-700">3 modelos de financiamento</span>
+            </p>
+            <p className="mt-1 text-sm text-slate-700">
+              Pra você entender as opções, o que faz sentido em cada cenário. <strong>Você tem a vantagem de fazer o dobro com o mesmo orçamento!</strong>
+            </p>
+          </div>
+        </div>
+
+        {/* Mini card lateral */}
+        <div className="w-full rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:max-w-[280px]">
+          <p className="text-xs font-semibold text-slate-500">O que isso resolve</p>
+          <ul className="mt-3 space-y-2 text-sm text-slate-700">
+            <li>• ✅ DAR PRA COMEÇAR DO ZERO</li>
+            <li>• ✅ Te dá um caminho de decisão</li>
+            <li>• ✅ Evita plano furado e dívida ruim</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Botão para ir pros planos */}
+      <div className="mt-6">
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById("planos");
+            el?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          className={cn(
+            "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
+            "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
+            "focus:outline-none focus:ring-4 focus:ring-lime-200"
+          )}
+        >
+          QUERO COMEÇAR!
+        </button>
+
+        <p className="mt-3 text-xs text-slate-500">
+          Acesso imediato. Você recebe tudo no e-mail após a compra.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* ===========================
           <section> O QUE VOCÊ RECEBE
@@ -425,9 +589,7 @@ function goCheckout1990() {
                 Sim, quero o completo
               </button>
 
-              <p className="mt-3 text-center text-xs text-slate-500">
-                Melhor escolha pra {pra ? labelBuildFor(pra) : "seu objetivo"}.
-              </p>
+            
             </div>
 
             {/* economico */}
