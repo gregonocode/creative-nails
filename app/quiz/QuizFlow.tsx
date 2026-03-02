@@ -51,9 +51,11 @@ function buildOfferUrl(params: { name: string; answers: Partial<QuizAnswer> }) {
 
   // dados do quiz
   sp.set("nome", params.name.trim());
-  if (params.answers.moneyIntent) sp.set("obj", params.answers.moneyIntent);
-  if (params.answers.buildFor) sp.set("pra", params.answers.buildFor);
-  if (params.answers.priority) sp.set("prio", params.answers.priority);
+
+  // ✅ novos campos do quiz
+  if (params.answers.alvenariaEconomica) sp.set("alv", params.answers.alvenariaEconomica);
+  if (params.answers.qtdQuitinetes) sp.set("qtd", params.answers.qtdQuitinetes);
+  if (params.answers.comoConstruir) sp.set("como", params.answers.comoConstruir);
 
   // ✅ tracking (utm_* + fbclid/fbc/fbp)
   if (typeof window !== "undefined") {
@@ -76,6 +78,7 @@ function buildOfferUrl(params: { name: string; answers: Partial<QuizAnswer> }) {
 
   return `/oferta?${sp.toString()}`;
 }
+
 async function trackQuizAnswer(params: { questionId: string; value: string }) {
   const k = `${params.questionId}:${params.value}`;
 
@@ -129,10 +132,20 @@ export default function QuizFlow() {
   const qid = String(currentQuestion.id);
   const trackKey = `${qid}:${value}`;
 
-  // ✅ 1x por resposta (state + dedupe)
+  /**
+   * ✅ TRACKING (genérico e reaproveitável)
+   * - 1x por (pergunta + resposta)
+   * - dedupe no state + dedupe forte no __sent dentro do trackQuizAnswer
+   *
+   * Você pode no futuro trocar o endpoint e salvar mais coisas, tipo label,
+   * utm, timestamp, quiz_session_id etc.
+   */
   setTracked((prev) => {
     if (prev[trackKey]) return prev;
-    if (qid === "buildFor") void trackQuizAnswer({ questionId: qid, value });
+
+    // ✅ Agora trackeia TODAS as perguntas (antes era só buildFor)
+    void trackQuizAnswer({ questionId: qid, value });
+
     return { ...prev, [trackKey]: true };
   });
 

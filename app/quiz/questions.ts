@@ -1,8 +1,13 @@
 // app/quiz/questions.ts
+
 export type QuizAnswer = {
-  moneyIntent: "ja_pensei" | "nunca_pensei" | "to_pensando_agora" | "quero_morar";
-  buildFor: "morar" | "alugar" | "vender" | "planejando";
-  priority: "mais_espaco" | "mais_bonito" | "mais_barato" | "todas";
+  alvenariaEconomica: "nunca_ouvi" | "ja_ouvi";
+  qtdQuitinetes: "uma" | "mais_de_duas" | "ainda_planejar";
+  comoConstruir:
+    | "recursos_proprios"
+    | "financiamento"
+    | "dois_juntos"
+    | "ainda_ver";
 };
 
 export type QuizOption<T extends string> = {
@@ -10,44 +15,45 @@ export type QuizOption<T extends string> = {
   value: T;
 };
 
-export type QuizQuestion = {
-  id: keyof QuizAnswer;
+export type QuizQuestion<K extends keyof QuizAnswer = keyof QuizAnswer> = {
+  id: K;
   title: string;
   subtitle?: string;
-  options: QuizOption<any>[];
+
+  /**
+   * ✅ Importante pro futuro (tracking):
+   * - `value` vira o que você salva no banco (ex: "ja_ouvi")
+   * - `label` é só pra UI (você pode salvar também se quiser, mas não é necessário)
+   */
+  options: QuizOption<QuizAnswer[K]>[];
 };
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
-    id: "moneyIntent",
-    title: "Já pensou em ganhar dinheiro com kitinetes?",
-    subtitle: "Só pra eu entender seu objetivo.",
+    id: "alvenariaEconomica",
+    title: "Você conhece a alvenaria econômica?",
     options: [
-      { label: "Já pensei", value: "ja_pensei" },
-      { label: "Nunca pensei", value: "nunca_pensei" },
-      { label: "Tô pensando agora", value: "to_pensando_agora" },
-      { label: "Quero pra morar mesmo", value: "quero_morar" },
+      { label: "Nunca ouvi falar", value: "nunca_ouvi" },
+      { label: "Sim, já ouvi falar", value: "ja_ouvi" },
     ],
   },
   {
-    id: "buildFor",
-    title: "Você quer construir pra…",
+    id: "qtdQuitinetes",
+    title: "Quantas quitinetes você pretende começar?",
     options: [
-      { label: "Morar", value: "morar" },
-      { label: "Alugar", value: "alugar" },
-      { label: "Vender", value: "vender" },
-      { label: "Ainda planejando", value: "planejando" },
+      { label: "Quero começar por uma", value: "uma" },
+      { label: "Mais de duas", value: "mais_de_duas" },
+      { label: "Ainda vou planejar", value: "ainda_planejar" },
     ],
   },
   {
-    id: "priority",
-    title: "Qual é sua prioridade #1?",
-    subtitle: "Escolhe a que mais pesa pra você.",
+    id: "comoConstruir",
+    title: "Como você deseja construir?",
     options: [
-      { label: "Mais espaço", value: "mais_espaco" },
-      { label: "Mais bonito", value: "mais_bonito" },
-      { label: "Mais barato", value: "mais_barato" },
-      { label: "Todas as opções", value: "todas" },
+      { label: "Recursos próprios", value: "recursos_proprios" },
+      { label: "Financiamento", value: "financiamento" },
+      { label: "Os dois juntos", value: "dois_juntos" },
+      { label: "Ainda vou ver", value: "ainda_ver" },
     ],
   },
 ];
