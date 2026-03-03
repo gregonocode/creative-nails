@@ -770,16 +770,20 @@ export default function OfertaPage() {
               a="Confiamos tanto no nosso produto que nos responsabilizamos por qualquer coisa. Se por acaso você não gostar, você tem 7 dias pra pedir reembolso."
             />
             <FaqItem
+              q="E vitalicio ?"
+              a="Sim. Você tem acesso vitalício a todo o conteúdo que entregamos hoje, e também a qualquer atualização ou material extra que a gente for adicionando no futuro (sem custo adicional)."
+            />
+            <FaqItem
               q="Como vou receber o acesso?"
               a="Assim que o pagamento for confirmado, você recebe o acesso imediatamente (e também no seu e-mail)."
             />
             <FaqItem
               q="Isso é pra iniciante?"
-              a="Sim. A proposta é justamente facilitar: em 3D você entende melhor o espaço e evita erro bobo."
+              a="Sim. A proposta é justamente facilitar: em 3D você entende melhor o espaço e evita erro bobo, tem dezenas de videos mostrando todo o metodo deixando ele muito facil"
             />
             <FaqItem
-              q="Serve pra construir pra aluguel?"
-              a="Serve. Inclusive o pack completo tem mais variações de modelos pra testar o que dá melhor retorno e aproveitamento."
+              q="Serve pra casa propria ?"
+              a="Serve. O método é focado em kitnets pra aluguel, mas as ideias de economia e o modelo de financiamento podem ser aplicados em outros tipos de obra também."
             />
           </div>
 
