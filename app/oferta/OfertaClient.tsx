@@ -100,10 +100,10 @@ export default function OfertaPage() {
     window.location.assign(url);
   }
 
-  function scrollToPlanos() {
-    const el = document.getElementById("planos");
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  function scrollToOferta() {
+  const el = document.getElementById("oferta");
+  el?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
   return (
     <div className="min-h-[100dvh] bg-white text-slate-900">
@@ -177,7 +177,7 @@ export default function OfertaPage() {
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
             <button
               type="button"
-              onClick={scrollToPlanos}
+              onClick={scrollToOferta}
               className={cn(
                 "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
                 "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
@@ -347,22 +347,22 @@ export default function OfertaPage() {
         </div>
       </div>
 
-      {/* Botão para ir pros planos */}
-      <div className="mt-6">
-        <button
-          type="button"
-          onClick={() => {
-            const el = document.getElementById("planos");
-            el?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-          className={cn(
-            "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
-            "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
-            "focus:outline-none focus:ring-4 focus:ring-lime-200"
-          )}
-        >
-          QUERO COMEÇAR!
-        </button>
+      {/* Botão para ir pra oferta */}
+<div className="mt-6">
+  <button
+    type="button"
+    onClick={() => {
+      const el = document.getElementById("oferta");
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }}
+    className={cn(
+      "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
+      "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
+      "focus:outline-none focus:ring-4 focus:ring-lime-200"
+    )}
+  >
+    QUERO COMEÇAR!
+  </button>
 
         <p className="mt-3 text-xs text-slate-500">
           Acesso imediato. Você recebe tudo no e-mail após a compra.
@@ -549,7 +549,7 @@ export default function OfertaPage() {
       {/* ===========================
           <section> COMPARATIVO (27 vs 10)
          =========================== */}
-      <section className="bg-sky-50">
+      <section id="oferta" className="bg-sky-50">
         <div className="mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Escolha a melhor opção!
