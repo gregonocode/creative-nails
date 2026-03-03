@@ -107,7 +107,7 @@ export default function OfertaPage() {
 
   return (
     <div className="min-h-[100dvh] bg-white text-slate-900">
-      <SocialProofToast everyMs={14_000} durationMs={3_000} />
+      <SocialProofToast everyMs={18_000} durationMs={3_000} />
       {/* ===========================
           HERO (novo) — foco aluguel
          =========================== */}
@@ -136,8 +136,8 @@ export default function OfertaPage() {
           {/* subheadline */}
           <p className="mt-4 max-w-[860px] text-base font-medium leading-relaxed text-slate-700 sm:text-lg">
             A ideia é simples: <b>reduzir o custo por unidade</b> usando um método de construção mais econômico
-             e com o mesmo orçamento, sair do “vou fazer 1” pra{" "}
-            <b>ter chance real de fazer 2</b>.
+             e com o mesmo orçamento, sair do “vou fazer uma kitinete” pra{" "}
+            <b>fazer duas com mesmo valor!</b>.
           </p>
 
           {/* cards (nova proposta) */}
@@ -534,7 +534,7 @@ export default function OfertaPage() {
       </h3>
 
       <p className="mt-2 text-sm text-slate-700">
-        Vamos te dar <b>totalmente de graça</b> um combo de videos de outras obras que foram feitas com o método de baixo custo <b>alvenaria economica</b>, pra você ter uma referência visual de como deixar bonito gastando pouco.
+        Vamos te dar <b>totalmente de graça</b> um combo de videos de outras obras que foram feitas com o método de baixo custo <b>alvenaria economica</b>, pra você se inspirar
       </p>
 
       <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1 text-xs text-slate-600">
@@ -567,10 +567,11 @@ export default function OfertaPage() {
 
               <ul className="mt-4 space-y-2 text-sm text-slate-700">
                 <li>✅ +40 modelos 3D baixo orçamento</li>
-                <li>✅ Mais variações de layout (mais espaço/mais valorização)</li>
+                <li>✅ Metodo alvenaria economica completa</li>
                 <li>✅ Ideias visuais pra melhorar o ambiente gastando pouco</li>
                 <li>✅ tabelas de objetivos para juntar de mil a 50 mil</li>
-                <li>✅ Melhor custo-benefício (pra quem vai usar de verdade)</li>
+                <li>✅ Dica de 3 modelo de financiamento pra começar do zero</li>
+                <li>✅ combo de videos de outras obras</li>
                 <li>✅ faça as suas proprias com IA de rascunho para trasformar em 3D ( sem custo ) </li>
                 
               </ul>
@@ -598,6 +599,7 @@ export default function OfertaPage() {
               <ul className="mt-4 space-y-2 text-sm text-slate-700">
                 <li>✅ +25 modelos baixo orçamento</li>
                 <li>✅ Menos modelos/variações</li>
+                
                 <li>✅ Ideal se você só quer “dar uma olhada”</li>
               </ul>
 
@@ -627,7 +629,7 @@ export default function OfertaPage() {
         <div>
           
           <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            Pra quem e o Metodo é indicado?
+            Pra quem o Metodo é indicado?
            
           </h2>
 
@@ -812,7 +814,7 @@ export default function OfertaPage() {
                 <p className="text-sm font-semibold text-slate-800">Você vai receber:</p>
                 <ul className="mt-3 space-y-2 text-sm text-slate-700">
                   <li>✅ +40 modelos 3D baixo orçamento</li>
-                  <li>✅ Mais variações (mais espaço / mais valorização)</li>
+                  <li>✅ Metodo alvenaria Economica</li>
                   <li>✅ Ideias simples pra deixar moderno gastando pouco</li>
                   <li>✅ AI trasforma rascunho em planta 3D</li>
                 </ul>
