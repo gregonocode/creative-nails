@@ -4,6 +4,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "@/app/components/quiz/css/shine.css";
+import SocialProofToast from "@/app/components/SocialProofToast";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -106,6 +107,7 @@ export default function OfertaPage() {
 
   return (
     <div className="min-h-[100dvh] bg-white text-slate-900">
+      <SocialProofToast everyMs={14_000} durationMs={3_000} />
       {/* ===========================
           HERO (novo) — foco aluguel
          =========================== */}
@@ -229,12 +231,12 @@ export default function OfertaPage() {
         </p>
 
         <ul className="mt-4 space-y-2 text-sm text-slate-700">
-          <li>• Chapisco</li>
-          <li>• Reboco</li>
-          <li>• Selador</li>
-          <li>• Massa corrida</li>
-          <li>• Lixamento</li>
-          <li>• Pintura</li>
+          <li>❌ Chapisco</li>
+          <li>❌ Reboco</li>
+          <li>❌ Selador</li>
+          <li>❌ Massa corrida</li>
+          <li>❌ Lixamento</li>
+          <li>❌ Pintura</li>
         </ul>
 
         <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 p-4">
@@ -258,7 +260,7 @@ export default function OfertaPage() {
         </p>
 
         <p className="mt-2 text-sm text-slate-700">
-          A proposta é usar <b>alvenaria econômica com tijolo ecológico</b> pra diminuir etapas caras.
+          ✅ A proposta é usar <b>alvenaria econômica com tijolo ecológico</b> pra diminuir etapas caras.
           Em muitos casos, a parede já fica com um visual bonito logo após levantar — e você não precisa
           passar por todo aquele “ciclo de acabamento”.
         </p>
@@ -267,14 +269,14 @@ export default function OfertaPage() {
           <div className="rounded-2xl border border-lime-200 bg-white p-4">
             <p className="text-xs font-semibold text-lime-800">O que você economiza</p>
             <p className="mt-1 text-sm text-slate-700">
-              Menos chapisco/reboco/massa corrida/lixamento → menos material, menos mão de obra, menos tempo.
+             ✅ Menos chapisco/reboco/massa corrida/lixamento → menos material, menos mão de obra, menos tempo.
             </p>
           </div>
 
           <div className="rounded-2xl border border-lime-200 bg-white p-4">
             <p className="text-xs font-semibold text-lime-800">Por que isso ajuda no aluguel</p>
             <p className="mt-1 text-sm text-slate-700">
-              Quando você baixa o custo por unidade, o orçamento rende. E aí vem a lógica:
+              ✅ Quando você baixa o custo por unidade, o orçamento rende. E aí vem a lógica:
               <b> por que fazer 1, se dá pra fazer 2?</b>
             </p>
           </div>
@@ -282,7 +284,7 @@ export default function OfertaPage() {
           <div className="rounded-2xl border border-lime-200 bg-white p-4">
             <p className="text-xs font-semibold text-lime-800">O que eu vou te ensinar</p>
             <p className="mt-1 text-sm text-slate-700">
-              Um modelo simples de kitnets para aluguel com foco em baixo custo, repetição de layout e execução direta
+              ✅ Um modelo simples de kitnets para aluguel com foco em baixo custo, repetição de layout e execução direta
               (sem frescura que estoura obra).
             </p>
           </div>
@@ -338,9 +340,9 @@ export default function OfertaPage() {
         <div className="w-full rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:max-w-[280px]">
           <p className="text-xs font-semibold text-slate-500">O que isso resolve</p>
           <ul className="mt-3 space-y-2 text-sm text-slate-700">
-            <li>• ✅ DAR PRA COMEÇAR DO ZERO</li>
-            <li>• ✅ Te dá um caminho de decisão</li>
-            <li>• ✅ Evita plano furado e dívida ruim</li>
+            <li>• ✅ Dar pra começar do zero</li>
+            <li>• ✅ Dar pra começar com pouco dinheiro</li>
+            <li>• ✅ O financiamneto se pagar sozinho</li>
           </ul>
         </div>
       </div>
@@ -379,7 +381,7 @@ export default function OfertaPage() {
             O que você vai receber
           </h2>
           <p className="mt-2 max-w-[780px] text-slate-700">
-            A ideia é simples: parar de “adivinhar” no papel e enxergar a quitinete de verdade em 3D.
+            Tudo que você vai receber ainda hoje!
           </p>
           {/* Banner 40 modelos */}
          <div className="mt-6 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -394,16 +396,20 @@ export default function OfertaPage() {
           <div className="mt-7 grid gap-4 sm:grid-cols-3">
             {[
               {
-                title: "Plantas 3D fáceis de entender",
-                desc: "Você bate o olho e entende circulação, posicionamento e aproveitamento de espaço.",
+                title: "+ 40 modelos 3D de quitinetes de baixo custo",
+                desc: "modelos prontos pra você se inspirar e criar seus proprior projetos",
               },
               {
-                title: "Modelos de quitinetes de baixo custo",
-                desc: "Nada mirabolante: layout prático, construível e pensado pra ser econômico.",
+                title: "3 modelo de emprestimo pra começar do zero",
+                desc: "mesmo que você não tenha 1 real no bolso, tem um modelo de financiamento que se paga sozinho com o aluguel das kitinetes",
               },
               {
-                title: "Ideias simples pra valorizar gastando pouco",
-                desc: "Organização + referências visuais pra deixar moderno sem estourar o orçamento.",
+                title: "Metodo de alvenaria economica",
+                desc: "um método de construção mais econômico, que corta etapas caras de acabamento e deixa a parede com um visual apresentável logo após levantar",
+              },
+              {
+                title: "Formula completa",
+                desc: "pra você não ficar perdido e ter clareza do caminho, a gente te entrega uma fórmula simples pra você seguir e ter o melhor resultado possível",
               },
             ].map((c) => (
               <div key={c.title} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -423,6 +429,7 @@ export default function OfertaPage() {
     <div className="rounded-3xl border border-sky-100 bg-sky-50 p-6 shadow-sm sm:p-8">
       <div className="flex items-start gap-3">
         <div className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-xl shadow-sm">
+          🎁
           
         </div>
 
@@ -478,15 +485,7 @@ export default function OfertaPage() {
           className="h-auto w-full object-cover"
         />
       </div>
-      {/* Banner detalhes */}
-<div className="mt-6 overflow-hidden rounded-3xl border border-sky-100 bg-white shadow-sm">
-  <img
-    src="/oferta/detalhes.png"
-    alt="Detalhes do modelo 3D"
-    className="h-auto w-full object-cover"
-  />
-</div>
-
+ 
       {/* reforço final */}
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-slate-700">
@@ -535,8 +534,7 @@ export default function OfertaPage() {
       </h3>
 
       <p className="mt-2 text-sm text-slate-700">
-        Vamos te dar <b>totalmente de graça</b> um <b>Pack de Decoração Visual</b> com ideias simples
-        pra deixar a quitinete mais bonita gastando pouco (sem “inventar moda” no orçamento).
+        Vamos te dar <b>totalmente de graça</b> um combo de videos de outras obras que foram feitas com o método de baixo custo <b>alvenaria economica</b>, pra você ter uma referência visual de como deixar bonito gastando pouco.
       </p>
 
       <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1 text-xs text-slate-600">
@@ -621,6 +619,80 @@ export default function OfertaPage() {
           </div>
         </div>
       </section>
+
+      <section className="bg-white">
+  <div className="mx-auto w-full max-w-[980px] px-4 py-10 sm:py-14">
+    <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          
+          <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Pra quem e o Metodo é indicado?
+           
+          </h2>
+
+          </div>
+      </div>
+
+      {/* grid de “para quem” */}
+      <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          {
+            title: "Quem quer gastar até ~50% menos",
+            desc: "Usar um método mais econômico e cortar etapas de acabamento que drenam o orçamento.",
+            badge: "Economia",
+          },
+          {
+            title: "Quem pensa: “se der pra fazer 2, eu faço”",
+            desc: "Diminuir o custo por unidade pra aumentar o número de kitnets no mesmo terreno/orçamento.",
+            badge: "Escala",
+          },
+          {
+            title: "Quem quer renda mensal com aluguel",
+            desc: "Criar uma base de renda recorrente com unidades simples, repetíveis e fáceis de manter.",
+            badge: "Renda",
+          },
+          {
+            title: "Quem tá começando do zero",
+            desc: "Sem precisar ser engenheiro: o material é simples, visual e feito pra iniciante.",
+            badge: "Iniciante",
+          },
+          {
+            title: "Quem quer obra mais rápida e previsível",
+            desc: "Menos etapas = menos “vai e volta” na obra e menos surpresa no custo final.",
+            badge: "Tempo",
+          },
+          {
+            title: "Quem quer evitar erro caro",
+            desc: "Enxergar a kitnet em 3D antes e seguir um modelo pronto evita retrabalho e desperdício.",
+            badge: "Segurança",
+          },
+        ].map((c) => (
+          <div
+            key={c.title}
+            className="rounded-3xl border border-slate-200 bg-slate-50 p-5 shadow-sm"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
+              <span className="h-2 w-2 rounded-full bg-lime-500" />
+              {c.badge}
+            </div>
+            <p className="mt-3 text-lg font-extrabold text-slate-900">{c.title}</p>
+            <p className="mt-2 text-sm text-slate-700">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* “não é pra quem” (ajuda a filtrar e aumenta confiança) */}
+      <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-5">
+        <p className="text-sm font-extrabold text-slate-900">E não é pra quem…</p>
+        <p className="mt-2 text-sm text-slate-700">
+          quer luxo e acabamento caro, ou quer “fórmula mágica” sem obra. Aqui é método simples pra reduzir custo
+          e construir pra aluguel do jeito certo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* ===========================
           <section> GARANTIA / CONFIANÇA
