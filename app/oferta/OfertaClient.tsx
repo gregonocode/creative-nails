@@ -171,6 +171,16 @@ export default function OfertaPage() {
                 Lhe mostramos 3 modelos para você começar mesmo que nao tenha 1 real no bolso!
               </p>
             </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
+              <p className="text-xs font-semibold text-slate-500">MUITO FACÍL</p>
+              <p className="mt-2 text-base font-extrabold text-slate-900">
+                O modelo de alvenaria economica e pelo menos 5x mais fácil que a alvenaria tradicional.
+              </p>
+              <p className="mt-2 text-sm text-slate-600">
+                você mesmo pode levantar as paredes, sem precisar de pedreiro specializado.
+              </p>
+            </div>
           </div>
 
           {/* CTA */}
