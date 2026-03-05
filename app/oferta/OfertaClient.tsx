@@ -185,9 +185,10 @@ export default function OfertaPage() {
             <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
               <p className="text-xs font-semibold text-slate-500">COSTRUÇÃO RAPIDA</p>
               <p className="mt-2 text-base font-extrabold text-slate-900">
-                Além de você mesmo construir segundo dados de outras obras, o modelo de alvenaria economica é de 5 a 10 vezes mais rápido que a alvenaria tradicional.
+                De 5 a 10 vezes mais rapido que a tradicional!
               </p>
               <p className="mt-2 text-sm text-slate-600">
+                Além de você mesmo construir segundo dados de outras obras, o modelo de alvenaria economica é de 5 a 10 vezes mais rápido que a alvenaria tradicional.
                 Existe casos de 2 pessoas levantar kitinetes em 20 dias usando esse método!
               </p>
             </div>
