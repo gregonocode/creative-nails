@@ -178,7 +178,7 @@ export default function OfertaPage() {
                 O modelo de alvenaria economica e pelo menos 5x mais fácil que a alvenaria tradicional.
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                você mesmo pode levantar as paredes, sem precisar de pedreiro specializado.
+                Até uma criança consegue levantar parades, já que os tijolos se encaixa como lego!
               </p>
             </div>
 
