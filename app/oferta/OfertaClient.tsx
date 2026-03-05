@@ -316,6 +316,8 @@ export default function OfertaPage() {
     </div>
   </div>
 </section>
+
+
 <section className="bg-white">
   <div className="mx-auto w-full max-w-[980px] px-4 py-8 sm:py-10">
     <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-6 shadow-sm sm:p-8">
@@ -323,56 +325,75 @@ export default function OfertaPage() {
         <div className="max-w-[720px]">
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
             <span className="h-2 w-2 rounded-full bg-amber-500" />
-            Dá pra começar mesmo sem dinheiro
+            Dá pra começar mesmo sem ter todo o dinheiro na mão
           </div>
 
           <h2 className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-            Você não precisa ter tudo à vista pra sair do papel.
+            Você não precisa esperar ter uma fortuna pra começar seu projeto.
           </h2>
 
           <p className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-base">
-            Muita gente trava porque acha que só dá pra construir quando tiver “uma bolada”.
-            Na prática, o jogo é <b>estratégia</b>: você começa com um plano, escolhe o modelo certo
-            e organiza o caminho pra viabilizar a obra sem se enrolar.
+            Muita gente adia a construção porque acha que só vale a pena começar
+            quando tiver todo o valor da obra à vista. Na prática, o que faz diferença
+            é <b>planejamento</b>, <b>estratégia</b> e a escolha do caminho certo para
+            viabilizar a construção sem dar um passo maior que a perna.
+          </p>
+
+          <p className="mt-3 text-sm leading-relaxed text-slate-700 sm:text-base">
+            Com orientação certa, você consegue entender opções de crédito, construção
+            por etapas e como usar o próprio potencial de aluguel das kitnets a seu favor,
+            sempre fazendo as contas com mais segurança.
           </p>
 
           <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
             <p className="text-sm font-bold text-slate-900">
-              ✅ Dentro do pack, tem um módulo ensinando <span className="text-amber-700">3 modelos de financiamento</span>
+              ✅ Dentro do pack, você aprende <span className="text-amber-700">4 formas de viabilizar a construção</span>
             </p>
             <p className="mt-1 text-sm text-slate-700">
-              Pra você entender as opções, o que faz sentido em cada cenário. <strong>Você tem a vantagem de fazer o dobro com o mesmo orçamento!</strong>
+              Entenda quais opções podem fazer sentido para cada cenário, como começar
+              mesmo com orçamento apertado e por que construir por etapas pode ser a
+              decisão mais inteligente.
             </p>
           </div>
         </div>
 
-        {/* Mini card lateral */}
         <div className="w-full rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:max-w-[280px]">
-          <p className="text-xs font-semibold text-slate-500">O que isso resolve</p>
-          <ul className="mt-3 space-y-2 text-sm text-slate-700">
-            <li>• ✅ Dar pra começar do zero</li>
-            <li>• ✅ Dar pra começar com pouco dinheiro</li>
-            <li>• ✅ O financiamneto se pagar sozinho</li>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            O que esse módulo te ajuda a enxergar
+          </p>
+
+          <ul className="mt-3 space-y-3 text-sm text-slate-700">
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-green-600">✅</span>
+              <span>Como começar do zero com mais clareza</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-green-600">✅</span>
+              <span>Como iniciar mesmo com pouco dinheiro</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-green-600">✅</span>
+              <span>Como avaliar se a renda do aluguel pode ajudar no projeto</span>
+            </li>
           </ul>
         </div>
       </div>
 
-      {/* Botão para ir pra oferta */}
-<div className="mt-6">
-  <button
-    type="button"
-    onClick={() => {
-      const el = document.getElementById("oferta");
-      el?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }}
-    className={cn(
-      "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
-      "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
-      "focus:outline-none focus:ring-4 focus:ring-lime-200"
-    )}
-  >
-    QUERO COMEÇAR!
-  </button>
+      <div className="mt-6">
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById("oferta");
+            el?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+          className={cn(
+            "shine-button w-full rounded-2xl px-6 py-4 text-base font-extrabold text-white shadow-sm transition sm:w-auto",
+            "bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-700 hover:to-lime-700",
+            "focus:outline-none focus:ring-4 focus:ring-lime-200"
+          )}
+        >
+          QUERO COMEÇAR!
+        </button>
 
         <p className="mt-3 text-xs text-slate-500">
           Acesso imediato. Você recebe tudo no e-mail após a compra.
@@ -381,6 +402,9 @@ export default function OfertaPage() {
     </div>
   </div>
 </section>
+
+
+
 
       {/* ===========================
           <section> O QUE VOCÊ RECEBE
@@ -580,7 +604,7 @@ export default function OfertaPage() {
                 <li>✅ Metodo alvenaria economica completa</li>
                 <li>✅ Ideias visuais pra melhorar o ambiente gastando pouco</li>
                 <li>✅ tabelas de objetivos para juntar de mil a 50 mil</li>
-                <li>✅ Dica de 3 modelo de financiamento pra começar do zero</li>
+                <li>✅ 4 modelo de financiamento pra começar do zero</li>
                 <li>✅ combo de videos de outras obras</li>
                 <li>✅ faça as suas proprias com IA de rascunho para trasformar em 3D ( sem custo ) </li>
                 
