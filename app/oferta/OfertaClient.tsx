@@ -165,10 +165,10 @@ export default function OfertaPage() {
             <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
               <p className="text-xs font-semibold text-slate-500">APENAS COMEÇE</p>
               <p className="mt-2 text-base font-extrabold text-slate-900">
-                Lhe mostramos 3 modelos de emprestimo para começar a construir.
+                Lhe mostramos 4 modelos de emprestimo para começar a construir.
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                Lhe mostramos 3 modelos para você começar mesmo que nao tenha 1 real no bolso!
+                Lhe mostramos 4 modelos para você começar mesmo que nao tenha 1 real no bolso!
               </p>
             </div>
 
