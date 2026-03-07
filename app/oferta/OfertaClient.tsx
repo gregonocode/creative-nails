@@ -5,6 +5,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "@/app/components/quiz/css/shine.css";
 import SocialProofToast from "@/app/components/SocialProofToast";
+import ExitBackOffer from "../ofertaClient/ExitBackOffer";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -89,6 +90,15 @@ export default function OfertaPage() {
     const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC");
     window.location.assign(url);
   }
+  
+    function handleExitOfferAccept() {
+    goCheckout1990();
+  }
+
+  function handleExitOfferDecline() {
+    // opcional: aqui você pode trackear evento no futuro
+    // ex: fbq('trackCustom', 'ExitOfferDeclined')
+  } 
 
   function goCheckout10() {
     const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/Y6rCfPS5");
@@ -185,10 +195,10 @@ export default function OfertaPage() {
             <div className="rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur">
               <p className="text-xs font-semibold text-slate-500">COSTRUÇÃO RAPIDA</p>
               <p className="mt-2 text-base font-extrabold text-slate-900">
-                De 5 a 10 vezes mais rapido que a tradicional!
+                De 5 a 10 vezes mais rápido que a tradicional!
               </p>
               <p className="mt-2 text-sm text-slate-600">
-                Além de você mesmo construir segundo dados de outras obras, o modelo de alvenaria economica é de 5 a 10 vezes mais rápido que a alvenaria tradicional.
+                Além de você mesmo construir, Segundo dados de outras obras, o modelo de alvenaria economica é de 5 a 10 vezes mais rápido que a alvenaria tradicional.
                 Existe casos de 2 pessoas levantar kitinetes em 20 dias usando esse método!
               </p>
             </div>
@@ -908,6 +918,10 @@ export default function OfertaPage() {
           </div>
         </div>
       )}
+            <ExitBackOffer
+        onAcceptOffer={handleExitOfferAccept}
+        onDeclineOffer={handleExitOfferDecline}
+      />
     </div>
   );
 }
