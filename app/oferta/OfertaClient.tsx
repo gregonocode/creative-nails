@@ -853,7 +853,14 @@ export default function OfertaPage() {
          =========================== */}
       {isPopupOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-[560px] overflow-hidden rounded-3xl bg-white shadow-2xl">
+          <div className="relative w-full max-w-[560px] overflow-hidden rounded-3xl bg-white shadow-2xl">
+            <button
+        type="button"
+           onClick={() => setIsPopupOpen(false)}
+            aria-label="Fechar oferta"
+          className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-slate-500 shadow-sm ring-1 ring-slate-200 transition hover:bg-white hover:text-slate-700">
+            ✕
+          </button>
             {/* topo */}
             <div className="bg-sky-50 p-5 sm:p-6">
               <p className="text-xs font-semibold text-sky-700">
