@@ -870,7 +870,7 @@ export default function OfertaPage() {
                 Leve tudo do Pack Completo por apenas <span className="text-sky-700">R$19,90</span>
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Antes de ir pro básico, faz mais sentido pegar o pacote completo com um desconto especial.
+                Ultima chance, tudo que tem no de 27 por apenas <b>R$ 19,90</b>
               </p>
             </div>
 
