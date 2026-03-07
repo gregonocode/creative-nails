@@ -3,60 +3,42 @@ import { createClient } from "@supabase/supabase-js";
 
 type Body = {
   eventName?: "view" | "accept" | "decline" | "close";
-  pagePath?: string;
-  source?: string;
-  sessionId?: string;
 };
 
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json()) as Body;
+    const { eventName } = (await req.json()) as Body;
 
-    if (!body.eventName) {
-      return NextResponse.json(
-        { ok: false, error: "eventName é obrigatório" },
-        { status: 400 }
-      );
+    if (!eventName) {
+      return NextResponse.json({ error: "invalid_body" }, { status: 400 });
     }
+
+    const key = `exitOffer:${eventName}`;
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!supabaseUrl || !serviceRoleKey) {
+    if (!supabaseUrl || !serviceKey) {
       return NextResponse.json(
-        { ok: false, error: "Variáveis do Supabase ausentes" },
+        {
+          error: "missing_env",
+          detail: "NEXT_PUBLIC_SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY",
+        },
         { status: 500 }
       );
     }
 
-    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    const supabase = createClient(supabaseUrl, serviceKey);
 
-    const payload = {
-      event_name: body.eventName,
-      page_path: body.pagePath ?? null,
-      source: body.source ?? null,
-      user_agent: req.headers.get("user-agent") ?? null,
-      session_id: body.sessionId ?? null,
-    };
-
-    const { error } = await supabase.from("exit_offer_events").insert(payload);
+    const { error } = await supabase.rpc("quiz_increment", { p_key: key });
 
     if (error) {
-      return NextResponse.json(
-        { ok: false, error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Erro interno ao rastrear evento";
-
-    return NextResponse.json(
-      { ok: false, error: message },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: true, key });
+  } catch {
+    return NextResponse.json({ error: "bad_request" }, { status: 400 });
   }
 }
 

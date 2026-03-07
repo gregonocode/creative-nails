@@ -37,6 +37,7 @@ export default function ExitBackOffer({
       if (!hasShownRef.current) {
         hasShownRef.current = true;
         setOpen(true);
+        void trackExitOfferEvent("view");
 
         // recoloca o estado para manter o usuário na página
         window.history.pushState({ exitBackOffer: true }, "", window.location.href);
@@ -56,22 +57,56 @@ export default function ExitBackOffer({
   }, []);
 
   function handleCloseOnly() {
-    setOpen(false);
-  }
+  setOpen(false);
+  void trackExitOfferEvent("close");
+}
 
   function handleAccept() {
-    setOpen(false);
-    onAcceptOffer();
-  }
+  setOpen(false);
+  void trackExitOfferEvent("accept");
+  onAcceptOffer();
+}
 
   function handleDeclineAndLeave() {
-    setOpen(false);
-    allowLeaveRef.current = true;
-    onDeclineOffer();
+  setOpen(false);
+  allowLeaveRef.current = true;
+  void trackExitOfferEvent("decline");
+  onDeclineOffer();
+  window.history.back();
+}
 
-    // volta de verdade
-    window.history.back();
+
+
+  function getExitOfferSessionId() {
+  try {
+    const key = "exit_offer_session_id";
+    const existing = window.sessionStorage.getItem(key);
+    if (existing) return existing;
+
+    const value = crypto.randomUUID();
+    window.sessionStorage.setItem(key, value);
+    return value;
+  } catch {
+    return "no-session";
   }
+}
+
+async function trackExitOfferEvent(
+  eventName: "view" | "accept" | "decline" | "close"
+) {
+  try {
+    await fetch("/api/exit-offer/track", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ eventName }),
+      keepalive: true,
+    });
+  } catch {
+    // silencioso
+  }
+}
 
   if (!open) return null;
 

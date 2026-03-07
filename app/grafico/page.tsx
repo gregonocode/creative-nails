@@ -50,17 +50,22 @@ async function getExitOfferStats() {
   );
 
   const { data, error } = await supabase
-    .from("exit_offer_events")
-    .select("event_name");
+    .from("quiz_counts")
+    .select("key,count")
+    .like("key", "exitOffer:%");
 
   if (error) throw new Error(error.message);
 
-  const rows = data ?? [];
+  const map = new Map<string, number>();
+  for (const row of data ?? []) {
+    const value = row.key.split(":")[1] ?? "";
+    map.set(value, Number(row.count ?? 0));
+  }
 
-  const totalViews = rows.filter((r) => r.event_name === "view").length;
-  const totalAccepts = rows.filter((r) => r.event_name === "accept").length;
-  const totalDeclines = rows.filter((r) => r.event_name === "decline").length;
-  const totalCloses = rows.filter((r) => r.event_name === "close").length;
+  const totalViews = map.get("view") ?? 0;
+  const totalAccepts = map.get("accept") ?? 0;
+  const totalDeclines = map.get("decline") ?? 0;
+  const totalCloses = map.get("close") ?? 0;
 
   const acceptRate =
     totalViews > 0 ? Math.round((totalAccepts / totalViews) * 100) : 0;
