@@ -867,7 +867,7 @@ export default function OfertaPage() {
                 ESPERA! OFERTA IRRESISTÍVEL 👇
               </p>
               <h3 className="mt-2 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
-                Leve tudo do Pack Completo por apenas <span className="text-sky-700">R$19,90</span>
+                Leve tudo do Pack Completo por apenas <span className="text-sky-700">R$14,90</span>
               </h3>
               <p className="mt-2 text-sm text-slate-600">
                 Ultima chance, tudo que tem no de 19,90 por apenas <b>R$ 14,90</b>
