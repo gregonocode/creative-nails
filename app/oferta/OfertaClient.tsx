@@ -106,7 +106,7 @@ export default function OfertaPage() {
   }
 
   function goCheckout1990() {
-    const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC?p=oferta");
+    const url = buildCheckoutUrl("https://pay.sereja.com.br/checkout/DjV1ETPC?p=promo14");
     window.location.assign(url);
   }
 
