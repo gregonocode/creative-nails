@@ -618,7 +618,7 @@ export default function OfertaPage() {
               </div>
 
               <p className="text-lg font-semibold">Pack Completo</p>
-              <p className="mt-1 text-3xl font-bold">R$27</p>
+              <p className="mt-1 text-3xl font-bold">R$19,90</p>
 
               <ul className="mt-4 space-y-2 text-sm text-slate-700">
                 <li>✅ +40 modelos 3D baixo orçamento</li>
@@ -774,7 +774,7 @@ export default function OfertaPage() {
                   "bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-200 sm:w-auto"
                 )}
               >
-                Quero o pack completo (R$27)
+                Quero o pack completo (R$19,90)
               </button>
 
               <button
@@ -870,7 +870,7 @@ export default function OfertaPage() {
                 Leve tudo do Pack Completo por apenas <span className="text-sky-700">R$19,90</span>
               </h3>
               <p className="mt-2 text-sm text-slate-600">
-                Ultima chance, tudo que tem no de 27 por apenas <b>R$ 19,90</b>
+                Ultima chance, tudo que tem no de 19,90 por apenas <b>R$ 14,90</b>
               </p>
             </div>
 
@@ -897,7 +897,7 @@ export default function OfertaPage() {
                   "bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-200"
                 )}
               >
-                Quero essa oferta (R$19,90)
+                Quero essa oferta
               </button>
 
               <button
