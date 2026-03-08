@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import "../components/quiz/css/shine.css";
+import BeforeAfterSlider from "./_components/BeforeAfterSlider";
+import Image from "next/image";
 import {
   CheckCircle2,
   ArrowRight,
@@ -283,24 +285,17 @@ function handleGoToUpsell1490() {
 
           {/* Placeholder de Vídeo/Imagem de Alta Conversão */}
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#1ad7a6] to-[#8ef0d5] opacity-20 blur-2xl"></div>
-            <div className="relative aspect-[4/5] lg:aspect-square w-full overflow-hidden rounded-[32px] border-8 border-white bg-slate-100 shadow-2xl flex flex-col items-center justify-center text-slate-400">
-              <ImageIcon className="h-16 w-16 mb-4 opacity-50" />
-              <p className="font-semibold px-8 text-center">
-                Coloque aqui uma foto ou vídeo do seu forro pronto para gerar desejo
-              </p>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 rounded-xl bg-white/90 backdrop-blur p-4 shadow-lg">
-                <div className="flex items-center gap-3">
-                  <PlayCircle className="h-8 w-8 text-[#1ad7a6]" />
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">Veja o resultado final</p>
-                    <p className="text-xs text-slate-600">Aperte o play</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#1ad7a6] to-[#8ef0d5] opacity-20 blur-2xl" />
+  <BeforeAfterSlider
+    beforeSrc="/forro/antes.jpg"
+    afterSrc="/forro/depois.jpg"
+    beforeLabel="Depois"
+    afterLabel="Antes"
+    
+   
+  />
+</div>
+
         </div>
       </Section>
 
@@ -350,10 +345,12 @@ function handleGoToUpsell1490() {
               Bônus Exclusivo de Ação Rápida
             </div>
 
-            <h2 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl leading-tight">
-              Finalize seu pedido agora e libere um pacote extra de bônus
-            </h2>
-
+           <h2 className="mt-6 text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl">
+  Finalize seu pedido agora e libere um pacote extra{" "}
+  <span className="inline-block bg-[#1AD7A6] px-2 py-0.5 text-white">
+  GRÁTIS!
+</span>
+</h2>
             <p className="mt-6 text-lg leading-relaxed text-slate-300">
               Para turbinar o visual da sua reforma sem estourar o orçamento, preparei um bônus especial focado em iluminação que vai transformar seu forro.
             </p>
@@ -367,10 +364,23 @@ function handleGoToUpsell1490() {
                   <h4 className="font-bold text-white text-lg">Guia de Iluminação em LED</h4>
                   <p className="text-sm mt-1 text-slate-400">Lista secreta de fornecedores com LED a partir de R$10 e tutorial de instalação embutida.</p>
                 </div>
+                
               </li>
             </ul>
+            <div className="mt-6 overflow-hidden rounded-[24px] border border-white/10 bg-white/5 shadow-xl">
+            
+  <Image
+    src="/forro/forroluz.png"
+    alt="Exemplo de iluminação em forro com LED"
+    width={1200}
+    height={900}
+    className="h-auto w-full object-cover"
+    priority={false}
+  />
+</div>
+            
           </div>
-
+          
           <div className="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/10 to-transparent p-1">
             <div className="rounded-[30px] bg-slate-900 p-8 backdrop-blur-md text-center">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#8ef0d5] mb-4">
