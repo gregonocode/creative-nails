@@ -289,8 +289,8 @@ function handleGoToUpsell1490() {
   <BeforeAfterSlider
     beforeSrc="/forro/antes.jpg"
     afterSrc="/forro/depois.jpg"
-    beforeLabel="Depois"
-    afterLabel="Antes"
+    beforeLabel="Antes"
+    afterLabel="Depois"
     
    
   />
