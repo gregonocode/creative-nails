@@ -13,7 +13,6 @@ import {
   Clock3,
   BadgePercent,
   PackageCheck,
-  PlayCircle,
   Lightbulb,
   Wand2,
   Star,
@@ -21,6 +20,7 @@ import {
   Image as ImageIcon,
   ChevronDown,
   X,
+  ClockAlert,
 } from "lucide-react";
 
 function Section({
@@ -238,7 +238,7 @@ function handleGoToUpsell1490() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0fa37d] to-[#1ad7a6]">
                 forro de baixo custo
               </span>{" "}
-              com EPS que fica{" "}
+              com EPS (ISOPOR) que fica{" "}
               <span className="relative whitespace-nowrap">
                 <span className="relative z-10">idêntico ao gesso</span>
                 <span className="absolute -bottom-2 left-0 -z-10 h-3 w-full bg-[#bdf3e5]"></span>
@@ -248,7 +248,7 @@ function handleGoToUpsell1490() {
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-600 sm:text-xl">
               Um acabamento moderno e elegante, podendo custar{" "}
               <strong className="font-extrabold text-slate-900 bg-[#e9fffa] px-2 py-0.5 rounded">
-                até 12x menos
+                até 10x menos
               </strong>{" "}
               do que as alternativas tradicionais. Tão simples que você mesmo pode executar sem precisar de mão de obra cara.
             </p>
@@ -278,7 +278,7 @@ function handleGoToUpsell1490() {
                 </div>
               </div>
               <span className="text-sm font-medium text-slate-500 text-center sm:text-left">
-                Pessoas já aprenderam
+                5067 Pessoas já aprenderam
               </span>
             </div>
           </div>
@@ -340,8 +340,9 @@ function handleGoToUpsell1490() {
 
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-center relative z-10">
           <div>
+            
             <div className="inline-flex items-center gap-2 rounded-full bg-[#1ad7a6]/10 border border-[#1ad7a6]/20 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#8ef0d5]">
-              <Clock3 className="h-4 w-4" />
+             <Clock3 className="h-4 w-4 items-center" /> 
               Bônus Exclusivo de Ação Rápida
             </div>
 
@@ -382,9 +383,10 @@ function handleGoToUpsell1490() {
           </div>
           
           <div className="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/10 to-transparent p-1">
-            <div className="rounded-[30px] bg-slate-900 p-8 backdrop-blur-md text-center">
+            <div className="rounded-[30px] bg-slate-900 p-8 backdrop-blur-md text-center ">
               <p className="text-sm font-bold uppercase tracking-[0.14em] text-[#8ef0d5] mb-4">
-                Esta oferta com bônus expira em:
+                <ClockAlert className="w-9 h-9 mb-2 mx-auto" />
+                 Esta oferta com bônus expira em:
               </p>
               
               {/* Timer Dinâmico */}
