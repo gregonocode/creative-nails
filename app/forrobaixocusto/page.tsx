@@ -169,7 +169,7 @@ export default function ForroEconomicoPage() {
 
 const [showUpsellModal, setShowUpsellModal] = useState(false);
 
-const CHECKOUT_BASICO = "https://pay.sereja.com.br/checkout/x8L9ISqb";
+const CHECKOUT_BASICO = "https://pay.sereja.com.br/checkout/d-Td6ESa?p=oferta10";
 const CHECKOUT_UPSELL_1490 = "https://pay.sereja.com.br/checkout/d-Td6ESa?p=promo";
 const CHECKOUT_COMPLETO = "https://pay.sereja.com.br/checkout/d-Td6ESa";
 
