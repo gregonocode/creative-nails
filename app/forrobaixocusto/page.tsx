@@ -333,6 +333,117 @@ function handleGoToUpsell1490() {
           />
         </div>
       </Section>
+      {/* Comparação de Preço */}
+
+{/* Comparação de Preço */}
+<Section className="bg-white">
+  <div className="mx-auto max-w-6xl">
+    <div className="text-center">
+      <div className="inline-flex rounded-full border border-[#d7f8ef] bg-[#effff9] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#0f8f6d]">
+        Comparação real de custo
+      </div>
+
+      <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+        Gesso tradicional ou forro econômico com EPS?
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">
+        A grande diferença está no custo final e na facilidade de execução.
+        Enquanto o <strong>forro de gesso</strong> normalmente exige{" "}
+        <strong>mão de obra especializada</strong>, o{" "}
+        <strong>forro com EPS (isopor)</strong> pode ser feito pela própria
+        pessoa, justamente por ser mais simples de trabalhar.
+      </p>
+    </div>
+
+    <div className="mt-14 grid gap-8 lg:grid-cols-2">
+      {/* Card Gesso */}
+      <div className="rounded-[32px] border border-rose-100 bg-gradient-to-b from-rose-50 to-white p-8 shadow-sm">
+        <div className="inline-flex rounded-full bg-rose-100 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-rose-700">
+          Forro de Gesso
+        </div>
+
+        <h3 className="mt-5 text-2xl font-black tracking-tight text-slate-900">
+          Mais caro e depende de profissional
+        </h3>
+
+        <div className="mt-6 rounded-3xl border border-rose-100 bg-white p-6 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
+            Ambiente de 10 m²
+          </p>
+          <p className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
+            R$ 750 a R$ 1.500
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-slate-500">
+            Considerando material, acabamento e mão de obra especializada.
+          </p>
+        </div>
+
+        <ul className="mt-8 space-y-4">
+          <li className="flex items-start gap-3 text-[15px] leading-6 text-slate-700 sm:text-base">
+            <X className="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
+            <span>Normalmente exige instalador com experiência</span>
+          </li>
+          <li className="flex items-start gap-3 text-[15px] leading-6 text-slate-700 sm:text-base">
+            <X className="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
+            <span>Custo final sobe com mão de obra e acabamento</span>
+          </li>
+          <li className="flex items-start gap-3 text-[15px] leading-6 text-slate-700 sm:text-base">
+            <X className="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
+            <span>Mais sensível a água, não pode molhar</span>
+          </li>
+          <li className="flex items-start gap-3 text-[15px] leading-6 text-slate-700 sm:text-base">
+            <X className="mt-0.5 h-5 w-5 shrink-0 text-rose-500" />
+            <span>Execução menos acessível para quem quer fazer sozinho</span>
+          </li>
+        </ul>
+      </div>
+
+      {/* Card EPS */}
+      <div className="rounded-[32px] border border-[#bff3e5] bg-gradient-to-b from-[#f3fffb] to-white p-8 shadow-[0_16px_50px_rgba(26,215,166,0.10)]">
+        <div className="inline-flex rounded-full bg-[#dff8f1] px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-[#0f8f6d]">
+          Forro Econômico com EPS
+        </div>
+
+        <h3 className="mt-5 text-2xl font-black tracking-tight text-slate-900">
+          Muito mais acessível e fácil de executar
+        </h3>
+
+        <div className="mt-6 rounded-3xl border border-[#dff8f1] bg-white p-6 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
+            Ambiente de 10 m²
+          </p>
+          <p className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
+            R$ 180 a R$ 200
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-slate-500">
+            Em média no material, com execução feita pela própria pessoa.
+          </p>
+        </div>
+
+        <ul className="mt-8 space-y-4">
+          <Bullet>Você mesmo pode fazer, sem precisar contratar mão de obra cara</Bullet>
+          <Bullet>Fácil de moldar com massa corrida e uma faquinha de serra</Bullet>
+          <Bullet>Baixa absorção de umidade, sem o mesmo risco do gesso comum ao molhar</Bullet>
+          <Bullet>Leve, prático e com menos sujeira na execução</Bullet>
+          <Bullet>Depois de pronto, fica bonito e sofisticado da mesma forma</Bullet>
+          <Bullet>Pode custar até 10x menos em comparação ao método tradicional</Bullet>
+        </ul>
+      </div>
+    </div>
+
+    <div className="mt-10 rounded-[28px] border border-[#dff8f1] bg-gradient-to-r from-[#effff9] to-white p-6 text-center shadow-sm sm:p-8">
+      <p className="text-lg font-bold leading-relaxed text-slate-800 sm:text-xl">
+        Ou seja: enquanto no gesso você paga caro também pela{" "}
+        <span className="text-slate-900">mão de obra especializada</span>, no
+        EPS a proposta é justamente permitir que{" "}
+        <span className="text-[#0fa37d]">você mesmo execute</span> e economize
+        pesado, sem abrir mão de um acabamento bonito.
+      </p>
+    </div>
+  </div>
+</Section>
+
       {/* Escassez / Bônus (Agora com Timer Dinâmico) */}
       <Section className="bg-slate-950 relative overflow-hidden">
         {/* Glow de fundo */}
@@ -379,6 +490,7 @@ function handleGoToUpsell1490() {
     priority={false}
   />
 </div>
+
             
           </div>
           
