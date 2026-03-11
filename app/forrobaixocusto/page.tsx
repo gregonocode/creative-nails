@@ -5,6 +5,7 @@ import Link from "next/link";
 import "../components/quiz/css/shine.css";
 import BeforeAfterSlider from "./_components/BeforeAfterSlider";
 import Image from "next/image";
+import AutoImageCarousel from "./_components/AutoImageCarousel";
 import {
   CheckCircle2,
   ArrowRight,
@@ -214,6 +215,15 @@ function handleGoToUpsell1490() {
   const minutes = Math.floor(timeLeft / 60).toString().padStart(2, "0");
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
+  const carouselImages = [
+  "/forro/modelo1.jpg",
+  "/forro/modelo2.jpg",
+  "/forro/modelo3.jpg",
+  "/forro/modelo4.jpg",
+  "/forro/modelo5.jpg",
+  "/forro/modelo6.jpg",
+];
+
   return (
     <main className="min-h-screen bg-[#f8fffd] text-slate-900 selection:bg-[#1ad7a6] selection:text-white">
       {/* Barra de Aviso Topo */}
@@ -344,7 +354,7 @@ function handleGoToUpsell1490() {
       </div>
 
       <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-        Gesso tradicional ou forro econômico com EPS?
+        Gesso tradicional ou forro econômico com EPS ?
       </h2>
 
       <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">
@@ -369,7 +379,7 @@ function handleGoToUpsell1490() {
 
         <div className="mt-6 rounded-3xl border border-rose-100 bg-white p-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
-            Ambiente de 10 m²
+            Ambiente de 10 m² custa entre:
           </p>
           <p className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
             R$ 750 a R$ 1.500
@@ -411,7 +421,7 @@ function handleGoToUpsell1490() {
 
         <div className="mt-6 rounded-3xl border border-[#dff8f1] bg-white p-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-500">
-            Ambiente de 10 m²
+            Ambiente de 10 m² custa entre:
           </p>
           <p className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
             R$ 180 a R$ 200
@@ -440,6 +450,28 @@ function handleGoToUpsell1490() {
         <span className="text-[#0fa37d]">você mesmo execute</span> e economize
         pesado, sem abrir mão de um acabamento bonito.
       </p>
+    </div>
+  </div>
+</Section>
+{/* carrossel de imagens */}
+<Section className="bg-slate-950 overflow-hidden">
+  <div className="mx-auto max-w-6xl">
+    <div className="text-center">
+      <div className="inline-flex rounded-full border border-[#1ad7a6]/20 bg-[#1ad7a6]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#8ef0d5]">
+        Resultados reais
+      </div>
+
+      <h2 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl">
+        Veja alguns exemplos de forros já finalizados
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
+        Tão simples que você faz no mesmo dia, diminui o calor e ainda valoriza sua casa.. custando pouco!
+      </p>
+    </div>
+
+    <div className="mt-10">
+      <AutoImageCarousel images={carouselImages} speedSeconds={24} />
     </div>
   </div>
 </Section>
