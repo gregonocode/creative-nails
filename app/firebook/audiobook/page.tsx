@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import AutoBookCarousel from "./_components/AutoBookCarousel";
+import SocialProofToast from "@/app/components/SocialProofToast";
 import {
   ArrowRight,
   Headphones,
@@ -127,7 +128,9 @@ function PlanCard({
 }) {
   
   return (
+    
     <div
+    
       className={[
         "relative flex flex-col rounded-[32px] border bg-white p-8 transition-all hover:shadow-xl",
         highlight
@@ -198,6 +201,8 @@ function PlanCard({
 
 export default function FirebookAudiobookPage() {
   return (
+    <>
+    <SocialProofToast everyMs={25_000} durationMs={3_000} />
     <main className="min-h-screen bg-white text-slate-900 selection:bg-[#E40627] selection:text-white">
       {/* Barra topo */}
       <div className="w-full bg-[#960016]">
@@ -283,77 +288,81 @@ export default function FirebookAudiobookPage() {
     </div>
   </div>
 </Section>
+          
           {/* Mockup visual */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#960016] to-[#E40627] opacity-10 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[32px] border border-rose-100 bg-white shadow-[0_20px_60px_rgba(150,0,22,0.12)]">
-              <div className="bg-[#960016] px-6 py-5 text-white">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-white/80">
-                  Seu app de audiobooks
-                </p>
-                <h3 className="mt-2 text-2xl font-black">Firebook</h3>
-                <p className="mt-2 text-sm text-white/80">
-                  Histórias, aprendizado e praticidade no seu ritmo
-                </p>
-              </div>
+<div className="relative mx-auto w-full max-w-md lg:max-w-none">
+  <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#960016] to-[#E40627] opacity-10 blur-2xl" />
+  <div className="relative overflow-hidden rounded-[32px] border border-rose-100 bg-white shadow-[0_20px_60px_rgba(150,0,22,0.12)]">
+    <div className="bg-[#960016] px-6 py-5 text-white">
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-white/80">
+        Seu app de audiobooks
+      </p>
+      <h3 className="mt-2 text-2xl font-black">Firebook</h3>
+      <p className="mt-2 text-sm text-white/80">
+        Histórias, aprendizado e praticidade no seu ritmo
+      </p>
+    </div>
 
-              <div className="p-6">
-                <div className="rounded-[28px] bg-gradient-to-br from-[#FFF4F6] to-white p-5 border border-rose-100">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E40627] text-white">
-                      <PlayCircle className="h-8 w-8" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#960016]">
-                        Audiobook em reprodução
-                      </p>
-                      <h4 className="mt-1 text-lg font-black text-slate-900">
-                        Escute e continue seu dia
-                      </h4>
-                      <p className="mt-1 text-sm text-slate-500">
-                        Dê play e aproveite seu tempo de forma mais leve
-                      </p>
-                    </div>
-                  </div>
+    <div className="p-6 mb-0">
+      <Image
+        src="/firebook/play.png"
+        alt="Tela do app Firebook"
+        width={768}
+        height={1024}
+      />
 
-                  <div className="mt-6 h-2 w-full rounded-full bg-rose-100">
-                    <div className="h-2 w-2/3 rounded-full bg-[#E40627]" />
-                  </div>
-
-                  <div className="mt-3 flex items-center justify-between text-xs font-semibold text-slate-500">
-                    <span>08:14</span>
-                    <span>12:30</span>
-                  </div>
-                </div>
-
-                <div className="mt-5 grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-rose-100 bg-white p-4">
-                    <Headphones className="h-6 w-6 text-[#960016]" />
-                    <p className="mt-3 text-sm font-bold text-slate-900">
-                      Ouça em qualquer momento
-                    </p>
-                  </div>
-
-                  <div className="rounded-2xl border border-rose-100 bg-white p-4">
-                    <BookOpen className="h-6 w-6 text-[#960016]" />
-                    <p className="mt-3 text-sm font-bold text-slate-900">
-                      Aprenda com praticidade
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-5 rounded-2xl border border-[#FFD7DE] bg-[#FFF1F4] p-4 text-sm font-bold text-[#960016]">
-                  Sem mensalidade. Você paga uma vez e aproveita.
-                </div>
-                
-              </div>
-             
-            </div>
-            
-          </div>
+      <div className="mt-0 mb-2 rounded-2xl border border-[#FFD7DE] bg-[#FFF1F4] p-4 text-sm font-bold text-[#960016]">
+        Sem mensalidade. Você paga uma vez e aproveita.
+      </div>
+    </div>
+  </div>
+</div>
            
         </div>
       </Section>
+      <Section className="bg-slate-950">
+  <div className="mx-auto max-w-5xl">
+    <div className="text-center">
+      <div className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white/80">
+        Avisos do Firebook
+      </div>
+
+      <h2 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl">
+        Receba notificações sempre que entrarem{" "}
+        <span className="text-[#ff2b4d]">Novos audiobooks</span>
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
+        No Firebook você também pode ser avisada quando chegarem novos conteúdos
+        na plataforma, para não perder nenhuma novidade.
+      </p>
+    </div>
+
+    <div className="mt-10 flex justify-center">
+      <Image
+        src="/firebook/notificação.png"
+        alt="Notificação de novos audiobooks no Firebook"
+        width={520}
+        height={172}
+      />
+    </div>
+
+    <div className="mx-auto mt-10 max-w-3xl text-center">
+      <p className="text-lg leading-relaxed text-slate-300 sm:text-xl">
+        Assim você acompanha tudo de forma simples e prática, sem precisar ficar
+        entrando toda hora para ver se apareceu algo novo.
+      </p>
+
+      <p className="mt-5 text-lg font-bold leading-relaxed text-white sm:text-xl">
+        E o melhor: receber alertas de{" "}
+        <span className="text-[#ff2b4d]">novos audiobooks</span> não gera{" "}
+        <span className="text-[#ff2b4d]">custo extra</span>.
+      </p>
+
+      
+    </div>
+  </div>
+</Section>
 
       {/* Dor + promessa */}
       <Section className="bg-white border-t border-rose-50">
@@ -638,6 +647,8 @@ export default function FirebookAudiobookPage() {
           </div>
         </div>
       </Section>
+      
     </main>
+    </>
   )
 }

@@ -4,8 +4,8 @@ import React, { useEffect, useMemo, useState } from "react";
 
 type PurchaseNotif = {
   name: string;
-  state: string; // UF
-  product: "Pack Completo" | "Pack Básico";
+  state: string;
+  product: "Firebook Premium" | "Firebook Essencial";
 };
 
 function cn(...classes: Array<string | false | null | undefined>) {
@@ -13,45 +13,44 @@ function cn(...classes: Array<string | false | null | undefined>) {
 }
 
 const PURCHASES: PurchaseNotif[] = [
-  { name: "Jessica Lima", state: "MG", product: "Pack Completo" },
-  { name: "Rafael Souza", state: "SP", product: "Pack Completo" },
-  { name: "Camila Santos", state: "RJ", product: "Pack Básico" },
-  { name: "Bruno Almeida", state: "PA", product: "Pack Completo" },
-  { name: "Larissa Rocha", state: "BA", product: "Pack Básico" },
-  { name: "Mateus Ferreira", state: "PR", product: "Pack Completo" },
-  { name: "Ana Beatriz", state: "CE", product: "Pack Completo" },
-  { name: "João Pedro", state: "SC", product: "Pack Básico" },
-  { name: "Mariana Costa", state: "GO", product: "Pack Completo" },
-  { name: "Diego Ribeiro", state: "RS", product: "Pack Completo" },
-  { name: "Isabela Nunes", state: "AM", product: "Pack Básico" },
-  { name: "Felipe Martins", state: "PE", product: "Pack Completo" },
-  { name: "Vitória Carvalho", state: "ES", product: "Pack Completo" },
-  { name: "Gabriel Oliveira", state: "DF", product: "Pack Básico" },
-  { name: "Juliana Mendes", state: "MA", product: "Pack Completo" },
-  { name: "Thiago Barros", state: "MT", product: "Pack Básico" },
-  { name: "Bianca Silva", state: "MS", product: "Pack Completo" },
-  { name: "Renato Azevedo", state: "RN", product: "Pack Básico" },
-  { name: "Letícia Araújo", state: "PB", product: "Pack Completo" },
-  { name: "Eduardo Pinto", state: "PI", product: "Pack Completo" },
-  { name: "Priscila Monteiro", state: "RO", product: "Pack Básico" },
-  { name: "André Luiz", state: "TO", product: "Pack Completo" },
+  { name: "Jessica Lima", state: "MG", product: "Firebook Premium" },
+  { name: "Camila Santos", state: "RJ", product: "Firebook Essencial" },
+  { name: "Larissa Rocha", state: "BA", product: "Firebook Premium" },
+  { name: "Ana Beatriz", state: "CE", product: "Firebook Premium" },
+  { name: "Mariana Costa", state: "GO", product: "Firebook Essencial" },
+  { name: "Isabela Nunes", state: "AM", product: "Firebook Premium" },
+  { name: "Vitória Carvalho", state: "ES", product: "Firebook Premium" },
+  { name: "Juliana Mendes", state: "MA", product: "Firebook Essencial" },
+  { name: "Bianca Silva", state: "MS", product: "Firebook Premium" },
+  { name: "Letícia Araújo", state: "PB", product: "Firebook Premium" },
+  { name: "Priscila Monteiro", state: "RO", product: "Firebook Essencial" },
+  { name: "Fernanda Alves", state: "SP", product: "Firebook Premium" },
+  { name: "Patrícia Souza", state: "PE", product: "Firebook Essencial" },
+  { name: "Bruna Martins", state: "PR", product: "Firebook Premium" },
+  { name: "Aline Ribeiro", state: "SC", product: "Firebook Premium" },
+  { name: "Tatiane Oliveira", state: "PA", product: "Firebook Essencial" },
+  { name: "Débora Fernandes", state: "RN", product: "Firebook Premium" },
+  { name: "Carla Mendes", state: "DF", product: "Firebook Essencial" },
+  { name: "Renata Barros", state: "RS", product: "Firebook Premium" },
+  { name: "Amanda Nogueira", state: "TO", product: "Firebook Premium" },
 ];
 
 function pickRandom<T>(arr: T[], avoid?: T) {
   if (arr.length === 0) return null;
   if (arr.length === 1) return arr[0];
+
   let item = arr[Math.floor(Math.random() * arr.length)];
-  // evita repetir o mesmo seguido
   if (avoid && item === avoid) {
     item = arr[Math.floor(Math.random() * arr.length)];
   }
+
   return item;
 }
 
 export default function SocialProofToast(props: {
-  everyMs?: number; // default 10s
-  durationMs?: number; // default 3s
-  enabled?: boolean; // default true
+  everyMs?: number;
+  durationMs?: number;
+  enabled?: boolean;
 }) {
   const everyMs = props.everyMs ?? 10_000;
   const durationMs = props.durationMs ?? 3_000;
@@ -62,7 +61,7 @@ export default function SocialProofToast(props: {
 
   const message = useMemo(() => {
     if (!current) return "";
-    return `${current.name}, ${current.state}, comprou o ${current.product}`;
+    return `${current.name}, ${current.state}, garantiu o ${current.product}`;
   }, [current]);
 
   useEffect(() => {
@@ -78,7 +77,6 @@ export default function SocialProofToast(props: {
       hideTimer = window.setTimeout(() => setVisible(false), durationMs);
     };
 
-    // mostra a primeira depois de um pequeno delay (fica natural)
     const firstTimer = window.setTimeout(showOne, 1200);
     const interval = window.setInterval(showOne, everyMs);
 
@@ -97,17 +95,21 @@ export default function SocialProofToast(props: {
         className={cn(
           "pointer-events-none w-[320px] max-w-[88vw]",
           "transition-all duration-300",
-          visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+          visible ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
         )}
         aria-live="polite"
       >
-        <div className="rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-lg backdrop-blur">
+        <div className="rounded-2xl border border-rose-100 bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
           <div className="flex items-start gap-3">
-            <div className="mt-0.5 h-2.5 w-2.5 flex-none rounded-full bg-lime-500" />
+            <div className="mt-0.5 h-2.5 w-2.5 flex-none rounded-full bg-[#E40627]" />
             <div className="min-w-0">
-              <p className="text-sm font-extrabold text-slate-900">Compra confirmada</p>
+              <p className="text-sm font-extrabold text-[#960016]">
+                Novo acesso liberado
+              </p>
               <p className="mt-1 text-sm text-slate-700">{message}</p>
-              <p className="mt-1 text-[11px] text-slate-500">há poucos instantes</p>
+              <p className="mt-1 text-[11px] text-slate-500">
+                há poucos instantes
+              </p>
             </div>
           </div>
         </div>
