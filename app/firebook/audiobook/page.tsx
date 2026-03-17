@@ -105,6 +105,24 @@ const bookImages = [
   "/firebook/livro8.jpg",
 ];
 
+const CHECKOUT_PREMIUM = "https://pay.sereja.com.br/checkout/x9SRX7Ff";
+const CHECKOUT_ESSENCIAL = "https://pay.sereja.com.br/checkout/x9SRX7Ff?p=oferta10";
+
+function withCurrentParams(url: string) {
+  if (typeof window === "undefined") return url;
+
+  const currentParams = new URLSearchParams(window.location.search);
+  const finalUrl = new URL(url);
+
+  currentParams.forEach((value, key) => {
+    if (!finalUrl.searchParams.has(key)) {
+      finalUrl.searchParams.set(key, value);
+    }
+  });
+
+  return finalUrl.toString();
+}
+
 function PlanCard({
   badge,
   title,
@@ -114,7 +132,8 @@ function PlanCard({
   highlight,
   items,
   cta,
-  href = "#",
+  href,
+  onClick,
 }: {
   badge: string;
   title: string;
@@ -125,12 +144,10 @@ function PlanCard({
   items: string[];
   cta: string;
   href?: string;
+  onClick?: () => void;
 }) {
-  
   return (
-    
     <div
-    
       className={[
         "relative flex flex-col rounded-[32px] border bg-white p-8 transition-all hover:shadow-xl",
         highlight
@@ -182,18 +199,34 @@ function PlanCard({
         ))}
       </ul>
 
-      <Link
-        href={href}
-        className={[
-          "mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-5 text-center text-[15px] font-black uppercase tracking-[0.08em] transition-all hover:scale-[1.02] active:scale-[0.98]",
-          highlight
-            ? "bg-[#E40627] text-white shadow-[0_14px_34px_rgba(228,6,39,0.28)] hover:bg-[#c90420]"
-            : "bg-slate-900 text-white hover:bg-slate-800",
-        ].join(" ")}
-      >
-        {cta}
-        <ArrowRight className="h-5 w-5" />
-      </Link>
+      {onClick ? (
+        <button
+          type="button"
+          onClick={onClick}
+          className={[
+            "mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-5 text-center text-[15px] font-black uppercase tracking-[0.08em] transition-all hover:scale-[1.02] active:scale-[0.98]",
+            highlight
+              ? "bg-[#E40627] text-white shadow-[0_14px_34px_rgba(228,6,39,0.28)] hover:bg-[#c90420]"
+              : "bg-slate-900 text-white hover:bg-slate-800",
+          ].join(" ")}
+        >
+          {cta}
+          <ArrowRight className="h-5 w-5" />
+        </button>
+      ) : (
+        <Link
+          href={href ?? "#"}
+          className={[
+            "mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-5 text-center text-[15px] font-black uppercase tracking-[0.08em] transition-all hover:scale-[1.02] active:scale-[0.98]",
+            highlight
+              ? "bg-[#E40627] text-white shadow-[0_14px_34px_rgba(228,6,39,0.28)] hover:bg-[#c90420]"
+              : "bg-slate-900 text-white hover:bg-slate-800",
+          ].join(" ")}
+        >
+          {cta}
+          <ArrowRight className="h-5 w-5" />
+        </Link>
+      )}
     </div>
   );
 }
@@ -522,39 +555,43 @@ export default function FirebookAudiobookPage() {
         </div>
 
         <div className="mt-16 grid gap-8 lg:grid-cols-2 lg:items-center max-w-5xl mx-auto">
-          <PlanCard
-            badge="Mais escolhido"
-            title="Acesso Completo"
-            subtitle="Para quem quer aproveitar melhor a experiência Firebook com mais praticidade e liberdade."
-            price="19,90"
-            oldPrice="R$ 49,90"
-            highlight
-            items={[
-              "Acesso ao app Firebook",
-              "Audiobooks para ouvir na rotina",
-              "Uso prático no dia a dia",
-              "Pagamento único sem mensalidade",
-              "Experiência mais completa",
-            ]}
-            cta="Quero o completo"
-            href="#"
-          />
+         <PlanCard
+  badge="Mais escolhido"
+  title="Acesso Completo"
+  subtitle="Para quem quer aproveitar melhor a experiência Firebook com mais praticidade e liberdade."
+  price="19,90"
+  oldPrice="R$ 49,90"
+  highlight
+  items={[
+    "Acesso ao app Firebook",
+    "Audiobooks para ouvir na rotina",
+    "Uso prático no dia a dia",
+    "Pagamento único sem mensalidade",
+    "Experiência mais completa",
+  ]}
+  cta="Quero o acesso completo"
+  onClick={() => {
+    window.location.href = withCurrentParams(CHECKOUT_PREMIUM);
+  }}
+/>
 
-          <PlanCard
-            badge="Entrada"
-            title="Acesso Essencial"
-            subtitle="Uma opção para quem quer começar agora com uma entrada mais leve."
-            price="9,90"
-            items={[
-              "Entrada no universo Firebook",
-              "Conteúdo em formato prático",
-              "Ideal para começar",
-              "Pagamento único",
-              "Sem assinatura mensal",
-            ]}
-            cta="Quero começar agora"
-            href="#"
-          />
+<PlanCard
+  badge="Entrada"
+  title="Acesso Essencial"
+  subtitle="Uma opção para quem quer começar agora com uma entrada mais leve."
+  price="10"
+  items={[
+    "Entrada no universo Firebook",
+    "Conteúdo em formato prático",
+    "Ideal para começar",
+    "Pagamento único",
+    "Sem assinatura mensal",
+  ]}
+  cta="Quero começar agora"
+  onClick={() => {
+    window.location.href = withCurrentParams(CHECKOUT_ESSENCIAL);
+  }}
+/>
         </div>
       </Section>
 
