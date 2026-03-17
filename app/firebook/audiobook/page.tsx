@@ -364,14 +364,7 @@ export default function FirebookAudiobookPage() {
         Receba notificações sempre que entrarem{" "}
         <span className="text-[#ff2b4d]">Novos audiobooks</span>
       </h2>
-
-      <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
-        No Firebook você também pode ser avisada quando chegarem novos conteúdos
-        na plataforma, para não perder nenhuma novidade.
-      </p>
-    </div>
-
-    <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex justify-center">
       <Image
         src="/firebook/notificação.png"
         alt="Notificação de novos audiobooks no Firebook"
@@ -380,12 +373,12 @@ export default function FirebookAudiobookPage() {
       />
     </div>
 
-    <div className="mx-auto mt-10 max-w-3xl text-center">
-      <p className="text-lg leading-relaxed text-slate-300 sm:text-xl">
-        Assim você acompanha tudo de forma simples e prática, sem precisar ficar
-        entrando toda hora para ver se apareceu algo novo.
+      <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
+        No Firebook você também pode ser avisada quando chegarem novos conteúdos
+        na plataforma, para não perder nenhuma novidade.
       </p>
-
+    </div>
+    <div className="mx-auto mt-10 max-w-3xl text-center">
       <p className="mt-5 text-lg font-bold leading-relaxed text-white sm:text-xl">
         E o melhor: receber alertas de{" "}
         <span className="text-[#ff2b4d]">novos audiobooks</span> não gera{" "}
@@ -488,28 +481,7 @@ export default function FirebookAudiobookPage() {
       {/* Sem mensalidade */}
       <Section className="bg-white">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr]">
-          <div>
-            <div className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#960016]">
-              Um dos maiores diferenciais
-            </div>
-
-            <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
-              Aqui você não fica presa em assinatura mensal
-            </h2>
-
-            <p className="mt-5 text-lg leading-relaxed text-slate-600">
-              Nada de cobrança recorrente pesando no cartão todo mês. A proposta
-              do Firebook é simples: você adquire seu acesso e aproveita sem essa
-              preocupação de mensalidade.
-            </p>
-
-            <ul className="mt-8 space-y-4">
-              <Bullet>Pagamento único</Bullet>
-              <Bullet>Sem surpresas com cobrança recorrente</Bullet>
-              <Bullet>Mais tranquilidade para comprar</Bullet>
-              <Bullet>Experiência simples e objetiva</Bullet>
-            </ul>
-          </div>
+          
 
           <div className="rounded-[32px] border border-rose-100 bg-gradient-to-br from-[#FFF4F6] to-white p-8 shadow-sm">
             <div className="rounded-[28px] border border-[#FFD7DE] bg-white p-8 text-center shadow-sm">
@@ -533,6 +505,80 @@ export default function FirebookAudiobookPage() {
           </div>
         </div>
       </Section>
+      <Section className="bg-[#960016]">
+  <div className="mx-auto max-w-5xl">
+    <div className="text-center">
+      <div className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white">
+        Oferta por tempo limitado
+      </div>
+
+      <h2 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl">
+        Se adquirir nos próximos{" "}
+        <span className="text-[#ff4d6d]">10 minutos</span>, ganhe totalmente{" "}
+        <span className="text-[#ff4d6d]">grátis</span> um combo de audiobook de{" "}
+        <span className="text-[#ff4d6d]">Sucesso Financeiro</span>
+      </h2>
+
+      <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-white/80">
+        Além do acesso ao Firebook, você ainda libera um combo especial com
+        conteúdos voltados para mentalidade, organização e crescimento
+        financeiro.
+      </p>
+    </div>
+
+    <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <Image
+          src="/firebook/livro1.jpg"
+          alt="Audiobook de sucesso financeiro 1"
+          width={300}
+          height={400}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <Image
+          src="/firebook/livro2.jpg"
+          alt="Audiobook de sucesso financeiro 2"
+          width={300}
+          height={400}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <Image
+          src="/firebook/livro3.jpg"
+          alt="Audiobook de sucesso financeiro 3"
+          width={300}
+          height={400}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <Image
+          src="/firebook/livro4.jpg"
+          alt="Audiobook de sucesso financeiro 4"
+          width={300}
+          height={400}
+          className="h-auto w-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div className="mt-10 flex justify-center">
+      <Link
+        href="#planos"
+        className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#E40627] px-8 py-4 text-sm font-extrabold uppercase tracking-[0.08em] text-white shadow-[0_14px_34px_rgba(228,6,39,0.28)] transition hover:scale-105 hover:bg-[#c90420]"
+      >
+        Quero garantir o bônus
+        <ArrowRight className="h-5 w-5" />
+      </Link>
+    </div>
+  </div>
+</Section>
 
       {/* Planos */}
       <Section
