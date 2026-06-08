@@ -648,10 +648,7 @@ export default function JogosRetroPage() {
                   Leve tudo da oferta de R$ 27 por apenas{" "}
                   <span className="text-red-600">R$ 17</span>
                 </h3>
-                <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-                  Por pouca diferenca voce desbloqueia a experiencia completa,
-                  com mais jogos, mais categorias e mais nostalgia.
-                </p>
+                
               </div>
 
               <div className="mt-6 rounded-[24px] border border-red-100 bg-red-50 p-5 sm:p-6">
