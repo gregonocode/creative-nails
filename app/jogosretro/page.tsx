@@ -46,6 +46,10 @@ const carouselImages = Array.from(
   { length: 8 },
   (_, index) => `/games/jogo-${index + 1}.png`,
 );
+const specialRetroImages = Array.from(
+  { length: 10 },
+  (_, index) => `/retro-especial/especial-${index + 1}.png`,
+);
 
 const reviews = [
   {
@@ -348,14 +352,13 @@ export default function JogosRetroPage() {
         <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <div className="inline-flex rounded-full border border-red-100 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-red-700">
-              Teste de gameplay
+              Muitos Classicos
             </div>
             <h2 className="mt-5 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-              Uma amostra do clima arcade
+              Só para você sentir o clima
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              Cada cena aparece por 4 segundos para mostrar o clima dos jogos
-              retro sem deixar a pagina parada.
+              Sinta a vibe dos jogos que você vai jogar ainda hoje.
             </p>
           </div>
 
@@ -395,10 +398,10 @@ export default function JogosRetroPage() {
       <Section className="overflow-hidden bg-slate-950">
         <div className="text-center">
           <div className="inline-flex rounded-full border border-red-400/20 bg-red-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-red-200">
-            Previa do acervo
+            Muitos jogos
           </div>
           <h2 className="mt-6 text-3xl font-black tracking-tight text-white sm:text-4xl">
-            Alguns classicos que voce vai reconhecer na hora
+            Alguns classicos que voce vai Jogar hoje mesmo!
           </h2>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
             Futebol retro, plataforma, corrida, luta, aventura e outros jogos
@@ -426,6 +429,53 @@ export default function JogosRetroPage() {
               </div>
             ))}
           </div>
+        </div>
+      </Section>
+
+      <Section className="overflow-hidden bg-[#fffafa]">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-red-100 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-red-700">
+            <Gift className="h-4 w-4" />
+            Bonus de ação rapida
+          </div>
+          <h2 className="mt-6 text-3xl font-black leading-tight tracking-tight text-[#181818] sm:text-5xl">
+            Se voce adquirir nos proximos 10 minutos, recebera totalmente gratis
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-xl font-black leading-relaxed text-[#181818] sm:text-2xl">
+            Esses jogos retro ESPECIAIS
+          </p>
+        </div>
+
+        <div className="relative mt-10 overflow-hidden">
+          <div
+            className="flex w-max gap-4 animate-auto-carousel will-change-transform"
+            style={{ animationDuration: "32s" }}
+          >
+            {[...specialRetroImages, ...specialRetroImages].map((src, index) => (
+              <div
+                key={`${src}-${index}`}
+                className="relative aspect-[415/500] w-[150px] shrink-0 overflow-hidden rounded-2xl border border-red-100 bg-white shadow-lg sm:w-[190px] md:w-[220px]"
+              >
+                <Image
+                  src={src}
+                  alt={`Jogo retro especial ${index + 1}`}
+                  fill
+                  sizes="(max-width: 640px) 150px, (max-width: 768px) 190px, 220px"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="#ofertas"
+            className="shine-button inline-flex min-h-[58px] items-center justify-center gap-2 rounded-2xl bg-red-600 px-8 py-4 text-sm font-black uppercase tracking-[0.08em] text-white shadow-[0_14px_34px_rgba(220,38,38,0.28)] transition hover:scale-105 hover:bg-red-700"
+          >
+            Quero os Especiais Agora
+            <ArrowRight className="h-5 w-5" />
+          </Link>
         </div>
       </Section>
 
