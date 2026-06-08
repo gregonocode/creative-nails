@@ -1,3 +1,4 @@
+//app\forrobaixocusto\_components\AutoImageCarousel.tsx
 "use client";
 
 import Image from "next/image";
