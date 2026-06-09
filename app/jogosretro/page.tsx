@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import "../components/quiz/css/shine.css";
 import {
   ArrowRight,
@@ -30,6 +31,7 @@ const CHECKOUT_BASICO =
   "https://pay.sereja.com.br/checkout/dcruR8nS?p=oferta10";
 const CHECKOUT_UPGRADE =
   "https://pay.sereja.com.br/checkout/dcruR8nS?p=oferta17";
+const META_PIXEL_ID = "959904006760346";
 const gameplayGifs = [
   {
     src: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGtydzVvNGJ3NnhhY2diMnk0ZzU5N250Y3pldWttdmpkZTNqbmY4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/psmjYov0chdqL9Uysz/giphy.gif",
@@ -294,6 +296,21 @@ export default function JogosRetroPage() {
 
   return (
     <main className="min-h-screen bg-[#fffafa] text-slate-950 selection:bg-red-600 selection:text-white">
+      <Script id="meta-pixel-jogosretro" strategy="afterInteractive">
+        {`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '${META_PIXEL_ID}');
+          fbq('track', 'PageView');
+        `}
+      </Script>
+
       <div className="w-full bg-red-600">
         <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 text-center text-[11px] font-black uppercase tracking-[0.18em] text-white sm:text-xs">
           <Sparkles className="mr-2 h-4 w-4" />
@@ -555,7 +572,9 @@ export default function JogosRetroPage() {
           <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
             Comece hoje sem comprar videogame novo
           </h2>
-         
+         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+            Escolha o melhor plano para você
+          </p>
         </div>
 
         <div className="mx-auto mt-14 grid max-w-5xl gap-8 lg:grid-cols-2 lg:items-stretch">
