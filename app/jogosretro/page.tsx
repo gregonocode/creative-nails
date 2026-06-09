@@ -9,9 +9,12 @@ import {
   BadgePercent,
   CheckCircle2,
   ChevronDown,
+  Download,
   Gamepad2,
   Gift,
+  Mail,
   Medal,
+  PackageOpen,
   ShieldCheck,
   Smartphone,
   Sparkles,
@@ -111,6 +114,39 @@ function BenefitCard({
         {title}
       </h3>
       <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">
+        {text}
+      </p>
+    </div>
+  );
+}
+
+function StepCard({
+  step,
+  icon,
+  title,
+  text,
+}: {
+  step: string;
+  icon: React.ReactNode;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="relative rounded-2xl border border-red-100 bg-white p-6 shadow-sm">
+      <div className="flex items-center gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white">
+          {icon}
+        </div>
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-red-600">
+            {step}
+          </p>
+          <h3 className="mt-1 text-xl font-black tracking-tight text-slate-950">
+            {title}
+          </h3>
+        </div>
+      </div>
+      <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
         {text}
       </p>
     </div>
@@ -349,6 +385,38 @@ export default function JogosRetroPage() {
       </Section>
 
       <Section className="bg-[#fffafa]">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="inline-flex rounded-full border border-red-100 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-red-700">
+            Como funciona
+          </div>
+          <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+            Em poucos passos voce ja comeca a jogar
+          </h2>
+        </div>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <StepCard
+            step="Passo 1"
+            icon={<Mail className="h-6 w-6" />}
+            title="Receba o acesso"
+            text="Depois da compra, voce recebe o acesso diretamente no seu email."
+          />
+          <StepCard
+            step="Passo 2"
+            icon={<Download className="h-6 w-6" />}
+            title="Instale o emulador"
+            text="Instale o emulador indicado para jogar os classicos no celular."
+          />
+          <StepCard
+            step="Passo 3"
+            icon={<PackageOpen className="h-6 w-6" />}
+            title="Importe e jogue"
+            text="Voce recebe mais de 900 jogos prontos para importar e comecar a jogar."
+          />
+        </div>
+      </Section>
+
+      <Section className="bg-[#fffafa]">
         <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <div className="inline-flex rounded-full border border-red-100 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-red-700">
@@ -487,10 +555,7 @@ export default function JogosRetroPage() {
           <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
             Comece hoje sem comprar videogame novo
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            A oferta completa libera tudo. A basica e uma porta de entrada mais
-            barata, com a opcao de upgrade especial antes de finalizar.
-          </p>
+         
         </div>
 
         <div className="mx-auto mt-14 grid max-w-5xl gap-8 lg:grid-cols-2 lg:items-stretch">
@@ -672,7 +737,7 @@ export default function JogosRetroPage() {
                   onClick={() => goToCheckout(CHECKOUT_UPGRADE)}
                   className="shine-button inline-flex min-h-[56px] w-full items-center justify-center gap-2 rounded-2xl bg-red-600 px-5 py-4 text-sm font-black uppercase tracking-[0.08em] text-white shadow-[0_14px_34px_rgba(220,38,38,0.28)] transition hover:scale-[1.01] hover:bg-red-700"
                 >
-                  Quero o upgrade de R$ 17
+                  Quero Completo por R$ 17
                   <Zap className="h-5 w-5" />
                 </button>
 
