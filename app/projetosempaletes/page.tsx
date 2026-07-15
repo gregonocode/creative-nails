@@ -183,6 +183,34 @@ export default function ProjetosEmPaletesPage() {
               </article>
             ))}
           </div>
+
+          <article className="mt-5 grid overflow-hidden rounded-[28px] border border-stone-200 bg-[#fcfbf9] md:grid-cols-[0.72fr_1.28fr] md:items-center">
+            <div className="relative mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden md:max-w-none">
+              <Image
+                src="/modelos/videos.webp"
+                alt="Videoaula mostrando a montagem de um móvel de madeira passo a passo"
+                fill
+                sizes="(max-width: 768px) 340px, 38vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="p-7 sm:p-10 lg:p-14">
+              <p
+                className="text-xs font-extrabold uppercase tracking-[0.2em]"
+                style={{ color: "var(--accent)" }}
+              >
+                Aperte o play e comece
+              </p>
+              <h3 className="mt-4 max-w-xl text-2xl font-extrabold tracking-[-0.04em] sm:text-4xl">
+                Vídeos passo a passo, direto ao ponto e sem enrolação.
+              </h3>
+              <p className="mt-5 max-w-xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
+                Acompanhe cada etapa de forma simples e visual para começar seu
+                projeto em poucos minutos, mesmo que você ainda não tenha experiência.
+              </p>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -397,7 +425,7 @@ export default function ProjetosEmPaletesPage() {
               palete em uma peça única para sua casa.
             </p>
             <Link
-              href="#projetos"
+              href="#oferta"
               className="mt-8 inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-8 text-sm font-extrabold text-white shadow-lg transition hover:-translate-y-1"
               style={{ backgroundImage: "var(--headline-gradient)" }}
             >
