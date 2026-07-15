@@ -11,6 +11,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import ProjectsCarousel from "./ProjectsCarousel";
+import SpecialProjectsCarousel from "./SpecialProjectsCarousel";
 import paletteMockup from "@/public/modelos/palette-mockup.webp";
 
 const montserrat = Montserrat({
@@ -29,8 +30,8 @@ const theme = {
 const benefits = [
   {
     icon: Recycle,
-    title: "Material reaproveitado",
-    text: "Transforme madeira acessível em peças bonitas, úteis e cheias de personalidade.",
+    title: "+800 projetos fáceis para você fazer ainda hoje",
+    text: "Tenha centenas de ideias prontas para escolher e começar o seu próximo projeto.",
   },
   {
     icon: PencilRuler,
@@ -39,8 +40,8 @@ const benefits = [
   },
   {
     icon: ShieldCheck,
-    title: "Estrutura confiável",
-    text: "Orientações para preparar, tratar e montar cada peça com mais segurança.",
+    title: "Comece com o que você já tem",
+    text: "Com apenas 1 martelo, pregos e os paletes de madeira que você tiver, você já pode começar.",
   },
 ];
 
@@ -78,7 +79,7 @@ export default function ProjetosEmPaletesPage() {
               id="titulo-principal"
               className="max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-[-0.055em] sm:text-6xl lg:text-7xl"
             >
-              +100 projetos e videos prontos com paletes pra fazer
+              +800 projetos e videos prontos com paletes pra fazer
               <GradientText> Ainda hoje.</GradientText>
             </h1>
 
@@ -98,7 +99,7 @@ export default function ProjetosEmPaletesPage() {
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="#projetos"
+                href="#oferta"
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-extrabold text-white shadow-[0_14px_34px_rgba(239,68,68,0.22)] transition hover:-translate-y-1"
                 style={{ backgroundImage: "var(--headline-gradient)" }}
               >
@@ -164,7 +165,7 @@ export default function ProjetosEmPaletesPage() {
               className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
             >
               Tudo o que você vai receber{" "}
-              <GradientText>Ainda hoje .</GradientText>
+              <GradientText>Ainda hoje.</GradientText>
             </h2>
           </div>
 
@@ -185,7 +186,153 @@ export default function ProjetosEmPaletesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO 04 — COMO FUNCIONA */}
+      {/* SEÇÃO 04 — PROJETOS ESPECIAIS */}
+      <section
+        id="projetos-especiais"
+        aria-labelledby="titulo-projetos-especiais"
+        className="relative overflow-hidden bg-stone-950 py-24 text-white sm:py-32"
+      >
+        <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-red-500/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-40 top-0 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-red-300">
+              Bônus por tempo limitado
+            </p>
+            <h2
+              id="titulo-projetos-especiais"
+              className="mt-4 text-3xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl"
+            >
+              Se você adquirir nos próximos{" "}
+              <GradientText>10 minutos</GradientText>, vai levar totalmente{" "}
+              <GradientText>GRÁTIS:</GradientText>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-base font-medium leading-8 text-stone-400 sm:text-lg">
+              Todos estes projetos especiais também serão seus.
+            </p>
+          </div>
+
+          <SpecialProjectsCarousel />
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="#oferta"
+              className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-8 text-sm font-extrabold text-white shadow-[0_14px_34px_rgba(239,68,68,0.28)] transition hover:-translate-y-1"
+              style={{ backgroundImage: "var(--headline-gradient)" }}
+            >
+              QUERO OS ESPECIAIS <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 05 — OFERTA */}
+      <section
+        id="oferta"
+        aria-labelledby="titulo-oferta"
+        className="scroll-mt-8 border-b border-stone-100 bg-[#fcfbf9] py-24 sm:py-32"
+      >
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <p
+              className="text-xs font-extrabold uppercase tracking-[0.2em]"
+              style={{ color: "var(--accent)" }}
+            >
+              Escolha o seu acesso
+            </p>
+            <h2
+              id="titulo-oferta"
+              className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
+            >
+              Comece hoje com o plano que mais combina com você.
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
+              Pagamento único e acesso imediato a uma coleção completa de ideias
+              para tirar seus projetos do papel.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-2 lg:items-start">
+            <article className="relative overflow-hidden rounded-[32px] border-2 border-red-500 bg-white p-7 shadow-[0_24px_70px_rgba(239,68,68,0.16)] sm:p-9">
+              <div
+                className="absolute right-0 top-0 rounded-bl-2xl px-5 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-white"
+                style={{ backgroundImage: "var(--headline-gradient)" }}
+              >
+                Mais completo
+              </div>
+
+              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-red-500">
+                Plano Completo
+              </p>
+              <div className="mt-5 flex items-end gap-2">
+                <span className="pb-2 text-lg font-extrabold text-stone-500">R$</span>
+                <span className="text-6xl font-extrabold tracking-[-0.06em]">19,90</span>
+                <span className="pb-2 text-sm font-bold text-stone-400">pagamento único</span>
+              </div>
+
+              <div className="my-8 h-px bg-stone-100" />
+
+              <ul className="space-y-4">
+                {[
+                  "+2.000 arquivos de ideias",
+                  "+1.500 projetos para construir",
+                  "+350 projetos industriais com paletes e solda",
+                  "Dezenas de vídeos com passo a passo",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6 text-stone-700">
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-red-50 text-red-500">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="https://pay.sereja.com.br/checkout/iqL964O8"
+                className="mt-9 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-extrabold text-white shadow-[0_14px_34px_rgba(239,68,68,0.24)] transition hover:-translate-y-1"
+                style={{ backgroundImage: "var(--headline-gradient)" }}
+              >
+                QUERO O COMPLETO <ArrowRight className="h-4 w-4" />
+              </a>
+            </article>
+
+            <article className="rounded-[32px] border border-stone-200 bg-white p-7 sm:p-9 lg:mt-8">
+              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-stone-500">
+                Plano Essencial
+              </p>
+              <div className="mt-5 flex items-end gap-2">
+                <span className="pb-2 text-lg font-extrabold text-stone-500">R$</span>
+                <span className="text-6xl font-extrabold tracking-[-0.06em]">10</span>
+                <span className="pb-2 text-sm font-bold text-stone-400">pagamento único</span>
+              </div>
+
+              <div className="my-8 h-px bg-stone-100" />
+
+              <ul className="space-y-4">
+                {["+800 projetos", "Ideias e referências para se inspirar", "Acesso imediato ao conteúdo"].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6 text-stone-700">
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-stone-100 text-stone-700">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="https://pay.sereja.com.br/checkout/iqL964O8?p=promo10"
+                className="mt-9 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-stone-950 px-7 text-sm font-extrabold text-white transition hover:-translate-y-1 hover:bg-stone-800"
+              >
+                QUERO ESSE <ArrowRight className="h-4 w-4" />
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 06 — COMO FUNCIONA */}
       <section
         id="como-funciona"
         aria-labelledby="titulo-como-funciona"
@@ -227,7 +374,7 @@ export default function ProjetosEmPaletesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO 05 — CHAMADA FINAL */}
+      {/* SEÇÃO 07 — CHAMADA FINAL */}
       <section
         id="chamada-final"
         aria-labelledby="titulo-chamada-final"
@@ -256,6 +403,71 @@ export default function ProjetosEmPaletesPage() {
             >
               Começar agora <ArrowRight className="h-4 w-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 08 — PERGUNTAS FREQUENTES */}
+      <section
+        id="perguntas-frequentes"
+        aria-labelledby="titulo-perguntas-frequentes"
+        className="border-b border-stone-100 bg-[#fcfbf9] py-20 sm:py-28"
+      >
+        <div className="mx-auto max-w-4xl px-5 sm:px-8">
+          <div className="text-center">
+            <p
+              className="text-xs font-extrabold uppercase tracking-[0.2em]"
+              style={{ color: "var(--accent)" }}
+            >
+              Tire suas dúvidas
+            </p>
+            <h2
+              id="titulo-perguntas-frequentes"
+              className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
+            >
+              Perguntas frequentes
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
+              Veja as respostas para as principais dúvidas antes de garantir o seu acesso.
+            </p>
+          </div>
+
+          <div className="mt-12 space-y-4">
+            {[
+              {
+                question: "O acesso é vitalício?",
+                answer:
+                  "Sim. Você faz um único pagamento e recebe acesso vitalício ao conteúdo adquirido, sem mensalidades ou cobranças recorrentes.",
+              },
+              {
+                question: "Como eu recebo o acesso?",
+                answer:
+                  "Assim que o pagamento for aprovado, o acesso é enviado imediatamente para o e-mail informado no momento da compra.",
+              },
+              {
+                question: "Tenho garantia?",
+                answer:
+                  "Sim. Você tem 7 dias de garantia para conhecer o conteúdo. Se não ficar satisfeito, poderá solicitar o reembolso dentro desse prazo.",
+              },
+            ].map(({ question, answer }) => (
+              <details
+                key={question}
+                className="group rounded-[24px] border border-stone-200 bg-white px-6 py-1 transition open:border-red-200 open:shadow-[0_14px_40px_rgba(28,25,23,0.06)] sm:px-8"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-6 text-left text-base font-extrabold marker:content-none sm:text-lg">
+                  {question}
+                  <span
+                    aria-hidden="true"
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-red-50 text-xl text-red-500 transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-3xl pb-6 pr-12 text-sm font-medium leading-7 text-stone-500 sm:text-base">
+                  {answer}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
