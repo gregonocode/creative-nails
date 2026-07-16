@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { Montserrat } from "next/font/google";
 import {
   ArrowRight,
@@ -62,6 +63,21 @@ export default function ProjetosEmPaletesPage() {
       style={theme}
       className={montserrat.variable + " min-h-screen overflow-hidden bg-white font-[family-name:var(--font-montserrat)] text-stone-950 selection:bg-red-100 selection:text-red-700"}
     >
+      <Script id="meta-pixel-projetos-em-paletes" strategy="afterInteractive">
+        {`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1584821460029460');
+          fbq('track', 'PageView');
+        `}
+      </Script>
+
       {/* SEÇÃO 01 — HERO */}
       <section
         id="inicio"
