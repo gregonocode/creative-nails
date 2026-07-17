@@ -10,6 +10,7 @@ import {
   PencilRuler,
   Recycle,
   ShieldCheck,
+  Star,
 } from "lucide-react";
 import ProjectsCarousel from "./ProjectsCarousel";
 import SpecialProjectsCarousel from "./SpecialProjectsCarousel";
@@ -43,6 +44,24 @@ const benefits = [
     icon: ShieldCheck,
     title: "Comece com o que você já tem",
     text: "Com apenas 1 martelo, pregos e os paletes de madeira que você tiver, você já pode começar.",
+  },
+];
+
+const testimonials = [
+  {
+    text: "Eu nunca tinha feito um móvel antes e consegui montar meu primeiro projeto seguindo o passo a passo. Ficou lindo e já estou escolhendo o próximo!",
+    name: "Ana Flavia",
+    rating: 5,
+  },
+  {
+    text: "A variedade de ideias é enorme e as explicações facilitam muito. Consegui aproveitar os paletes que estavam parados e transformar tudo em móveis úteis.",
+    name: "Carlos Silva",
+    rating: 4,
+  },
+  {
+    text: "O acesso chegou rápido e o conteúdo é muito completo. Economizei bastante fazendo minhas próprias peças e ainda recebi vários elogios.",
+    name: "Mariana Costa",
+    rating: 5,
   },
 ];
 
@@ -376,7 +395,63 @@ export default function ProjetosEmPaletesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO 06 — COMO FUNCIONA */}
+      {/* SEÇÃO 06 — DEPOIMENTOS */}
+      <section
+        id="depoimentos"
+        aria-labelledby="titulo-depoimentos"
+        className="border-b border-stone-100 bg-white py-24 sm:py-32"
+      >
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <p
+              className="text-xs font-extrabold uppercase tracking-[0.2em]"
+              style={{ color: "var(--accent)" }}
+            >
+              Histórias de quem já começou
+            </p>
+            <h2
+              id="titulo-depoimentos"
+              className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
+            >
+              Quem coloca a mão na massa, <GradientText>recomenda.</GradientText>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
+              Veja como os projetos estão ajudando pessoas a transformar paletes em
+              peças bonitas, úteis e cheias de personalidade.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {testimonials.map(({ text, name, rating }, index) => (
+              <article
+                key={index}
+                className="flex h-full flex-col rounded-[28px] border border-stone-200 bg-[#fcfbf9] p-7 transition hover:-translate-y-1 hover:border-red-200 hover:shadow-[0_18px_45px_rgba(28,25,23,0.08)] sm:p-8"
+              >
+                <div className="flex gap-1 text-amber-400" aria-label={`${rating} de 5 estrelas`}>
+                  {Array.from({ length: rating }).map((_, starIndex) => (
+                    <Star
+                      key={starIndex}
+                      className="h-4 w-4 fill-current"
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+                <blockquote className="mt-6 flex-1 text-sm font-medium leading-7 text-stone-600 sm:text-base">
+                  “{text}”
+                </blockquote>
+                <div className="mt-7 border-t border-stone-200 pt-5">
+                  <p className="text-sm font-extrabold text-stone-950">{name}</p>
+                  <p className="mt-1 text-xs font-semibold text-stone-400">
+                    Aluno(a) Projetos em Paletes
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SEÇÃO 07 — COMO FUNCIONA */}
       <section
         id="como-funciona"
         aria-labelledby="titulo-como-funciona"
@@ -418,7 +493,7 @@ export default function ProjetosEmPaletesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO 07 — CHAMADA FINAL */}
+      {/* SEÇÃO 08 — CHAMADA FINAL */}
       <section
         id="chamada-final"
         aria-labelledby="titulo-chamada-final"
@@ -451,7 +526,7 @@ export default function ProjetosEmPaletesPage() {
         </div>
       </section>
 
-      {/* SEÇÃO 08 — PERGUNTAS FREQUENTES */}
+      {/* SEÇÃO 09 — PERGUNTAS FREQUENTES */}
       <section
         id="perguntas-frequentes"
         aria-labelledby="titulo-perguntas-frequentes"
