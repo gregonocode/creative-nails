@@ -32,35 +32,35 @@ const theme = {
 const benefits = [
   {
     icon: Recycle,
-    title: "+800 projetos fáceis para você fazer ainda hoje",
-    text: "Tenha centenas de ideias prontas para escolher e começar o seu próximo projeto.",
+    title: "+800 ideias prontas na palma da mão",
+    text: "Não falta ideia! Tem projeto pra sala, quarto, jardim, varanda... É só olhar, escolher e fazer.",
   },
   {
     icon: PencilRuler,
-    title: "Projetos bem explicados",
-    text: "Medidas, lista de materiais e uma sequência clara para facilitar a montagem.",
+    title: "Tudo mastigadinho pra você",
+    text: "Entregamos as medidas exatas, o que comprar e o passo a passo. Impossível você errar a montagem.",
   },
   {
     icon: ShieldCheck,
-    title: "Comece com o que você já tem",
-    text: "Com apenas 1 martelo, pregos e os paletes de madeira que você tiver, você já pode começar.",
+    title: "Use o que tem em casa",
+    text: "Você acha palete até de graça na rua. Com um martelo, pregos e força de vontade, você já faz milagre.",
   },
 ];
 
 const testimonials = [
   {
-    text: "Eu nunca tinha feito um móvel antes e consegui montar meu primeiro projeto seguindo o passo a passo. Ficou lindo e já estou escolhendo o próximo!",
-    name: "Ana Flavia",
+    text: "Eu nunca tinha batido um prego na vida! Peguei uns paletes num mercadinho aqui perto e montei um painel pra TV lindo. Minha esposa adorou e economizamos uns 500 reais fácil!",
+    name: "João Carlos",
     rating: 5,
   },
   {
-    text: "A variedade de ideias é enorme e as explicações facilitam muito. Consegui aproveitar os paletes que estavam parados e transformar tudo em móveis úteis.",
-    name: "Carlos Silva",
-    rating: 4,
+    text: "Paguei os 19,90 achando que era bobeira, mas é bom demais! Os vídeos salvam muito a vida da gente. Já fiz uma mesinha de centro e agora tô indo pro sofá do quintal.",
+    name: "Marcos Silva",
+    rating: 5,
   },
   {
-    text: "O acesso chegou rápido e o conteúdo é muito completo. Economizei bastante fazendo minhas próprias peças e ainda recebi vários elogios.",
-    name: "Mariana Costa",
+    text: "Sou dona de casa e queria dar um trato na varanda sem gastar muito. O material é super fácil de entender, chega no e-mail na hora. O pessoal aqui em casa nem acreditou que fui eu que fiz.",
+    name: "Ana Flávia",
     rating: 5,
   },
 ];
@@ -108,28 +108,25 @@ export default function ProjetosEmPaletesPage() {
 
         <div className="relative mx-auto grid max-w-7xl gap-14 px-5 pb-20 pt-[35px] sm:px-8 sm:pb-24 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
-           
-
             <h1
               id="titulo-principal"
               className="max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-[-0.055em] sm:text-6xl lg:text-7xl"
             >
-              +800 projetos e videos prontos com paletes pra fazer
-              <GradientText> Ainda hoje.</GradientText>
+              Faça móveis lindos de paletes e economize{" "}
+              <GradientText>uma nota!</GradientText>
             </h1>
 
             <div className="relative mx-auto mt-8 w-full max-w-xl lg:max-w-none">
-            <Image
-              src={paletteMockup}
-              alt="Prévia dos projetos em paletes"
-              className="h-auto w-full object-contain"
-              priority
-            />
-          </div>
+              <Image
+                src={paletteMockup}
+                alt="Prévia dos projetos em paletes"
+                className="h-auto w-full object-contain"
+                priority
+              />
+            </div>
 
             <p className="mt-7 max-w-xl text-base font-medium leading-8 text-stone-600 sm:text-lg">
-              com os projetos em mãos tudo fica <b>muito fácil</b>,
-              e você pode começar a criar móveis incríveis hoje mesmo.
+              Chega de pagar caro na loja! Com nossos projetos mastigadinhos, você faz tudo em casa brincando, <b>mesmo sem nunca ter pego num martelo.</b>
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -138,13 +135,12 @@ export default function ProjetosEmPaletesPage() {
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-extrabold text-white shadow-[0_14px_34px_rgba(239,68,68,0.22)] transition hover:-translate-y-1"
                 style={{ backgroundImage: "var(--headline-gradient)" }}
               >
-                QUERO RECEBER AGORA! <ArrowRight className="h-4 w-4" />
+                QUERO MEU ACESSO AGORA! <ArrowRight className="h-4 w-4" />
               </Link>
-             
             </div>
 
             <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs font-semibold text-stone-500 sm:text-sm">
-              {["Passo a passo", "Medidas detalhadas", "Baixo investimento"].map((item) => (
+              {["Tudo passo a passo", "Medidas certinhas", "Gaste quase nada"].map((item) => (
                 <span key={item} className="flex items-center gap-2">
                   <span className="grid h-5 w-5 place-items-center rounded-full bg-stone-950 text-white">
                     <Check className="h-3 w-3" />
@@ -154,8 +150,6 @@ export default function ProjetosEmPaletesPage() {
               ))}
             </div>
           </div>
-
-          
         </div>
       </section>
 
@@ -168,17 +162,18 @@ export default function ProjetosEmPaletesPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em]" style={{ color: "var(--accent)" }}>Inspire-se</p>
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em]" style={{ color: "var(--accent)" }}>
+                Deixe a casa linda
+              </p>
               <h2
                 id="titulo-projetos"
                 className="mt-4 max-w-2xl text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
               >
-                Projetos para transformar cada espaço.
+                Ideias para transformar qualquer canto.
               </h2>
             </div>
             <p className="max-w-md text-sm font-medium leading-7 text-stone-500 sm:text-base">
-              Comece com uma ideia simples e avance no seu ritmo. Cada projeto foi
-              pensado para unir estética, economia e funcionalidade.
+              Comece com um banquinho e logo você tá fazendo um sofá inteiro. Nossos projetos unem o bonito, o barato e o fácil de fazer.
             </p>
           </div>
 
@@ -194,13 +189,14 @@ export default function ProjetosEmPaletesPage() {
       >
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em]" style={{ color: "var(--accent)" }}>Simples de verdade</p>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em]" style={{ color: "var(--accent)" }}>
+              Fácil demais
+            </p>
             <h2
               id="titulo-vantagens"
               className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
             >
-              Tudo o que você vai receber{" "}
-              <GradientText>Ainda hoje.</GradientText>
+              Veja por que todo mundo tá <GradientText>fazendo em casa.</GradientText>
             </h2>
           </div>
 
@@ -235,14 +231,13 @@ export default function ProjetosEmPaletesPage() {
                 className="text-xs font-extrabold uppercase tracking-[0.2em]"
                 style={{ color: "var(--accent)" }}
               >
-                Aperte o play e comece
+                Aperte o play e faça junto
               </p>
               <h3 className="mt-4 max-w-xl text-2xl font-extrabold tracking-[-0.04em] sm:text-4xl">
-                Vídeos passo a passo, direto ao ponto e sem enrolação.
+                Aulas em vídeo direto ao ponto, sem enrolação.
               </h3>
               <p className="mt-5 max-w-xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
-                Acompanhe cada etapa de forma simples e visual para começar seu
-                projeto em poucos minutos, mesmo que você ainda não tenha experiência.
+                Você não vai ficar lendo manual chato. É só olhar no celular, pausar e fazer igualzinho. Mostramos cada detalhe pra qualquer iniciante conseguir montar de primeira.
               </p>
             </div>
           </article>
@@ -261,18 +256,16 @@ export default function ProjetosEmPaletesPage() {
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-red-300">
-              Bônus por tempo limitado
+              Presente de Pai pra Filho
             </p>
             <h2
               id="titulo-projetos-especiais"
               className="mt-4 text-3xl font-extrabold leading-tight tracking-[-0.045em] sm:text-5xl"
             >
-              Se você adquirir nos próximos{" "}
-              <GradientText>10 minutos</GradientText>, vai levar totalmente{" "}
-              <GradientText>GRÁTIS:</GradientText>
+              Comprando nos próximos <GradientText>10 minutos</GradientText>, você leva isso tudo totalmente <GradientText>DE GRAÇA:</GradientText>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-base font-medium leading-8 text-stone-400 sm:text-lg">
-              Todos estes projetos especiais também serão seus.
+              Um pacotão de projetos super especiais que sozinhos já valem mais que o dobro do preço!
             </p>
           </div>
 
@@ -284,7 +277,7 @@ export default function ProjetosEmPaletesPage() {
               className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-8 text-sm font-extrabold text-white shadow-[0_14px_34px_rgba(239,68,68,0.28)] transition hover:-translate-y-1"
               style={{ backgroundImage: "var(--headline-gradient)" }}
             >
-              QUERO OS ESPECIAIS <ArrowRight className="h-4 w-4" />
+              QUERO OS BRINDES AGORA <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -302,17 +295,16 @@ export default function ProjetosEmPaletesPage() {
               className="text-xs font-extrabold uppercase tracking-[0.2em]"
               style={{ color: "var(--accent)" }}
             >
-              Escolha o seu acesso
+              A hora é agora!
             </p>
             <h2
               id="titulo-oferta"
               className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
             >
-              Comece hoje com o plano que mais combina com você.
+              Escolha o pacote que cabe no seu bolso.
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
-              Pagamento único e acesso imediato a uma coleção completa de ideias
-              para tirar seus projetos do papel.
+              Sem mensalidades. Você paga uma vez só e o acesso chega no seu e-mail na hora!
             </p>
           </div>
 
@@ -322,26 +314,27 @@ export default function ProjetosEmPaletesPage() {
                 className="absolute right-0 top-0 rounded-bl-2xl px-5 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-white"
                 style={{ backgroundImage: "var(--headline-gradient)" }}
               >
-                Mais completo
+                O MAIS VENDIDO 🔥
               </div>
 
               <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-red-500">
-                Plano Completo
+                O Pacotão Completo
               </p>
               <div className="mt-5 flex items-end gap-2">
                 <span className="pb-2 text-lg font-extrabold text-stone-500">R$</span>
                 <span className="text-6xl font-extrabold tracking-[-0.06em]">19,90</span>
-                <span className="pb-2 text-sm font-bold text-stone-400">pagamento único</span>
+                <span className="pb-2 text-sm font-bold text-stone-400">só!</span>
               </div>
 
               <div className="my-8 h-px bg-stone-100" />
 
               <ul className="space-y-4">
                 {[
-                  "+2.000 arquivos de ideias",
-                  "+1.500 projetos para construir",
-                  "+350 projetos industriais com paletes e solda",
-                  "Dezenas de vídeos com passo a passo",
+                  "AULAS EM VÍDEO mostrando como montar",
+                  "+2.000 ideias pra você se inspirar",
+                  "+1.500 projetos detalhados pra construir",
+                  "+350 projetos misturando palete com ferro",
+                  "Todos os bônus especiais inclusos",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6 text-stone-700">
                     <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-red-50 text-red-500">
@@ -357,24 +350,29 @@ export default function ProjetosEmPaletesPage() {
                 className="mt-9 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-extrabold text-white shadow-[0_14px_34px_rgba(239,68,68,0.24)] transition hover:-translate-y-1"
                 style={{ backgroundImage: "var(--headline-gradient)" }}
               >
-                QUERO O COMPLETO <ArrowRight className="h-4 w-4" />
+                QUERO O PACOTÃO COM VÍDEOS <ArrowRight className="h-4 w-4" />
               </a>
             </article>
 
             <article className="rounded-[32px] border border-stone-200 bg-white p-7 sm:p-9 lg:mt-8">
               <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-stone-500">
-                Plano Essencial
+                Plano Quebra-Galho
               </p>
               <div className="mt-5 flex items-end gap-2">
                 <span className="pb-2 text-lg font-extrabold text-stone-500">R$</span>
                 <span className="text-6xl font-extrabold tracking-[-0.06em]">10</span>
-                <span className="pb-2 text-sm font-bold text-stone-400">pagamento único</span>
+                <span className="pb-2 text-sm font-bold text-stone-400">só!</span>
               </div>
 
               <div className="my-8 h-px bg-stone-100" />
 
               <ul className="space-y-4">
-                {["+800 projetos", "Ideias e referências para se inspirar", "Acesso imediato ao conteúdo"].map((item) => (
+                {[
+                  "+800 projetos básicos no PDF",
+                  "Fotos de ideias pra você se inspirar",
+                  "Acesso liberado na mesma hora",
+                  "Não inclui vídeos (apenas leitura)",
+                ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6 text-stone-700">
                     <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-stone-100 text-stone-700">
                       <Check className="h-3.5 w-3.5" strokeWidth={3} />
@@ -388,7 +386,7 @@ export default function ProjetosEmPaletesPage() {
                 href="https://pay.sereja.com.br/checkout/iqL964O8?p=promo10"
                 className="mt-9 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-stone-950 px-7 text-sm font-extrabold text-white transition hover:-translate-y-1 hover:bg-stone-800"
               >
-                QUERO ESSE <ArrowRight className="h-4 w-4" />
+                QUERO SÓ O BÁSICO <ArrowRight className="h-4 w-4" />
               </a>
             </article>
           </div>
@@ -407,17 +405,16 @@ export default function ProjetosEmPaletesPage() {
               className="text-xs font-extrabold uppercase tracking-[0.2em]"
               style={{ color: "var(--accent)" }}
             >
-              Histórias de quem já começou
+              Olha o que a galera tá falando
             </p>
             <h2
               id="titulo-depoimentos"
               className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
             >
-              Quem coloca a mão na massa, <GradientText>recomenda.</GradientText>
+              Quem bota a mão na massa, <GradientText>não se arrepende.</GradientText>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
-              Veja como os projetos estão ajudando pessoas a transformar paletes em
-              peças bonitas, úteis e cheias de personalidade.
+              Gente como a gente, transformando ripas de madeira em móveis incríveis pro final de semana.
             </p>
           </div>
 
@@ -442,7 +439,7 @@ export default function ProjetosEmPaletesPage() {
                 <div className="mt-7 border-t border-stone-200 pt-5">
                   <p className="text-sm font-extrabold text-stone-950">{name}</p>
                   <p className="mt-1 text-xs font-semibold text-stone-400">
-                     Projetos em Paletes
+                    Cliente Projetos em Paletes
                   </p>
                 </div>
               </article>
@@ -459,24 +456,23 @@ export default function ProjetosEmPaletesPage() {
       >
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-red-300">Do zero ao projeto pronto</p>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-red-300">É pá-pum</p>
             <h2
               id="titulo-como-funciona"
               className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
             >
-              Seu próximo móvel em três etapas.
+              Seu móvel novo em 3 passos bem simples.
             </h2>
             <p className="mt-6 text-base font-medium leading-8 text-stone-400">
-              Uma jornada clara para você construir com confiança, sem complicação
-              e aproveitando melhor cada material.
+              Não tem segredo nenhum. É só seguir a nossa "receita de bolo" e em poucas horas você tem uma peça novinha em folha.
             </p>
           </div>
 
           <div className="grid gap-4">
             {[
-              ["01", "Escolha o projeto", "Encontre a peça que combina com seu espaço e seu nível de experiência."],
-              ["02", "Separe os materiais", "Confira medidas, ferramentas e tudo o que será necessário antes de começar."],
-              ["03", "Construa no seu ritmo", "Siga as etapas, faça os acabamentos e deixe o projeto com a sua cara."],
+              ["01", "Escolhe o que vai fazer", "Abre no celular, dá uma olhada na lista enorme e acha o móvel que você tá querendo pra casa."],
+              ["02", "Separa as coisas", "Pega os paletes, o martelo e os pregos. A lista do que você vai usar já vai estar toda mastigadinha."],
+              ["03", "Mão na massa!", "Segue o passo a passo com a gente. Num piscar de olhos a madeira ganha forma e o móvel tá pronto pra usar."],
             ].map(([number, title, text]) => (
               <article
                 key={number}
@@ -508,19 +504,18 @@ export default function ProjetosEmPaletesPage() {
               id="titulo-chamada-final"
               className="mt-6 text-3xl font-extrabold tracking-[-0.05em] sm:text-5xl"
             >
-              Pronto para criar algo{" "}
-              <GradientText>com as próprias mãos?</GradientText>
+              Bora colocar a {" "}
+              <GradientText>mão na massa?</GradientText>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-sm font-medium leading-7 text-stone-600 sm:text-base">
-              Explore os projetos, escolha o seu favorito e transforme um simples
-              palete em uma peça única para sua casa.
+              Chega de ficar só babando nas fotos de internet e pagando o olho da cara em lojas chiques. Garanta seus projetos e crie seus próprios móveis gastando quase nada!
             </p>
             <Link
               href="#oferta"
               className="mt-8 inline-flex min-h-14 items-center justify-center gap-2 rounded-full px-8 text-sm font-extrabold text-white shadow-lg transition hover:-translate-y-1"
               style={{ backgroundImage: "var(--headline-gradient)" }}
             >
-              Começar agora <ArrowRight className="h-4 w-4" />
+              BORA COMEÇAR! <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -538,35 +533,35 @@ export default function ProjetosEmPaletesPage() {
               className="text-xs font-extrabold uppercase tracking-[0.2em]"
               style={{ color: "var(--accent)" }}
             >
-              Tire suas dúvidas
+              Ficou alguma dúvida?
             </p>
             <h2
               id="titulo-perguntas-frequentes"
               className="mt-4 text-3xl font-extrabold tracking-[-0.045em] sm:text-5xl"
             >
-              Perguntas frequentes
+              Perguntas da galera
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-stone-500 sm:text-base">
-              Veja as respostas para as principais dúvidas antes de garantir o seu acesso.
+              Veja as respostas pra tirar o grilo da cabeça e garantir logo o seu acesso.
             </p>
           </div>
 
           <div className="mt-12 space-y-4">
             {[
               {
-                question: "O acesso é vitalício?",
+                question: "Vou ter que ficar pagando todo mês?",
                 answer:
-                  "Sim. Você faz um único pagamento e recebe acesso vitalício ao conteúdo adquirido, sem mensalidades ou cobranças recorrentes.",
+                  "Não! Você paga apenas uma vez. Pagou os R$19,90 (ou R$10), o acesso é seu pra sempre. Não tem pegadinha nem cobrança a mais depois.",
               },
               {
-                question: "Como eu recebo o acesso?",
+                question: "Como o conteúdo chega pra mim?",
                 answer:
-                  "Assim que o pagamento for aprovado, o acesso é enviado imediatamente para o e-mail informado no momento da compra.",
+                  "Assim que o pagamento for aprovado (via PIX ou cartão aprova na hora), a gente manda um e-mail com a senha pra você entrar no nosso portal pelo seu próprio celular ou computador.",
               },
               {
-                question: "Tenho garantia?",
+                question: "E se eu não gostar?",
                 answer:
-                  "Sim. Você tem 7 dias de garantia para conhecer o conteúdo. Se não ficar satisfeito, poderá solicitar o reembolso dentro desse prazo.",
+                  "Você tem 7 dias de garantia! É só testar. Se você achar que os projetos não servem pra você, a gente devolve seu dinheiro sem fazer pergunta chata.",
               },
             ].map(({ question, answer }) => (
               <details
@@ -594,7 +589,7 @@ export default function ProjetosEmPaletesPage() {
       <footer className="border-t border-stone-100 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-center text-xs font-semibold text-stone-400 sm:px-8 md:flex-row md:text-left">
           <p>© {new Date().getFullYear()} Projetos em Paletes.</p>
-          <p>Ideias simples. Resultados que transformam.</p>
+          <p>Móveis fáceis. Você mesmo faz e economiza uma nota.</p>
         </div>
       </footer>
     </main>
