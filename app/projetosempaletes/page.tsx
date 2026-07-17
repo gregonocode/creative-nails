@@ -442,7 +442,7 @@ export default function ProjetosEmPaletesPage() {
                 <div className="mt-7 border-t border-stone-200 pt-5">
                   <p className="text-sm font-extrabold text-stone-950">{name}</p>
                   <p className="mt-1 text-xs font-semibold text-stone-400">
-                    Aluno(a) Projetos em Paletes
+                     Projetos em Paletes
                   </p>
                 </div>
               </article>
