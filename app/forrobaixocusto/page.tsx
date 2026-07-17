@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import "../components/quiz/css/shine.css";
 import BeforeAfterSlider from "./_components/BeforeAfterSlider";
 import Image from "next/image";
@@ -226,6 +227,21 @@ function handleGoToUpsell1490() {
 
   return (
     <main className="min-h-screen bg-[#f8fffd] text-slate-900 selection:bg-[#1ad7a6] selection:text-white">
+      <Script id="meta-pixel-forro-baixo-custo" strategy="afterInteractive">
+        {`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1584821460029460');
+          fbq('track', 'PageView');
+        `}
+      </Script>
+
       {/* Barra de Aviso Topo */}
       <div className="w-full bg-[#1ad7a6]">
         <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 text-center text-[11px] font-black uppercase tracking-[0.18em] text-white sm:text-xs">
