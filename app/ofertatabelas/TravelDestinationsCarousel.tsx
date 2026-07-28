@@ -1,14 +1,15 @@
-import { ImageIcon, MapPin } from "lucide-react";
+import Image from "next/image";
+import { MapPin } from "lucide-react";
 
 const destinations = [
-  { name: "Fernando de Noronha", location: "Pernambuco, Brasil" },
-  { name: "Lençóis Maranhenses", location: "Maranhão, Brasil" },
-  { name: "Santiago e Atacama", location: "Chile" },
-  { name: "Buenos Aires", location: "Argentina" },
-  { name: "Gramado", location: "Rio Grande do Sul, Brasil" },
-  { name: "Porto de Galinhas", location: "Pernambuco, Brasil" },
-  { name: "Rio de Janeiro", location: "Rio de Janeiro, Brasil" },
-  { name: "Jalapão", location: "Tocantins, Brasil" },
+  { name: "Fernando de Noronha", location: "Pernambuco, Brasil", image: "/viagem/fernando_noronha.webp" },
+  { name: "Lençóis Maranhenses", location: "Maranhão, Brasil", image: "/viagem/lencoes_maranhences.webp" },
+  { name: "Santiago e Atacama", location: "Chile", image: "/viagem/chile_santiago.webp" },
+  { name: "Buenos Aires", location: "Argentina", image: "/viagem/boenos_aires.webp" },
+  { name: "Gramado", location: "Rio Grande do Sul, Brasil", image: "/viagem/gramado.webp" },
+  { name: "Porto de Galinhas", location: "Pernambuco, Brasil", image: "/viagem/porto_de_galinhas.webp" },
+  { name: "Rio de Janeiro", location: "Rio de Janeiro, Brasil", image: "/viagem/rio_janeiro.webp" },
+  { name: "Jalapão", location: "Tocantins, Brasil", image: "/viagem/jalapão.webp" },
 ];
 
 export default function TravelDestinationsCarousel() {
@@ -26,12 +27,14 @@ export default function TravelDestinationsCarousel() {
             aria-hidden={index >= destinations.length}
             className="group relative aspect-[4/5] w-[180px] shrink-0 overflow-hidden rounded-[24px] border border-emerald-100 bg-[#eefaf4] shadow-[0_18px_50px_rgba(8,80,55,.10)] sm:w-[220px] md:w-[250px]"
           >
-            <div className="absolute inset-0 flex flex-col items-center justify-center pb-20 text-emerald-300">
-              <span className="grid h-14 w-14 place-items-center rounded-2xl border border-emerald-100 bg-white/80">
-                <ImageIcon className="h-6 w-6" />
-              </span>
-              <span className="mt-3 text-[10px] font-black uppercase tracking-[.16em] text-emerald-500/60">Imagem em breve</span>
-            </div>
+            <Image
+              src={destination.image}
+              alt={destination.name}
+              fill
+              sizes="(max-width: 639px) 180px, (max-width: 767px) 220px, 250px"
+              className="object-cover transition duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
             <div className="absolute inset-x-3 bottom-3 rounded-[18px] border border-white bg-white/95 p-4 shadow-lg backdrop-blur-sm">
               <p className="text-sm font-black leading-5 tracking-[-.02em] text-slate-900 sm:text-base">{destination.name}</p>

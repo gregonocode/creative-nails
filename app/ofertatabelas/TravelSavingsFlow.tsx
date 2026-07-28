@@ -10,6 +10,8 @@ import {
   LoaderCircle,
   Plane,
   Route,
+  X,
+  Zap,
 } from "lucide-react";
 import RecipeIdeasCarousel from "./RecipeIdeasCarousel";
 import TravelDestinationsCarousel from "./TravelDestinationsCarousel";
@@ -43,6 +45,7 @@ export default function TravelSavingsFlow() {
   const [goal, setGoal] = useState<number | null>(null);
   const [nameError, setNameError] = useState(false);
   const [travelPhraseIndex, setTravelPhraseIndex] = useState(0);
+  const [showFlashOffer, setShowFlashOffer] = useState(false);
 
   const firstName = useMemo(() => name.trim().split(/\s+/)[0] || "Viajante", [name]);
   const currentStep = step === "name" ? 1 : step === "goal" ? 2 : 3;
@@ -67,6 +70,22 @@ export default function TravelSavingsFlow() {
 
     return () => window.clearInterval(interval);
   }, [step]);
+
+  useEffect(() => {
+    if (!showFlashOffer) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setShowFlashOffer(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [showFlashOffer]);
 
   function submitName(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -205,7 +224,7 @@ export default function TravelSavingsFlow() {
               Um método vendido por até <span className="text-[#181818] line-through">R$ 900</span>
             </p>
             <p className="mt-2 text-3xl font-black uppercase tracking-[-.03em] text-[#181818] sm:text-4xl">
-              Hoje você recebe de bônus
+              Hoje você recebe de GRAÇA!
             </p>
 
             <a
@@ -313,12 +332,13 @@ export default function TravelSavingsFlow() {
                   ))}
                 </ul>
 
-                <a
-                  href="https://pay.sereja.com.br/checkout/_CUBPHPI?p=promo12"
+                <button
+                  type="button"
+                  onClick={() => setShowFlashOffer(true)}
                   className="mt-9 inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#181818] px-7 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-black"
                 >
                   QUERO SÓ O BÁSICO <ArrowRight className="h-4 w-4" />
-                </a>
+                </button>
               </article>
             </div>
           </div>
@@ -498,6 +518,66 @@ export default function TravelSavingsFlow() {
             <p>Uma meta de cada vez, cada vez mais perto do seu destino.</p>
           </div>
         </footer>
+
+        {showFlashOffer && (
+          <div
+            className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/70 p-4 backdrop-blur-sm"
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) setShowFlashOffer(false);
+            }}
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="flash-offer-title"
+              aria-describedby="flash-offer-description"
+              className="relative w-full max-w-lg overflow-hidden rounded-[32px] border border-emerald-300 bg-white p-6 text-center shadow-[0_30px_100px_rgba(0,0,0,.35)] sm:p-9"
+            >
+              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-emerald-300/30 blur-3xl" />
+              <button
+                type="button"
+                onClick={() => setShowFlashOffer(false)}
+                aria-label="Fechar oferta"
+                className="absolute right-4 top-4 z-10 grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-900"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-emerald-100 text-emerald-600">
+                <Zap className="h-8 w-8 fill-current" />
+              </span>
+              <p className="mt-5 text-xs font-black uppercase tracking-[.2em] text-emerald-600">
+                Espere! Oferta-relâmpago
+              </p>
+              <h2 id="flash-offer-title" className="mt-3 text-3xl font-black tracking-[-.045em] text-[#181818] sm:text-4xl">
+                Leve tudo do Pacote Completo por apenas R$ 17
+              </h2>
+              <p id="flash-offer-description" className="mx-auto mt-4 max-w-md text-sm font-semibold leading-7 text-slate-500 sm:text-base">
+                Tenha todas as tabelas, as 10 receitas para vender e o método para encontrar voos mais baratos.
+              </p>
+
+              <div className="mt-6 flex items-center justify-center gap-3">
+                <span className="text-lg font-bold text-slate-400 line-through">R$ 27</span>
+                <span className="text-4xl font-black tracking-[-.05em] text-emerald-600">R$ 17</span>
+              </div>
+
+              <a
+                href="https://pay.sereja.com.br/checkout/_CUBPHPI?p=oferta17"
+                className="shine-button mt-7 inline-flex min-h-16 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-black text-[#181818] shadow-[0_16px_40px_rgba(0,214,100,.28)] transition hover:-translate-y-1"
+                style={{ backgroundImage: "var(--travel-gradient)" }}
+              >
+                QUERO ESSA OFERTA <ArrowRight className="h-5 w-5" />
+              </a>
+              <a
+                href="https://pay.sereja.com.br/checkout/_CUBPHPI?p=promo12"
+                className="mt-3 inline-flex min-h-12 w-full items-center justify-center text-xs font-bold text-slate-400 underline decoration-slate-300 underline-offset-4 transition hover:text-slate-700"
+              >
+                Não, quero o acesso de R$ 12 mesmo
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
