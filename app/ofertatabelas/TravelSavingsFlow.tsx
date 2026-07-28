@@ -221,7 +221,7 @@ export default function TravelSavingsFlow() {
             </div>
 
             <p className="mt-8 text-sm font-bold uppercase tracking-[.1em] text-white/85">
-              Um método vendido por até <span className="text-[#181818] line-through">R$ 900</span>
+              Um método vendido por "alguns" por <span className="text-[#181818] line-through">R$ 900</span>
             </p>
             <p className="mt-2 text-3xl font-black uppercase tracking-[-.03em] text-[#181818] sm:text-4xl">
               Hoje você recebe de GRAÇA!
