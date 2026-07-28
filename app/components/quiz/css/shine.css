@@ -29,3 +29,18 @@
     left: 125%;
   }
 }
+
+.travel-phrase-change {
+  animation: travel-phrase-in 0.45s ease-out both;
+}
+
+@keyframes travel-phrase-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
