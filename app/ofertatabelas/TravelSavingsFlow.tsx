@@ -1,3 +1,4 @@
+//app\ofertatabelas\TravelSavingsFlow.tsx
 "use client";
 
 import Image from "next/image";
@@ -209,6 +210,10 @@ export default function TravelSavingsFlow() {
 
             <p className="mx-auto mt-6 max-w-2xl text-base font-bold leading-8 text-white/90 sm:text-lg">
               Uma estratégia simples que pode ajudar você a encontrar passagens mais baratas para o destino que deseja.
+            </p>
+
+            <p className="mx-auto mt-3 max-w-xl text-sm font-semibold leading-6 text-white/80 sm:text-base">
+              O método será explicado em vídeo, passo a passo, para você aplicar com facilidade.
             </p>
 
             <div className="mx-auto mt-10 max-w-3xl border-y border-[#181818]/20 py-8">
