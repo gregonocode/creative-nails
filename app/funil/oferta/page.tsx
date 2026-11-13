@@ -175,9 +175,9 @@ export default function OfertaPage() {
   const congratsName = useMemo(() => safeFirstName(payload?.name ?? ''), [payload?.name]);
 
   // ✅ Troque pelos seus links reais:
-  const checkoutIndividual = 'https://pay.sereja.com.br/checkout/xFZ4qhce';
-  const checkoutFamilia = 'https://pay.sereja.com.br/checkout/99lZVGTF';
-  const checkoutOferta1990 = 'https://pay.sereja.com.br/checkout/99lZVGTF?p=promo19';
+  const checkoutIndividual = 'https://pay.sereja.com.br/checkout/_CUBPHPI?p=promo12';
+  const checkoutFamilia = 'https://pay.sereja.com.br/checkout/_CUBPHPI';
+  const checkoutOferta1990 = 'https://pay.sereja.com.br/checkout/_CUBPHPI?p=promo19';
 
   // ✅ Abre o upsell só 1x por sessão
   const openUpsellOnce = useCallback(() => {
@@ -307,7 +307,13 @@ export default function OfertaPage() {
 
             <div className="flex items-start gap-4">
   <div className="relative h-20 w-20 flex-none overflow-hidden rounded-2xl ring-1 ring-black/10 bg-white">
-   
+    <Image
+      src="/tabelas/capa_facebook.webp"
+      alt="Capa do bônus sobre o Marketplace do Facebook"
+      fill
+      sizes="80px"
+      className="object-cover"
+    />
   </div>
 
   <div className="flex-1">
@@ -347,6 +353,21 @@ export default function OfertaPage() {
 
           </div>
 
+          <div className="mt-3 rounded-3xl border border-sky-200 bg-sky-50 p-5 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-3 py-1 text-xs font-bold text-sky-800">
+              🎁 Bônus grátis no Pacote Completo
+            </div>
+            <h3 className="mt-3 text-base font-extrabold text-[#111b21]">
+              Método Skiplagged: Voos mais baratos (Skiplagged)
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-black/65">
+              Você procura um voo que segue para outra cidade, mas faz escala no lugar que quer visitar.
+              Com esse método, você desce nessa escala e não pega o próximo trecho. Dependendo da rota e da
+              data, a passagem pode custar <b>até 70% mais barata</b>.
+            </p>
+           
+          </div>
+
           {/* NOVO CARD 2 — Parabéns + bônus 15 min */}
           <div className="relative overflow-hidden rounded-3xl border border-[#0FDB6B]/35 bg-white p-5 shadow-sm">
             <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#0FDB6B]/15 blur-2xl" />
@@ -357,7 +378,12 @@ export default function OfertaPage() {
 
             <div className="mt-2 text-sm text-black/65">
               Se você levar nos próximos{' '}
-              <span className="font-semibold text-[#111b21]">15 minutos</span>, você vai receber
+              <span
+                className="inline-block animate-pulse font-semibold text-[#111b21]"
+                style={{ animationDuration: '3s' }}
+              >
+                15 minutos
+              </span>, você vai receber
               totalmente <span className="font-semibold text-[#111b21]">GRÁTIS</span> a dica de como
               concluir em até 10x mais rapido <strong>( NÃO E BRINCADEIRA").</strong>
             </div>
@@ -387,6 +413,7 @@ export default function OfertaPage() {
               <li>✅ 7 tabelas: 10k, 20k, 40k e 100k e +</li>
               <li>✅ Tabelas para você dar de presente </li>
               <li>✅ Aprenda a vender itens de casa pelo Marketplace do Facebook</li>
+              <li>✅ Bônus grátis: método Skiplagged para buscar voos mais baratos</li>
               <li>✅ Você pode imprimir quantas quiser</li>
               <li>✅ Perfeito para objetivos diferentes</li>
               <li>✅ Mesma meta dividido para casal ou familia</li>
@@ -491,6 +518,9 @@ export default function OfertaPage() {
           </div>
           <div className="rounded-2xl border border-black/10 bg-black/5 p-3">
             ✅ Venda itens que não usa mais pelo Marketplace do Facebook
+          </div>
+          <div className="rounded-2xl border border-black/10 bg-black/5 p-3">
+            ✅ Bônus grátis: método Skiplagged para buscar voos mais baratos
           </div>
         </div>
 
