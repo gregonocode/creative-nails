@@ -19,7 +19,7 @@ export default function FunnelShell({
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-[#0FDB6B]/40">
             <Image
-             src="/perfil horta.webp"
+             src="/tabelas/perfil horta.webp"
              alt="Perfil"
              fill
              className="object-cover"
@@ -28,7 +28,7 @@ export default function FunnelShell({
 
             <div className="flex-1">
               <div className="text-sm font-semibold">Tabela da Prosperidade</div>
-              <div className="text-xs text-black/50">mensagem guiada • 2026</div>
+              <div className="text-xs text-black/50">mensagem guiada • 2027</div>
             </div>
           </div>
 
@@ -46,7 +46,7 @@ export default function FunnelShell({
         </div>
 
         <div className="mt-4 text-center text-xs text-black/40">
-          © 2026 • Tabela da Prosperidade
+          © 2027 • Tabela da Prosperidade
         </div>
       </div>
     </div>

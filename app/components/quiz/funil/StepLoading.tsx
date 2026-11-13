@@ -78,7 +78,8 @@ export default function StepLoading({
 
       if (s >= seconds) {
         window.clearInterval(interval);
-        router.push('/funil/oferta');
+        const trackingQuery = new URLSearchParams(window.location.search).toString();
+        router.push(trackingQuery ? `/funil/oferta?${trackingQuery}` : '/funil/oferta');
       }
     }, 200);
 

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import ProsperidadeMetaPixel from '@/app/components/quiz/funil/ProsperidadeMetaPixel';
 
 type Goal = 'casa' | 'viagem' | 'carro' | 'tranquilidade' | 'outro';
 type Amount = 10000 | 20000 | 40000 | 100000;
@@ -149,9 +150,19 @@ function Modal({
 export default function OfertaPage() {
   const [payload, setPayload] = useState<StoredPayload | null>(null);
   const [upsellOpen, setUpsellOpen] = useState(false);
+  const [trackingQuery, setTrackingQuery] = useState('');
+
+  const withTracking = (url: string) => {
+    if (!trackingQuery) return url;
+    return `${url}${url.includes('?') ? '&' : '?'}${trackingQuery}`;
+  };
 
   useEffect(() => {
     setPayload(readPayload());
+  }, []);
+
+  useEffect(() => {
+    setTrackingQuery(window.location.search.replace(/^\?/, ''));
   }, []);
 
   const firstName = useMemo(() => safeFirstName(payload?.name ?? ''), [payload?.name]);
@@ -165,8 +176,8 @@ export default function OfertaPage() {
 
   // ✅ Troque pelos seus links reais:
   const checkoutIndividual = 'https://pay.sereja.com.br/checkout/xFZ4qhce';
-  const checkoutFamilia = 'https://pay.sereja.com.br/checkout/_CUBPHPI';
-  const checkoutOferta1990 = 'https://pay.sereja.com.br/checkout/99lZVGTF';
+  const checkoutFamilia = 'https://pay.sereja.com.br/checkout/99lZVGTF';
+  const checkoutOferta1990 = 'https://pay.sereja.com.br/checkout/99lZVGTF?p=promo19';
 
   // ✅ Abre o upsell só 1x por sessão
   const openUpsellOnce = useCallback(() => {
@@ -211,17 +222,18 @@ export default function OfertaPage() {
 
   return (
     <div className="min-h-screen bg-[#efeae2] text-[#111b21]">
+      <ProsperidadeMetaPixel />
       <div className="mx-auto max-w-xl px-4 py-6">
         {/* Header igual funil */}
         <div className="mb-4 rounded-2xl border border-black/10 bg-white/70 p-4 backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-black/10">
-              <Image src="/perfil horta.webp" alt="Perfil" fill className="object-cover" priority />
+              <Image src="/tabelas/perfil horta.webp" alt="Perfil" fill className="object-cover" priority />
             </div>
 
             <div className="flex-1">
               <div className="text-sm font-semibold">Tabela da Prosperidade</div>
-              <div className="text-xs text-black/50">2026 • versão personalizada</div>
+              <div className="text-xs text-black/50">2027 • versão personalizada</div>
             </div>
           </div>
         </div>
@@ -238,7 +250,7 @@ export default function OfertaPage() {
 
           <div className="max-w-[92%] rounded-2xl bg-black/5 px-4 py-3">
             <div className="text-sm font-semibold">
-              {firstName}, sua Tabela da Prosperidade 2026 está pronta ✅
+              {firstName}, sua Tabela da Prosperidade 2027 está pronta ✅
             </div>
 
             <div className="mt-1 text-sm text-black/60">
@@ -257,7 +269,7 @@ export default function OfertaPage() {
 
           <div className="mt-3 ml-auto max-w-[92%] rounded-2xl bg-[#D3FCAE] px-4 py-3 text-[#062b16] shadow-sm">
             <div className="text-sm">
-              Método simples: depositou → marcou na tabela. Em 2026 você enxerga o progresso.
+              Método simples: depositou → marcou na tabela. Em 2027 você enxerga o progresso.
             </div>
           </div>
 
@@ -273,7 +285,7 @@ export default function OfertaPage() {
           {/* Imagem abaixo do Como funciona */}
           <div className="mt-4 -mx-4">
             <Image
-              src="/desafio.webp"
+              src="/tabelas/desafio.webp"
               alt="Mockup da Tabela da Prosperidade"
               width={1200}
               height={1200}
@@ -300,34 +312,34 @@ export default function OfertaPage() {
 
   <div className="flex-1">
     <p className="text-sm text-black/65">
-      Acelere os resultados e preencha as tabelas muito mais rápido com a{' '}
-      <span className="font-semibold text-[#111b21]">técnica do BRIQUE</span>!
+      Acelere suas metas aprendendo a anunciar e vender itens que você não usa mais pelo{' '}
+      <span className="font-semibold text-[#111b21]">Marketplace do Facebook</span>. Use o dinheiro das vendas para completar suas tabelas.
     </p>
 
     <ul className="mt-3 space-y-2 text-sm text-black/70">
       <li className="flex items-start gap-2">
         <span className="mt-[2px]">✅</span>
-        <span>Você não precisa sair do trabalho pra fazer brique</span>
+        <span>Anuncie itens que você já tem em casa e não usa mais</span>
       </li>
       <li className="flex items-start gap-2">
         <span className="mt-[2px]">✅</span>
-        <span>Dá pra começar com o que tem em casa</span>
+        <span>Publique no Marketplace e converse com interessados pelo celular</span>
       </li>
       <li className="flex items-start gap-2">
         <span className="mt-[2px]">✅</span>
-        <span>Dá pra começar com pouco e ir subindo de nível</span>
+        <span>Você não precisa comprar produtos para começar</span>
       </li>
       <li className="flex items-start gap-2">
         <span className="mt-[2px]">✅</span>
-        <span>Você usa pra preencher suas tabelas de forma mais rápida</span>
+        <span>Use o dinheiro das vendas para avançar na sua meta</span>
       </li>
       <li className="flex items-start gap-2">
         <span className="mt-[2px]">✅</span>
-        <span>Seu maior trabalho vai ser publicar um item</span>
+        <span>Comece escolhendo um item e criando seu anúncio</span>
       </li>
       <li className="flex items-start gap-2">
         <span className="mt-[2px]">✅</span>
-        <span>E muitas outras técnicas que você verá</span>
+        <span>Aprenda a apresentar seus itens para quem compra na sua região</span>
       </li>
     </ul>
   </div>
@@ -361,7 +373,7 @@ export default function OfertaPage() {
                 Melhor escolha
               </div>
 
-              <div className="mt-3 text-lg font-extrabold">Pacote Completo (2026)</div>
+              <div className="mt-3 text-lg font-extrabold">Pacote Completo (2027)</div>
 
               <div className="mt-2 text-sm text-black/60">
                 Ideal pra casal e família — várias metas prontas.
@@ -374,15 +386,15 @@ export default function OfertaPage() {
             <ul className="mt-5 space-y-2 text-sm text-black/70">
               <li>✅ 7 tabelas: 10k, 20k, 40k e 100k e +</li>
               <li>✅ Tabelas para você dar de presente </li>
-              <li>✅ Acelere os resultados com BRIQUE!</li>
+              <li>✅ Aprenda a vender itens de casa pelo Marketplace do Facebook</li>
               <li>✅ Você pode imprimir quantas quiser</li>
               <li>✅ Perfeito para objetivos diferentes</li>
               <li>✅ Mesma meta dividido para casal ou familia</li>
-              <li>✅ Bônus: Brique acelera metas</li>
+              <li>✅ Bônus: transforme itens parados em dinheiro para sua meta</li>
             </ul>
 
             <Link
-              href={checkoutFamilia}
+              href={withTracking(checkoutFamilia)}
               className="shine-button mt-5 block w-full rounded-2xl bg-[#0FDB6B] py-3 text-center font-semibold text-[#062b16]"
             >
               Quero o Pacote Completo
@@ -396,7 +408,7 @@ export default function OfertaPage() {
           {/* Individual 10 */}
           <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm">
             <div className="text-center">
-              <div className="text-lg font-extrabold">Individual (2026)</div>
+              <div className="text-lg font-extrabold">Individual (2027)</div>
               <div className="mt-2 text-sm text-black/60">
                 Uma tabela para 1 pessoa (meta escolhida).
               </div>
@@ -450,7 +462,7 @@ export default function OfertaPage() {
         </div>
 
         <div className="mt-6 pb-8 text-center text-xs text-black/40">
-          © 2026 • Tabela da Prosperidade
+          © 2027 • Tabela da Prosperidade
         </div>
       </div>
 
@@ -478,20 +490,20 @@ export default function OfertaPage() {
             ✅ Ideal para casal e família
           </div>
           <div className="rounded-2xl border border-black/10 bg-black/5 p-3">
-            ✅ acelere os resultados com BRIQUE!
+            ✅ Venda itens que não usa mais pelo Marketplace do Facebook
           </div>
         </div>
 
         <div className="mt-5 grid gap-2">
           <Link
-            href={checkoutOferta1990}
+            href={withTracking(checkoutOferta1990)}
             className="shine-button block w-full rounded-2xl bg-[#0FDB6B] py-3 text-center font-semibold text-[#062b16]"
           >
             Quero essa oferta
           </Link>
 
           <Link
-            href={checkoutIndividual}
+            href={withTracking(checkoutIndividual)}
             className="block w-full rounded-2xl border border-black/10 bg-white py-3 text-center font-semibold text-black/70 hover:bg-black/5"
           >
             Quero o de 12 mesmo

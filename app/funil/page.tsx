@@ -6,6 +6,7 @@ import StepGoal from '@/app/components/quiz/funil/StepGoal';
 import StepAmount from '@/app/components/quiz/funil/StepAmount';
 import StepName from '@/app/components/quiz/funil/StepName';
 import StepLoading from '@/app/components/quiz/funil/StepLoading';
+import ProsperidadeMetaPixel from '@/app/components/quiz/funil/ProsperidadeMetaPixel';
 
 type Goal = 'casa' | 'viagem' | 'carro' | 'tranquilidade' | 'outro';
 type Amount = 10000 | 20000 | 40000 | 100000;
@@ -32,41 +33,44 @@ export default function FunilPage() {
   }, [step]);
 
   return (
-    <FunnelShell progress={progress}>
-      {step === 'goal' && (
-        <StepGoal
-          value={answers.goal}
-          onBack={() => setStep('goal')}
-          onSelect={(goal) => {
-            setAnswers((p) => ({ ...p, goal }));
-            setStep('amount');
-          }}
-        />
-      )}
+    <>
+      <ProsperidadeMetaPixel />
+      <FunnelShell progress={progress}>
+        {step === 'goal' && (
+          <StepGoal
+            value={answers.goal}
+            onBack={() => setStep('goal')}
+            onSelect={(goal) => {
+              setAnswers((p) => ({ ...p, goal }));
+              setStep('amount');
+            }}
+          />
+        )}
 
-      {step === 'amount' && (
-        <StepAmount
-          value={answers.amount}
-          onBack={() => setStep('goal')}
-          onSelect={(amount) => {
-            setAnswers((p) => ({ ...p, amount }));
-            setStep('name');
-          }}
-        />
-      )}
+        {step === 'amount' && (
+          <StepAmount
+            value={answers.amount}
+            onBack={() => setStep('goal')}
+            onSelect={(amount) => {
+              setAnswers((p) => ({ ...p, amount }));
+              setStep('name');
+            }}
+          />
+        )}
 
-      {step === 'name' && (
-        <StepName
-          value={answers.name}
-          onBack={() => setStep('amount')}
-          onSubmit={(name) => {
-            setAnswers((p) => ({ ...p, name }));
-            setStep('loading');
-          }}
-        />
-      )}
+        {step === 'name' && (
+          <StepName
+            value={answers.name}
+            onBack={() => setStep('amount')}
+            onSubmit={(name) => {
+              setAnswers((p) => ({ ...p, name }));
+              setStep('loading');
+            }}
+          />
+        )}
 
-      {step === 'loading' && <StepLoading answers={answers} seconds={3} />}
-    </FunnelShell>
+        {step === 'loading' && <StepLoading answers={answers} seconds={3} />}
+      </FunnelShell>
+    </>
   );
 }

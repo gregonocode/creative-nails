@@ -215,7 +215,7 @@ export default function OfertaEsPage() {
         <div className="mb-4 rounded-2xl border border-black/10 bg-white/70 p-4 backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-black/10">
-              <Image src="/perfil horta.webp" alt="Perfil" fill className="object-cover" priority />
+              <Image src="/tabelas/perfil horta.webp" alt="Perfil" fill className="object-cover" priority />
             </div>
 
             <div className="flex-1">
@@ -266,7 +266,7 @@ export default function OfertaEsPage() {
           {/* Imagem abaixo do Como funciona */}
           <div className="mt-4 -mx-4">
             <Image
-              src="/desafio.webp"
+              src="/tabelas/desafio.webp"
               alt="Mockup de la Tabla de Prosperidad"
               width={1200}
               height={1200}

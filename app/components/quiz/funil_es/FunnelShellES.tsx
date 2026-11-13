@@ -18,7 +18,7 @@ export default function FunnelShellES({
           <div className="flex items-center gap-3">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-1 ring-[#0FDB6B]/40">
               <Image
-                src="/perfil horta.webp"
+                src="/tabelas/perfil horta.webp"
                 alt="Perfil"
                 fill
                 className="object-cover"
